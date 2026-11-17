@@ -420,3 +420,8 @@ form{display:flex;flex-direction:column;gap:18px}
 .drawer .logo,.footer .logo-badge,.curtain .mark{background:var(--cream);border-radius:14px;padding:8px 14px}
 .drawer .logo img{height:44px}
 .footer .logo-badge{box-sizing:border-box}
+/* hero buttons on phones: full width, same size, stacked */
+@media (max-width:640px){
+  .hero-btns{flex-direction:column;align-items:stretch;gap:12px;width:100%}
+  .hero-btns .btn{width:100%;min-height:56px;padding-inline:20px}
+}
