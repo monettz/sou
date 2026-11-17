@@ -110,7 +110,7 @@ main{overflow-x:clip}
 [data-page].active{display:block}
 
 /* hero */
-.hero{padding-block:120px 48px;min-height:min(80vh,760px);display:flex;flex-direction:column;justify-content:flex-end;color:var(--cream);background:var(--ink)}
+.hero{padding-block:120px 80px;min-height:min(80vh,760px);display:flex;flex-direction:column;justify-content:flex-end;color:var(--cream);background:var(--ink)}
 .hero-bg{position:absolute;inset:0;z-index:0}
 .hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 68%;opacity:0;transform:scale(1.08);transition:opacity 1.2s ease,transform 7s ease}
 .hero-bg img.on{opacity:1;transform:scale(1)}
@@ -120,11 +120,6 @@ main{overflow-x:clip}
 .hero .h1{color:var(--cream)}
 .hero .hl{color:var(--tan)}
 .hero .lead{color:#EFE3D2}
-.hero .iconbtn{border-color:var(--cream);color:var(--cream)}
-.hero .iconbtn.fill{background:var(--cream);color:var(--ink)}
-.hero .dots button{background-color:rgba(255,247,239,.45)}
-.hero .dots button.on{background-color:var(--tan)}
-.hero-ctrl{justify-content:space-between;margin-top:56px}
 .pill{align-self:flex-start;display:inline-flex;gap:8px;align-items:center;padding:8px 16px;border-radius:999px;background:var(--cream);border:1px solid var(--line);font:700 14px/1.2 var(--ui);color:var(--bronze-dk)}
 .float{position:absolute;background:var(--white);border-radius:20px;padding:16px 20px;display:flex;gap:14px;align-items:center;box-shadow:0 14px 34px rgba(110,88,60,.16);animation:bob 5s ease-in-out infinite}
 .float.b{animation-delay:-2.5s}

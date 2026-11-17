@@ -178,16 +178,9 @@
       if (motionOn() && sio) { splitEl(T); T.classList.add('in'); requestAnimationFrame(() => requestAnimationFrame(() => T.classList.add('split-in'))); }
       parts.forEach(p => p.style.opacity = 1);
     }, reduce ? 0 : 350);
-    $('#slDots').innerHTML = slides.map((_, j) => `<button class="${j === sl ? 'on' : ''}" aria-label="Show banner ${j + 1}" data-j="${j}"></button>`).join('');
-    $('#slCount').textContent = `0${sl + 1} / 03`;
   }
   let slPaused = false;
   const slRestart = () => { clearInterval(slTimer); if (!reduce && !slPaused) slTimer = setInterval(() => showSlide(sl + 1), 6000); };
-  { const b = document.createElement('button'); b.className = 'iconbtn pausebtn'; b.type = 'button';
-    const d = () => { b.setAttribute('aria-label', slPaused ? 'Play banners' : 'Pause banners'); b.innerHTML = slPaused ? '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>' : '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z" fill="currentColor"/></svg>'; };
-    b.onclick = () => { slPaused = !slPaused; d(); slRestart(); }; d(); document.querySelector('#slPrev').before(b); }
-  $('#slDots').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { showSlide(+b.dataset.j); slRestart(); } });
-  $('#slPrev').onclick = () => { showSlide(sl - 1); slRestart(); }; $('#slNext').onclick = () => { showSlide(sl + 1); slRestart(); };
 
   /* ---------- MOTION ---------- */
   let io;
