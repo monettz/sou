@@ -10,7 +10,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&family=Amiri&display=swap">
-<link rel="icon" href="assets/logo.jpg">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
 <link rel="stylesheet" href="/src/styles.css">
 </head>
 <body>
@@ -44,12 +45,11 @@
 
 <header class="header" id="hdr">
   <div class="wrap">
-    <a class="logo" href="#home" aria-label="SOU home"><img src="assets/logo.jpg" alt="SOU — Tullab al-Ummah" width="609" height="610"></a>
+    <a class="logo" href="#home" aria-label="SOU home"><img src="assets/logo.png" alt="SOU — طلاب الأمة" width="549" height="167"></a>
     <nav class="nav" aria-label="Main">
       <a href="#about">About</a><a href="#approach">Our Approach</a><a href="#whats-on">What’s On</a><a href="#reviews">Reviews</a><a href="#packages">Packages</a><a href="#contact">Contact</a>
     </nav>
     <div class="hactions">
-      <a class="login" href="#login">Log in</a>
       <button class="btn btn-primary btn-sm" data-taster>Book a Taster Class</button>
       <button class="iconbtn burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><svg width="22" height="22" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg></button>
     </div>
@@ -57,9 +57,9 @@
 </header>
 
 <div class="drawer" id="drawer" aria-label="Menu">
-  <div class="top"><a class="logo" href="#home" aria-label="SOU home"><img src="assets/logo.jpg" alt="SOU" width="609" height="610"></a><button class="iconbtn" id="drawerClose" style="border-color:var(--tan);color:var(--cream);background:var(--ink)" aria-label="Close menu"><svg width="22" height="22" aria-hidden="true" focusable="false"><use href="#i-close"/></svg></button></div>
+  <div class="top"><a class="logo" href="#home" aria-label="SOU home"><img src="assets/logo-light.png" alt="SOU — طلاب الأمة" width="549" height="167"></a><button class="iconbtn" id="drawerClose" style="border-color:var(--tan);color:var(--cream);background:var(--ink)" aria-label="Close menu"><svg width="22" height="22" aria-hidden="true" focusable="false"><use href="#i-close"/></svg></button></div>
   <nav aria-label="Mobile">
-    <a href="#home">Home <span>→</span></a><a href="#about">About <span>→</span></a><a href="#approach">Our Approach <span>→</span></a><a href="#whats-on">What’s On <span>→</span></a><a href="#reviews">Reviews <span>→</span></a><a href="#packages">Packages <span>→</span></a><a href="#contact">Contact <span>→</span></a><a href="#teach">Teach with SOU <span>→</span></a><a href="#login">Log in <span>→</span></a>
+    <a href="#home">Home <span>→</span></a><a href="#about">About <span>→</span></a><a href="#approach">Our Approach <span>→</span></a><a href="#whats-on">What’s On <span>→</span></a><a href="#reviews">Reviews <span>→</span></a><a href="#packages">Packages <span>→</span></a><a href="#contact">Contact <span>→</span></a><a href="#teach">Teach with SOU <span>→</span></a>
   </nav>
   <div class="bottom"><button class="btn btn-primary" data-taster>Book a Free Taster Class</button><a class="btn btn-light" href="https://wa.me/447946000000" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
 </div>
@@ -69,22 +69,21 @@
 <!-- ================= HOME ================= -->
 <section data-page="home">
   <div class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <img class="on" src="assets/hero-sou1.jpg" alt="" width="960" height="1280" fetchpriority="high">
+      <img src="assets/hero-sou2.jpg" alt="" width="960" height="1280" loading="lazy" decoding="async">
+      <img src="assets/hero-sou3.jpg" alt="" width="960" height="1280" loading="lazy" decoding="async">
+    </div>
     <div class="wrap">
-      <div class="hero-row">
-        <div class="hero-copy">
-          <span class="pill ld"><svg width="16" height="16" aria-hidden="true" focusable="false"><use href="#i-spark"/></svg><span id="slKicker">Online &amp; in-person classes for all ages</span></span>
-          <h1 class="h1 ld" id="slTitle">Rooted learning for the <span class="hl">students of the Ummah</span></h1>
-          <p class="lead ld" id="slBody" style="max-width:540px">Structured Qur’an, Arabic and Islamic studies with qualified teachers — at a pace and schedule that fits your life.</p>
-          <div class="row ld"><button class="btn btn-primary" data-taster>Book a Free Taster Class <svg class="arr" width="18" height="18" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></button><a class="btn btn-outline" href="#packages">View Packages</a></div>
-          <div class="row ld" style="gap:14px"><span style="display:flex"><span class="av" style="background:var(--tan);border:3px solid var(--sand)"></span><span class="av" style="background:var(--bronze);border:3px solid var(--sand);margin-left:-14px"></span><span class="av" style="background:var(--ink);border:3px solid var(--sand);margin-left:-14px"></span></span><span style="font-size:15px;color:var(--muted)"><b style="color:var(--ink)">4.9 rating</b> from 120+ learner reviews</span></div>
-        </div>
-        <div class="hero-visual ld">
-          <div class="arch"><img id="slImg" src="assets/hero3.jpg" alt="Wooden Qur’an stand in a sunlit window" width="1100" height="733" fetchpriority="high"></div>
-          <div class="float" style="left:-48px;bottom:72px"><span class="ic"><svg width="24" height="24" aria-hidden="true" focusable="false" style="color:var(--bronze-dk)"><use href="#i-cal"/></svg></span><span><span style="display:block;font-size:13px;color:var(--muted)">Next cohort starts</span><b style="font:600 20px/1.2 var(--display)">Monday, 18 November</b></span></div>
-        </div>
+      <div class="hero-copy">
+        <span class="pill ld"><svg width="16" height="16" aria-hidden="true" focusable="false"><use href="#i-spark"/></svg><span id="slKicker">Online &amp; in-person classes for all ages</span></span>
+        <h1 class="h1 ld" id="slTitle">Rooted learning for the <span class="hl">students of the Ummah</span></h1>
+        <p class="lead ld" id="slBody" style="max-width:540px">Structured Qur’an, Arabic and Islamic studies with qualified teachers — at a pace and schedule that fits your life.</p>
+        <div class="row ld"><button class="btn btn-primary" data-taster>Book a Free Taster Class <svg class="arr" width="18" height="18" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></button><a class="btn btn-light" href="#packages">View Packages</a></div>
+        <div class="row ld" style="gap:14px"><span style="display:flex"><span class="av" style="background:var(--tan);border:3px solid var(--ink)"></span><span class="av" style="background:var(--bronze);border:3px solid var(--ink);margin-left:-14px"></span><span class="av" style="background:var(--cream);border:3px solid var(--ink);margin-left:-14px"></span></span><span style="font-size:15px"><b>4.9 rating</b> from 120+ learner reviews</span></div>
       </div>
-      <div class="row" style="justify-content:space-between;margin-top:48px">
-        <div class="row" style="gap:16px"><div class="dots" id="slDots" role="group" aria-label="Choose banner"></div><span id="slCount" style="font:700 14px/1 var(--ui);color:var(--muted)">01 / 03</span></div>
+      <div class="row hero-ctrl">
+        <div class="row" style="gap:16px"><div class="dots" id="slDots" role="group" aria-label="Choose banner"></div><span id="slCount" style="font:700 14px/1 var(--ui)">01 / 03</span></div>
         <div class="row" style="gap:12px"><button class="iconbtn" id="slPrev" aria-label="Previous banner"><svg width="20" height="20" aria-hidden="true" focusable="false"><use href="#i-back"/></svg></button><button class="iconbtn fill" id="slNext" aria-label="Next banner"><svg width="20" height="20" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></button></div>
       </div>
     </div>
@@ -351,20 +350,6 @@
   </div></section>
 </section>
 
-<!-- ================= LOGIN ================= -->
-<section data-page="login">
-  <section class="sec" style="padding-top:48px"><div class="wrap split">
-    <div class="ld" style="position:relative;border-radius:32px;overflow:hidden;min-height:520px"><img src="assets/hero2.jpg" alt="Qur’an on a wooden stand" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" width="1100" height="733" loading="lazy" decoding="async"><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(43,43,43,0) 40%,rgba(43,43,43,.85))"></div><div style="position:absolute;left:32px;right:32px;bottom:32px;color:var(--cream)"><span class="ar" translate="no" lang="ar" dir="rtl" style="font-size:34px;color:var(--tan)">طلاب الأمة</span><p style="font:600 30px/1.2 var(--display);margin-top:8px">Your learning, notes and teachers — all in one place.</p></div></div>
-    <div class="form-card ld"><form data-form="login" novalidate>
-      <h1 class="h2">Welcome back</h1><p class="lead" style="margin-top:-8px">Log in to your SOU portal.</p>
-      <div class="seg" role="tablist" aria-label="Account type" id="roleSeg" style="align-self:flex-start"><button class="on" type="button">Student</button><button type="button">Teacher</button><button type="button">Staff</button></div>
-      <label class="field" for="lgEmail">Email<input id="lgEmail" name="email" autocomplete="username" spellcheck="false" autocapitalize="off" type="email" value="aisha@example.com"></label>
-      <label class="field" for="lgPass">Password<input id="lgPass" name="password" autocomplete="current-password" type="password" value="password123"></label>
-      <div class="row" style="justify-content:space-between;font-size:14px"><label class="consent" for="lgRem"><input id="lgRem" type="checkbox"> Remember me</label><a href="#login" style="font-weight:700">Forgot password?</a></div>
-      <button class="btn btn-primary" type="submit">Log in</button>
-      <span class="row" style="gap:8px;font-size:13px;color:var(--muted)"><svg width="16" height="16" aria-hidden="true" focusable="false" style="color:var(--bronze-dk)"><use href="#i-shield"/></svg>Protected by CAPTCHA and login-attempt limits</span>
-    </form></div>
-  </div></section>
 </section>
 
 </main>
@@ -372,10 +357,10 @@
 <footer class="footer">
   <div class="wrap">
     <div class="cols">
-      <div class="col"><img src="assets/logo.jpg" alt="SOU — طلاب الأمة" style="width:104px;height:104px;border-radius:20px" width="609" height="610" loading="lazy" decoding="async"><p style="font-size:14px;color:var(--tan)">Structured Qur’an, Arabic and Islamic studies for children and adults — online and in person.</p><div class="soc"><a href="#home" aria-label="Instagram"><svg width="18" height="18" aria-hidden="true" focusable="false"><use href="#i-ig"/></svg></a><a href="#home" aria-label="Facebook"><svg width="18" height="18" aria-hidden="true" focusable="false"><use href="#i-fb"/></svg></a><a href="#home" aria-label="YouTube"><svg width="18" height="18" aria-hidden="true" focusable="false"><use href="#i-yt"/></svg></a><a href="#home" aria-label="TikTok"><svg width="18" height="18" aria-hidden="true" focusable="false"><use href="#i-tt"/></svg></a></div></div>
+      <div class="col"><img src="assets/logo-light.png" alt="SOU — طلاب الأمة" style="width:200px;height:auto" width="549" height="167" loading="lazy" decoding="async"><p style="font-size:14px;color:var(--tan)">Structured Qur’an, Arabic and Islamic studies for children and adults — online and in person.</p><div class="soc"><a href="#home" aria-label="Instagram"><svg width="18" height="18" aria-hidden="true" focusable="false"><use href="#i-ig"/></svg></a><a href="#home" aria-label="Facebook"><svg width="18" height="18" aria-hidden="true" focusable="false"><use href="#i-fb"/></svg></a><a href="#home" aria-label="YouTube"><svg width="18" height="18" aria-hidden="true" focusable="false"><use href="#i-yt"/></svg></a><a href="#home" aria-label="TikTok"><svg width="18" height="18" aria-hidden="true" focusable="false"><use href="#i-tt"/></svg></a></div></div>
       <nav class="col" aria-label="Explore"><h2 class="fh">Explore</h2><a href="#about">About us</a><a href="#approach">Our Approach</a><a href="#whats-on">What’s On</a><a href="#reviews">Reviews</a><a href="#packages">Packages</a></nav>
-      <nav class="col" aria-label="Learners"><h2 class="fh">Learners</h2><a href="#taster" data-taster>Book a Taster Class</a><a href="#packages">Pricing &amp; packages</a><a href="#contact">Admissions enquiry</a><a href="#login">Student login</a></nav>
-      <nav class="col" aria-label="Instructors"><h2 class="fh">Instructors</h2><a href="#teach">Teach with SOU</a><a href="#contact">Instructor enquiries</a><a href="#login">Teacher login</a></nav>
+      <nav class="col" aria-label="Learners"><h2 class="fh">Learners</h2><a href="#taster" data-taster>Book a Taster Class</a><a href="#packages">Pricing &amp; packages</a><a href="#contact">Admissions enquiry</a></nav>
+      <nav class="col" aria-label="Instructors"><h2 class="fh">Instructors</h2><a href="#teach">Teach with SOU</a><a href="#contact">Instructor enquiries</a></nav>
       <div class="col"><h2 class="fh">Get in touch</h2><span style="user-select:all">hello@sou-academy.com</span><span style="user-select:all">+44 20 7946 0000</span><a href="https://wa.me/447946000000" target="_blank" rel="noopener">WhatsApp us</a></div>
     </div>
     <div class="legal"><span>© 2026 SOU — Tullab al-Ummah. All rights reserved.</span><span>Privacy policy · Terms · Safeguarding · Demo content</span></div>

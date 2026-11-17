@@ -24,7 +24,7 @@
     { cat: 'blog', tag: 'Blog', date: '02 Nov 2026', title: '5 habits that help adult learners stay consistent', img: 'post-blog.jpg', alt: 'Laptop, notebook and pens' },
     { cat: 'blog', tag: 'Blog', date: '28 Oct 2026', title: 'Making the most of online Qur’an lessons', img: 'about-online.jpg', alt: 'Laptop ready for an online lesson' },
     { cat: 'class', tag: 'New class', date: '20 Oct 2026', title: 'Weekend Hifz circle for teens', img: 'hero2.jpg', alt: 'Qur’an on a stand over a prayer rug' },
-    { cat: 'flyer', tag: 'Offer', date: '14 Oct 2026', title: 'Bundle offer: 2 bonus lessons this term', img: 'hero1.jpg', alt: 'Qur’an with dates and prayer beads' },
+    { cat: 'flyer', tag: 'Offer', date: '14 Oct 2026', title: 'Bundle offer: 2 bonus lessons this term', img: 2 },
   ];
   const tones = [['#8A6F4D', '#FFF7EF'], ['#D6B98C', '#2B2B2B'], ['#2B2B2B', '#FFF7EF'], ['#6E583C', '#FFF7EF']];
   const reviews = [
@@ -163,19 +163,19 @@
 
   /* ---------- HERO BANNER SLIDES ---------- */
   const slides = [
-    { k: 'Online & in-person classes for all ages', t: 'Rooted learning for the <span class="hl">students of the Ummah</span>', b: 'Structured Qur’an, Arabic and Islamic studies with qualified teachers — at a pace and schedule that fits your life.', img: 'hero3.jpg', alt: 'Wooden Qur’an stand in a sunlit window' },
-    { k: 'Winter term · Enrolment open', t: 'New evening cohorts <span class="hl">start this month</span>', b: 'Reserve your place now and begin with a free taster class. Places are limited.', img: 'hero2.jpg', alt: 'Qur’an on a wooden stand over a prayer rug' },
-    { k: 'Limited offer', t: 'Two bonus lessons with <span class="hl">every bundle</span>', b: 'Book any bundle before 30 November and enjoy extra sessions with your teacher.', img: 'hero1.jpg', alt: 'Qur’an with dates and prayer beads' },
+    { k: 'Online & in-person classes for all ages', t: 'Rooted learning for the <span class="hl">students of the Ummah</span>', b: 'Structured Qur’an, Arabic and Islamic studies with qualified teachers — at a pace and schedule that fits your life.', img: 0 },
+    { k: 'Winter term · Enrolment open', t: 'New evening cohorts <span class="hl">start this month</span>', b: 'Reserve your place now and begin with a free taster class. Places are limited.', img: 1 },
+    { k: 'Limited offer', t: 'Two bonus lessons with <span class="hl">every bundle</span>', b: 'Book any bundle before 30 November and enjoy extra sessions with your teacher.', img: 2 },
   ];
   let sl = 0, slTimer;
   function showSlide(i) {
     sl = (i + slides.length) % slides.length; const s = slides[sl];
-    const parts = [$('#slKicker'), $('#slTitle'), $('#slBody'), $('#slImg')];
+    const parts = [$('#slKicker'), $('#slTitle'), $('#slBody')];
+    $$('.hero-bg img').forEach((im, j) => im.classList.toggle('on', j === s.img));
     parts.forEach(p => { p.style.transition = 'opacity .35s'; p.style.opacity = 0; });
     setTimeout(() => {
       $('#slKicker').textContent = s.k; const T = $('#slTitle'); T.innerHTML = s.t; $('#slBody').textContent = s.b;
       if (motionOn() && sio) { splitEl(T); T.classList.add('in'); requestAnimationFrame(() => requestAnimationFrame(() => T.classList.add('split-in'))); }
-      const img = $('#slImg'); img.src = 'assets/' + s.img; img.alt = s.alt; img.classList.remove('on'); void img.offsetWidth; img.classList.add('on');
       parts.forEach(p => p.style.opacity = 1);
     }, reduce ? 0 : 350);
     $('#slDots').innerHTML = slides.map((_, j) => `<button class="${j === sl ? 'on' : ''}" aria-label="Show banner ${j + 1}" data-j="${j}"></button>`).join('');
@@ -293,7 +293,7 @@
   }
   // curtain + progress bar
   const curtain = document.createElement('div'); curtain.className = 'curtain'; curtain.setAttribute('aria-hidden', 'true');
-  curtain.innerHTML = '<span class="mark"><img src="assets/logo.jpg" alt="" width="609" height="610"></span><span class="ar" lang="ar" dir="rtl">طلاب الأمة</span>';
+  curtain.innerHTML = '<span class="mark"><img src="assets/logo-light.png" alt="" width="549" height="167"></span>';
   const bar = document.createElement('div'); bar.className = 'progress'; bar.setAttribute('aria-hidden', 'true');
   document.body.append(curtain, bar);
   function withCurtain(swap) {
@@ -387,7 +387,6 @@
   document.addEventListener('submit', e => {
     const f = e.target.closest('form[data-form]'); if (!f) return;
     e.preventDefault();
-    if (f.dataset.form === 'login') { f.insertAdjacentHTML('beforeend', '<div class="note" role="status">Student, teacher and admin portals arrive in Stage 2 of the project.</div>'); return; }
     const bad = $$('[required]', f).filter(i => i.type === 'checkbox' ? !i.checked : !i.value.trim() || (i.type === 'email' && !/^\S+@\S+\.\S+$/.test(i.value)));
     $$('.err', f).forEach(x => x.remove());
     if (bad.length) { bad.forEach(i => { i.setAttribute('aria-invalid', 'true'); const lbl = i.closest('label, .captcha'); lbl && lbl.insertAdjacentHTML('beforeend', `<span class="err" style="color:#B3412F;font:700 13px/1.2 var(--ui)">${i.type === 'checkbox' ? 'Tick this box to continue' : i.type === 'email' && i.value ? 'Enter a valid email, like name@example.com' : 'Fill in this field to continue'}</span>`); }); bad[0].focus(); announce(bad.length === 1 ? '1 field needs attention' : bad.length + ' fields need attention'); return; }
@@ -414,7 +413,6 @@
     else { lbl.textContent = 'I am a…'; sel.innerHTML = '<option>Prospective student</option><option>Parent / guardian</option><option>Current student</option><option>Organisation</option>'; }
   });
   $('#modeSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; mode = b.dataset.mode; $$('#modeSeg button').forEach(x => x.classList.toggle('on', x === b)); renderPlans(); observeReveals(); });
-  $('#roleSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $$('#roleSeg button').forEach(x => x.classList.toggle('on', x === b)); $('#lgEmail').value = { Student: 'aisha@example.com', Teacher: 'ahmed@sou-academy.com', Staff: 'admin@sou-academy.com' }[b.textContent]; });
   $('#copyLink').onclick = async () => { try { await navigator.clipboard.writeText(location.href); $('#copied').textContent = 'Link copied'; } catch { $('#copied').textContent = 'Copy the address from your browser'; } };
   $('#addCal').onclick = e => { e.target.textContent = 'Added to calendar ✓'; };
 

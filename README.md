@@ -1,6 +1,6 @@
 # SOU — Tullab al-Ummah website
 
-Stage 01 one-page website (Home, About, Our Approach, What’s On, Reviews, Packages, Contact, Teach with SOU, Checkout, Login stub). Built with plain HTML, CSS and JavaScript, bundled by [Vite](https://vitejs.dev).
+Stage 01 one-page website (Home, About, Our Approach, What’s On, Reviews, Packages, Contact, Teach with SOU, Checkout). Built with plain HTML, CSS and JavaScript, bundled by [Vite](https://vitejs.dev).
 
 ## Run locally
 

@@ -79,15 +79,14 @@ p{margin:0}
 .header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--sand);border-bottom:1px solid var(--line);transition:transform .45s var(--ease)}
 .header.hide{transform:translateY(-110%)}
 .header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:84px}
-.logo{display:block;width:104px;height:54px;overflow:hidden;flex:none;border-radius:8px}
-.logo img{width:174px;height:174px;max-width:none;margin:-35px 0 0 -35px}
+.logo{display:block;flex:none;line-height:0}
+.logo img{height:52px;width:auto;max-width:none}
 .nav{display:flex;gap:30px}
 .nav a{font:700 16px/1 var(--ui);color:var(--ink);text-decoration:none;padding:10px 0;position:relative}
 .nav a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;border-radius:2px;background:var(--bronze);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
 .nav a:hover::after,.nav a.on::after{transform:scaleX(1)}
 .nav a.on{color:var(--bronze-dk)}
 .hactions{display:flex;align-items:center;gap:16px}
-.hactions .login{font:700 16px/1 var(--ui);color:var(--ink);text-decoration:none}
 .burger{display:none}
 .drawer{position:fixed;inset:0;overscroll-behavior:contain;overflow-y:auto;z-index:80;background:var(--ink);color:var(--cream);padding:env(safe-area-inset-top,0px) max(20px,env(safe-area-inset-right,0px)) 28px max(20px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;transform:translateY(-100%);transition:transform .5s var(--ease);visibility:hidden}
 .drawer.open{transform:none;visibility:visible}
@@ -111,14 +110,22 @@ main{overflow-x:clip}
 [data-page].active{display:block}
 
 /* hero */
-.hero{padding-block:64px 72px}
-.hero-row{display:flex;gap:64px;align-items:center}
-.hero-copy{flex:1;min-width:0;display:flex;flex-direction:column;gap:26px}
+.hero{padding-block:120px 48px;min-height:min(80vh,760px);display:flex;flex-direction:column;justify-content:flex-end;color:var(--cream);background:var(--ink)}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 68%;opacity:0;transform:scale(1.08);transition:opacity 1.2s ease,transform 7s ease}
+.hero-bg img.on{opacity:1;transform:scale(1)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(30,26,22,.86) 0%,rgba(30,26,22,.6) 45%,rgba(30,26,22,.2) 100%),linear-gradient(0deg,rgba(30,26,22,.7) 0%,rgba(30,26,22,0) 45%)}
+.hero .wrap{width:100%}
+.hero-copy{max-width:680px;display:flex;flex-direction:column;gap:26px}
+.hero .h1{color:var(--cream)}
+.hero .hl{color:var(--tan)}
+.hero .lead{color:#EFE3D2}
+.hero .iconbtn{border-color:var(--cream);color:var(--cream)}
+.hero .iconbtn.fill{background:var(--cream);color:var(--ink)}
+.hero .dots button{background-color:rgba(255,247,239,.45)}
+.hero .dots button.on{background-color:var(--tan)}
+.hero-ctrl{justify-content:space-between;margin-top:56px}
 .pill{align-self:flex-start;display:inline-flex;gap:8px;align-items:center;padding:8px 16px;border-radius:999px;background:var(--cream);border:1px solid var(--line);font:700 14px/1.2 var(--ui);color:var(--bronze-dk)}
-.hero-visual{flex:0 0 480px;position:relative;height:580px}
-.hero-visual .arch{position:absolute;inset:0;border-radius:240px 240px 32px 32px;overflow:hidden}
-.hero-visual .arch img{width:100%;height:100%;object-fit:cover;transition:opacity .8s ease,transform 6s ease}
-.hero-visual .arch img.on{transform:scale(1.04)}
 .float{position:absolute;background:var(--white);border-radius:20px;padding:16px 20px;display:flex;gap:14px;align-items:center;box-shadow:0 14px 34px rgba(110,88,60,.16);animation:bob 5s ease-in-out infinite}
 .float.b{animation-delay:-2.5s}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
@@ -341,8 +348,8 @@ form{display:flex;flex-direction:column;gap:18px}
 .motion .rv-img.in{clip-path:inset(0 0 0 0 round 32px);transform:none;transition:clip-path 1.1s var(--ease),transform 1.4s var(--ease)}
 /* page curtain transition */
 .curtain{position:fixed;inset:0;z-index:120;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;transform:translateY(100%);pointer-events:none}
-.curtain .mark{width:120px;height:62px;overflow:hidden;border-radius:12px;opacity:0;transform:translateY(16px);transition:opacity .4s,transform .5s var(--ease)}
-.curtain .mark img{width:200px;height:200px;max-width:none;margin:-40px 0 0 -40px}
+.curtain .mark{line-height:0;opacity:0;transform:translateY(16px);transition:opacity .4s,transform .5s var(--ease)}
+.curtain .mark img{width:220px;height:auto}
 .curtain .ar{font-size:30px;color:var(--tan);opacity:0;transition:opacity .4s .1s}
 .curtain.cover{transform:none;transition:transform .55s cubic-bezier(.76,0,.24,1)}
 .curtain.cover .mark,.curtain.cover .ar{opacity:1;transform:none}
@@ -378,11 +385,10 @@ form{display:flex;flex-direction:column;gap:18px}
 .motion-toggle[aria-pressed="true"] i::after{transform:translateX(12px)}
 
 /* responsive */
-@media (max-width:1080px){.nav{display:none}.hactions .login{display:none}.burger{display:inline-flex}.hero-visual{flex-basis:400px;height:500px}}
+@media (max-width:1080px){.nav{display:none}.burger{display:inline-flex}}
 @media (max-width:860px){
   .sec{padding-block:64px}
-  .hero-row,.split,.cal-wrap,.co{flex-direction:column;align-items:stretch;gap:32px}
-  .hero-visual{flex:none;width:100%;height:380px}
+  .split,.cal-wrap,.co{flex-direction:column;align-items:stretch;gap:32px}
   .float{display:none}
   .dialog{flex-direction:column}
   .dialog aside{flex:none;padding:24px}
