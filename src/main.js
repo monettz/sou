@@ -293,7 +293,7 @@
   }
   // curtain + progress bar
   const curtain = document.createElement('div'); curtain.className = 'curtain'; curtain.setAttribute('aria-hidden', 'true');
-  curtain.innerHTML = '<span class="mark"><img src="assets/logo-light.png" alt="" width="549" height="167"></span>';
+  curtain.innerHTML = '<span class="mark"><img src="assets/logo.png" alt="" width="549" height="167"></span>';
   const bar = document.createElement('div'); bar.className = 'progress'; bar.setAttribute('aria-hidden', 'true');
   document.body.append(curtain, bar);
   function withCurtain(swap) {
