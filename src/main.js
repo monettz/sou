@@ -50,7 +50,7 @@
     { href: '#taster', taster: true, subject: 'Arabic Language', cta: 'Book a free taster', t: 'Arabic Language', d: 'Grammar, vocabulary and conversation to understand the Qur’an directly.', img: 'post-flyer.jpg', tags: ['Beginner', 'Intermediate'] },
     { href: '#taster', taster: true, subject: 'Islamic Studies', cta: 'Book a free taster', t: 'Islamic Studies', d: 'Aqeedah, fiqh of worship, seerah and character, taught practically.', img: 'hero1.jpg', tags: ['Children', 'Adults'] },
     { href: '#taster', taster: true, subject: 'Qur’an Reading & Tajweed', cta: 'Book a free taster', t: 'Hifz Programme', d: 'Structured memorisation with daily revision and teacher listening.', img: 'hero2.jpg', tags: ['Teens', 'Adults'] },
-    { href: '#taster', taster: true, subject: 'Not sure yet', cta: 'Book a free taster', t: 'Children’s Classes', d: 'Gentle, engaging lessons for ages 5–12 with progress for parents.', img: 'about-teacher.jpg', tags: ['Ages 5–12'] },
+    { href: '#taster', taster: true, subject: 'Not sure yet', cta: 'Book a free taster', t: 'Children’s Classes', d: 'Gentle, engaging lessons for ages 5–12 with progress for parents.', img: 'study-home.jpg', tags: ['Ages 5–12'] },
   ];
   const featured = [
     { href: '#post', cta: 'Read more', t: 'The winter timetable is here', d: 'New evening and weekend slots for every subject.', img: 'post-flyer.jpg', tags: ['Flyer'] },
