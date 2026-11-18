@@ -137,7 +137,7 @@ main{overflow-x:clip}
 .marquee{overflow:hidden;white-space:nowrap;padding-block:22px;background:var(--ink);color:var(--cream)}
 .marquee .track{display:inline-flex;gap:48px;animation:marq 32s linear infinite;padding-left:48px}
 .marquee span{font:600 26px/1 var(--display);display:inline-flex;align-items:center;gap:48px}
-.marquee span::after{content:"✦";color:var(--tan);font-size:18px}
+.marquee span::after{content:"";display:inline-block;width:9px;height:9px;background:var(--tan);transform:rotate(45deg);vertical-align:middle}
 .img-marquee{overflow:hidden;padding-block:8px}
 .img-marquee .track{display:flex;gap:20px;width:max-content;animation:marq 48s linear infinite}
 .img-marquee img{width:300px;height:220px;object-fit:cover;border-radius:24px;flex:none}
@@ -195,7 +195,11 @@ main{overflow-x:clip}
 
 /* reviews */
 .rv{background:var(--cream);border:1px solid var(--line);border-radius:var(--r-md);padding:30px;display:flex;flex-direction:column;gap:18px;margin:0}
-.rv .stars{color:var(--bronze);letter-spacing:3px}
+.rv .stars{color:var(--bronze);display:inline-flex;gap:2px}
+.rv .stars .off{color:var(--line)}
+.star-row{display:flex;gap:2px;color:var(--bronze)}
+.tick-c{display:inline-flex;color:var(--ok)}
+.as-sent{display:flex;gap:8px;align-items:center}
 .rv blockquote{margin:0;font:500 19px/1.55 var(--body);flex:1}
 .rv figcaption{display:flex;gap:12px;align-items:center}
 .av{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 15px/1 var(--ui);flex:none}
@@ -251,7 +255,7 @@ main{overflow-x:clip}
 .plan ul{list-style:none;margin:0;padding:18px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px;flex:1;font-size:15px}
 .plan.feat ul{border-color:#4A4540}
 .plan li{display:flex;gap:10px}
-.plan li::before{content:"✓";color:var(--bronze);font-weight:700}
+.plan li::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;background:var(--bronze);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.2 4.2L19 7' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.2 4.2L19 7' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
 .plan.feat li::before{color:var(--tan)}
 .table-box{overflow-x:auto;background:var(--white);border:1px solid var(--line);border-radius:var(--r-md)}
 table{border-collapse:collapse;width:100%;min-width:720px;font-size:15px}
@@ -477,3 +481,28 @@ form{display:flex;flex-direction:column;gap:18px}
 .lvl-big{display:flex;flex-direction:column;font:600 clamp(40px,7vw,64px)/1 var(--display);color:var(--ink)}
 .lvl-big small{font:800 13px/1.6 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--bronze-dk)}
 .as-sent{margin:0;font:700 14px/1.4 var(--ui);color:var(--ok)}
+.announce a{display:inline-flex;align-items:center;gap:4px}
+.drawer nav a span{display:inline-flex;align-items:center}
+
+/* course cards */
+.course .img{height:240px}
+.course .body{flex:1}
+.course h3{font-size:24px;margin:0}
+.course p{margin:0;color:var(--muted);font-size:15px;line-height:1.6;flex:1}
+.course .link{color:var(--bronze-dk);margin-top:6px}
+/* team cards: centred on wide screens, compact rows on phones */
+.member{align-items:center;text-align:center}
+.member .av{width:96px;height:96px;font:600 30px/1 var(--display)}
+.member .who{display:flex;flex-direction:column;gap:6px;align-items:center}
+.member h3{margin:0;font-size:22px}
+.member b{font:800 13px/1.3 var(--ui);color:var(--bronze-dk);text-transform:uppercase;letter-spacing:.04em}
+.member p{margin:0;font-size:15px;color:var(--muted)}
+@media (max-width:559px){
+  .member{flex-direction:row;align-items:center;text-align:left;padding:20px;gap:16px}
+  .member .av{width:64px;height:64px;font-size:22px}
+  .member .who{align-items:flex-start;gap:4px}
+  .member h3{font-size:20px}
+  .course .img{height:200px}
+}
+.mail{font-size:15px}
+.rv figcaption > span:nth-child(2){min-width:0}

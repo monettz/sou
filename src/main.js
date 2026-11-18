@@ -28,11 +28,11 @@
   ];
   const tones = [['#8A6F4D', '#FFF7EF'], ['#D6B98C', '#2B2B2B'], ['#2B2B2B', '#FFF7EF'], ['#6E583C', '#FFF7EF']];
   const reviews = [
-    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · Student 18+', 'My teacher is so kind, patient and always ensuring I understand before moving on.', 5],
-    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · Student 18+', 'The PowerPoints are also provided before each lesson, which is really helpful as it allows you to know what to expect and prepare beforehand.', 5],
-    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · Student 18+', 'The pace of the lessons is really good. There’s enough time to take detailed notes and reflect without ever feeling rushed.', 5],
-    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · Student 18+', 'We learn key terms, what is mandatory and what is Sunnah, as well as practical ways to get closer to Allah SWT and improve our relationship with Him.', 5],
-    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · Student 18+', 'I’ve really been enjoying my Islamic Studies lessons. The lessons go into such beautiful detail about our deen, starting right from the very beginning. They are perfect for anyone who wants to build a strong foundation or strengthen their existing knowledge.', 5],
+    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · 18+', 'My teacher is so kind, patient and always ensuring I understand before moving on.', 5],
+    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · 18+', 'The PowerPoints are also provided before each lesson, which is really helpful as it allows you to know what to expect and prepare beforehand.', 5],
+    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · 18+', 'The pace of the lessons is really good. There’s enough time to take detailed notes and reflect without ever feeling rushed.', 5],
+    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · 18+', 'We learn key terms, what is mandatory and what is Sunnah, as well as practical ways to get closer to Allah SWT and improve our relationship with Him.', 5],
+    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · 18+', 'I’ve really been enjoying my Islamic Studies lessons. The lessons go into such beautiful detail about our deen, starting right from the very beginning. They are perfect for anyone who wants to build a strong foundation or strengthen their existing knowledge.', 5],
   ];
   const steps = [
     ['Sample a class', 'Book a free taster lesson and meet a teacher with no commitment.', ['Choose a subject and a preferred time', 'Reservation confirmed by email', 'Our team is notified to assign a teacher']],
@@ -69,7 +69,7 @@
 
   /* ---------- RENDERERS ---------- */
   const postCard = (p) => `<a class="post rv-up" href="#post"><span class="img"><img src="assets/${p.img}" alt="${p.alt}" width="800" height="534" loading="lazy" decoding="async"></span><span class="body"><span class="meta"><span class="chip">${p.tag}</span>${p.date}</span><h3>${p.title}</h3><span class="link">Read more ${icon('i-arrow', 18, 'arr')}</span></span></a>`;
-  const reviewCard = (r, i) => `<figure class="rv rv-up" style="background:var(--white)"><span class="row" style="justify-content:space-between"><span class="stars" aria-label="${r[5]} out of 5">${'★'.repeat(r[5])}${'☆'.repeat(5 - r[5])}</span></span><blockquote>“${r[4]}”</blockquote><figcaption><span class="av" style="background:${tones[i % 4][0]};color:${tones[i % 4][1]}">${r[1]}</span><span><b style="display:block;font-family:var(--ui)">${r[2]}</b><span style="font-size:13px;color:var(--muted)">${r[3]}</span></span><span class="verified">Verified</span></figcaption></figure>`;
+  const reviewCard = (r, i) => `<figure class="rv rv-up" style="background:var(--white)"><span class="row" style="justify-content:space-between"><span class="stars" role="img" aria-label="${r[5]} out of 5">${[1, 2, 3, 4, 5].map(n => `<span class="${n <= r[5] ? '' : 'off'}">${icon('i-star', 18)}</span>`).join('')}</span></span><blockquote>“${r[4]}”</blockquote><figcaption><span class="av" style="background:${tones[i % 4][0]};color:${tones[i % 4][1]}">${r[1]}</span><span><b style="display:block;font-family:var(--ui)">${r[2]}</b><span style="font-size:13px;color:var(--muted)">${r[3]}</span></span><span class="verified">Verified</span></figcaption></figure>`;
   const planCard = (p) => `<div class="plan rv-up ${p.feat ? 'feat' : ''}"><span class="row" style="justify-content:space-between"><h3>${p.name}</h3>${p.badge ? `<span class="badge">${p.badge}</span>` : ''}</span><span class="desc">${p.desc}</span><span class="price"><b>${p.price}</b><span>${p.unit}</span></span>${p.save ? `<span class="save">${p.save}</span>` : ''}<ul>${p.feats.map(f => `<li>${f}</li>`).join('')}</ul><a class="btn ${p.feat ? 'btn-primary' : 'btn-outline'}" href="${p.custom ? '#packages' : '#enrol'}" data-plan="${p.id}" ${p.custom ? 'data-scroll="custom"' : ''}>${p.cta}</a></div>`;
 
   function renderPosts() {
@@ -93,17 +93,18 @@
   function renderStatic() {
     $$('[data-steps]').forEach(el => el.innerHTML = steps.map((s, i) => `<li class="step ${i === 0 ? 'first' : ''}"><span class="n">0${i + 1}</span><h3>${s[0]}</h3><p>${s[1]}</p></li>`).join(''));
     $('[data-steps-detail]').innerHTML = steps.map((s, i) => `<div class="split rv-up" style="align-items:flex-start;gap:40px;padding-block:44px;border-top:${i ? '1px solid var(--line)' : '0'}"><div class="row" style="flex:1;gap:24px;flex-wrap:nowrap;align-items:flex-start"><span class="step-n" style="flex:none;width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:600 32px/1 var(--display);${i === 0 ? 'background:var(--bronze);color:var(--white)' : 'background:var(--sand);border:1px solid var(--tan);color:var(--bronze-dk)'}">0${i + 1}</span><div class="stack" style="gap:12px"><span class="eyebrow">Step 0${i + 1}</span><h2 class="h3" style="font-size:34px">${s[0]}</h2><p class="lead">${s[1]}</p></div></div><div class="card" style="flex:1"><span class="eyebrow" style="font-size:12px">What happens</span>${s[2].map(p => `<span class="row" style="flex-wrap:nowrap;gap:10px;align-items:flex-start">${icon('i-check', 20)}<span>${p}</span></span>`).join('')}</div></div>`).join('') + `<div class="row rv-up" style="padding-top:32px;border-top:1px solid var(--line)"><button class="btn btn-primary" data-taster>Start step 1 — Book a Taster Class</button><a class="btn btn-outline" href="#packages">Compare packages</a></div>`;
-    $('[data-teachers]').innerHTML = teachers.map((t, i) => `<div class="card lift rv-up" style="align-items:center;text-align:center"><span class="av" style="width:96px;height:96px;font:600 30px/1 var(--display);background:${tones[i % 4][0]};color:${tones[i % 4][1]}">${t[0]}</span><h3>${t[1]}</h3><b style="font:800 14px/1 var(--ui);color:var(--bronze-dk)">${t[2]}</b><p>${t[3]}</p></div>`).join('');
+    $('[data-teachers]').innerHTML = teachers.map((t, i) => `<div class="card lift rv-up member"><span class="av" style="background:${tones[i % 4][0]};color:${tones[i % 4][1]}">${t[0]}</span><span class="who"><h3>${t[1]}</h3><b>${t[2]}</b><p>${t[3]}</p></span></div>`).join('');
     $('[data-faq]').innerHTML = faqs.map((f, i) => `<details ${i === 0 ? 'open' : ''}><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('');
     $('[data-process]').innerHTML = [['Apply online', 'Send your details, CV and certificates.'], ['Interview', 'A short video call with our academic lead.'], ['Demo lesson', 'Teach a 20-minute sample lesson.'], ['Onboarding', 'Safeguarding checks, portal training and your first students.']].map((p, i, a) => `<li class="row" style="flex-wrap:nowrap;align-items:stretch;gap:16px"><span style="display:flex;flex-direction:column;align-items:center"><span style="width:44px;height:44px;border-radius:50%;background:var(--bronze);display:flex;align-items:center;justify-content:center;font:600 18px/1 var(--display)">${i + 1}</span>${i < a.length - 1 ? '<span style="flex:1;width:2px;background:var(--bronze);min-height:20px"></span>' : ''}</span><span style="padding:8px 0 24px"><b style="display:block;font:600 22px/1.1 var(--display)">${p[0]}</b><span style="color:var(--tan);font-size:15px">${p[1]}</span></span></li>`).join('');
     $('#bars').innerHTML = [[5, 88], [4, 9], [3, 2], [2, 1], [1, 0]].map(([n, p]) => `<span class="row" style="gap:10px;flex-wrap:nowrap;font:700 13px/1 var(--ui)"><span style="width:14px">${n}</span><span style="flex:1;height:8px;border-radius:999px;background:var(--sand)"><span class="bar" data-w="${p}" style="display:block;height:8px;border-radius:999px;background:var(--bronze);width:100%;transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ease)"></span></span><span style="width:34px;text-align:right;color:var(--muted)">${p}%</span></span>`).join('');
-    $('#cmp').innerHTML = [['Price', '£60 / month', '£45 / month', '£90 / month', '£300 / 15 lessons'], ['Subjects', '1 of Arabic, Islamic Studies or Qur’an', '1 of Arabic, Islamic Studies or Qur’an', 'All three, weekly', '1 short course'], ['Lesson type', 'Live, private', 'Live, up to 5 students', 'Live, private', 'Live'], ['Lesson length', '45 min (40 + 5 Q&A)', '1 hour (50 + 10 Q&A)', '45 min (35 + 10 Q&A)', '—'], ['Lessons', '4 a month (1 per week)', '4 a month (1 per week)', '4 a month (1 per week)', '15 lessons'], ['Schedule', 'Flexible times', 'Fixed weekly time', 'Fixed weekly time', 'Agreed with you'], ['Lesson materials', '✓', '✓', '✓', '✓']].map(r => `<tr><td>${r[0]}</td><td class="c">${r[1]}</td><td class="c">${r[2]}</td><td class="c" style="background:#FFFBF5">${r[3]}</td><td class="c">${r[4]}</td></tr>`).join('');
+    $('#cmp').innerHTML = [['Price', '£60 / month', '£45 / month', '£90 / month', '£300 / 15 lessons'], ['Subjects', '1 of Arabic, Islamic Studies or Qur’an', '1 of Arabic, Islamic Studies or Qur’an', 'All three, weekly', '1 short course'], ['Lesson type', 'Live, private', 'Live, up to 5 students', 'Live, private', 'Live'], ['Lesson length', '45 min (40 + 5 Q&A)', '1 hour (50 + 10 Q&A)', '45 min (35 + 10 Q&A)', '—'], ['Lessons', '4 a month (1 per week)', '4 a month (1 per week)', '4 a month (1 per week)', '15 lessons'], ['Schedule', 'Flexible times', 'Fixed weekly time', 'Fixed weekly time', 'Agreed with you'], ['Lesson materials', 'CHK', 'CHK', 'CHK', 'CHK']].map(r => `<tr><td>${r[0]}</td>${r.slice(1).map((v, k) => `<td class="c"${k === 2 ? ' style="background:#FFFBF5"' : ''}>${v === 'CHK' ? `<span class="tick-c" aria-label="Included">${icon('i-check', 20)}</span>` : v}</td>`).join('')}</tr>`).join('');
+    $$('[data-courses]').forEach(el => el.innerHTML = courses.map(c => `<a class="post course rv-up" href="#taster" data-taster data-subject="${c.subject}"><span class="img"><img src="assets/${c.img}" alt="" width="800" height="534" loading="lazy" decoding="async"></span><span class="body"><span class="meta"><span class="chip">${c.tags[0]}</span></span><h3>${c.t}</h3><p>${c.d}</p><span class="link">${c.cta} ${icon('i-arrow', 18, 'arr')}</span></span></a>`).join(''));
     $$('[data-levels]').forEach(el => el.innerHTML = levels.map(l => `<div class="lvl rv-up"><span class="n">${l[0]}</span><h3>${l[1]}</h3><p>${l[2]}</p></div>`).join(''));
     $$('[data-crash]').forEach(el => el.innerHTML = crash.map(c => `<li>${icon('i-check', 20)}<span>${c}</span></li>`).join(''));
     $$('[data-captcha]').forEach(el => el.outerHTML = `<input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><div class="captcha"><label><input type="checkbox" required> I’m not a robot</label><small class="row" style="gap:6px">${icon('i-shield', 16)}CAPTCHA spam protection</small></div>`);
     // stars
     const st = $('#stars'); let rating = 5;
-    const drawStars = () => st.innerHTML = [1, 2, 3, 4, 5].map(n => `<button type="button" role="radio" aria-checked="${n === rating}" aria-label="${n} star${n > 1 ? 's' : ''}" data-n="${n}" style="width:44px;height:44px;border:0;background:none;cursor:pointer;font-size:30px;color:${n <= rating ? '#8A6F4D' : '#E4CFAE'}">★</button>`).join('');
+    const drawStars = () => st.innerHTML = [1, 2, 3, 4, 5].map(n => `<button type="button" role="radio" aria-checked="${n === rating}" aria-label="${n} star${n > 1 ? 's' : ''}" data-n="${n}" style="width:44px;height:44px;border:0;background:none;cursor:pointer;color:${n <= rating ? '#8A6F4D' : '#E4CFAE'}">${icon('i-star', 30)}</button>`).join('');
     drawStars(); st.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { rating = +b.dataset.n; drawStars(); } });
   }
 
@@ -370,7 +371,7 @@
   const successHTML = {
     taster: ['Your taster class is reserved', 'We’ve emailed your confirmation. Our team has also been notified and will confirm your teacher and class link shortly.', '<a class="btn btn-primary" href="#packages">Next: select a plan</a>'],
     contact: ['Message sent', 'A copy is on its way to your email and the right team member will reply within one working day.', ''],
-    review: ['Jazakum Allahu khayran', 'Thank you for your feedback. It will appear once our team has reviewed it.', ''],
+    review: ['Thank you for your review', 'We appreciate your feedback. It will appear once our team has reviewed it.', ''],
     custom: ['Request received', 'We’ve emailed you a copy. Our team will send a tailored quote within one working day.', ''],
     teach: ['Application received', 'Our academic lead will review your application and contact you within 5 working days.', ''],
   };
@@ -403,13 +404,13 @@
     else { lbl.textContent = 'I am a…'; sel.innerHTML = '<option>Prospective student</option><option>Current student</option><option>Organisation</option>'; }
   });
   $('#copyLink').onclick = async () => { try { await navigator.clipboard.writeText(location.href); $('#copied').textContent = 'Link copied'; } catch { $('#copied').textContent = 'Copy the address from your browser'; } };
-  $('#addCal').onclick = e => { e.target.textContent = 'Added to calendar ✓'; };
+  $('#addCal').onclick = e => { e.target.textContent = 'Added to calendar'; };
 
   /* ---------- CHECKOUT ---------- */
   const co = { step: 0, plan: 'bundle', days: ['Tue', 'Sat'], time: 'Evening' };
   function renderCheckout() {
     const ps = planDefs().filter(p => !p.custom), P = ps.find(p => p.id === co.plan) || ps[1];
-    $('#coSteps').innerHTML = ['Package', 'Details', 'Schedule', 'Payment'].map((l, i) => `<li class="${i <= co.step ? 'on' : ''}"><i>${i < co.step ? '✓' : i + 1}</i>${l}</li>`).join('');
+    $('#coSteps').innerHTML = ['Package', 'Details', 'Schedule', 'Payment'].map((l, i) => `<li class="${i <= co.step ? 'on' : ''}"><i>${i < co.step ? icon('i-check', 14) : i + 1}</i>${l}</li>`).join('');
     $('#coPlan').textContent = P.name; $('#coDesc').textContent = P.desc; $('#coPrice').textContent = P.price; $('#coSched').textContent = (co.days.join(', ') || '—') + ' · ' + co.time;
     const nav = co.step < 4 ? `<div class="row" style="justify-content:space-between;border-top:1px solid var(--line);padding-top:22px;margin-top:auto"><button class="btn btn-outline" data-co="-1" ${co.step === 0 ? 'disabled style="opacity:.4"' : ''}>Back</button><button class="btn btn-primary" data-co="1">${co.step === 3 ? 'Pay ' + P.price + ' securely' : 'Continue'} ${icon('i-arrow', 18, 'arr')}</button></div>` : '';
     const chip = (arr, v, multi) => `<div class="chips" data-co-chips="${multi ? 'days' : 'time'}">${arr.map(x => `<button type="button" class="${(multi ? co.days.includes(x) : co.time === x) ? 'on' : ''}">${x}</button>`).join('')}</div>`;
@@ -476,9 +477,9 @@
     try {
       const res = await fetch('https://formsubmit.co/ajax/' + SOU_EMAIL, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ _subject: `New assessment completed: ${r.name} (${r.subject})`, _template: 'table', _captcha: 'false', Name: r.name, Email: r.email, Subject: r.subject, 'Suggested level': r.level[1], Date: r.date, Answers: lines }) });
       if (!res.ok) throw new Error(res.status);
-      el() && (el().textContent = '✓ SOU has been notified and will be in touch about your level.');
+      el() && (el().innerHTML = `${icon('i-check', 18)} SOU has been notified and will be in touch about your level.`);
     } catch (err) {
-      const msg = encodeURIComponent(`Assalamu alaykum, I completed the ${r.subject} assessment. Name: ${r.name}. Email: ${r.email}. Suggested level: ${r.level[1]}.`);
+      const msg = encodeURIComponent(`Hello SOU, I completed the ${r.subject} assessment. Name: ${r.name}. Email: ${r.email}. Suggested level: ${r.level[1]}.`);
       el() && (el().innerHTML = `We couldn’t notify SOU automatically. <a href="https://wa.me/447907411836?text=${msg}" target="_blank" rel="noopener">Send your result on WhatsApp</a> instead.`);
     }
   }
@@ -531,6 +532,6 @@
   route();
   if (motionOn()) { curtain.classList.add('cover'); curtain.style.transition = 'none'; requestAnimationFrame(() => { curtain.style.transition = ''; withIntro(); }); }
   function withIntro() { curtain.classList.add('leave'); curtain.classList.remove('cover'); setTimeout(() => { curtain.classList.remove('leave'); curtain.style.transition = 'none'; curtain.style.transform = 'translateY(100%)'; void curtain.offsetWidth; curtain.style.transition = ''; curtain.style.transform = ''; }, 750); }
-  cfRender = [coverflow($('#cf'), courses, $('#cfPrev'), $('#cfNext')), coverflow($('#cf2'), featured, $('#cf2Prev'), $('#cf2Next'))];
+  cfRender = [coverflow($('#cf2'), featured, $('#cf2Prev'), $('#cf2Next'))];
   observeReveals();
 })();
