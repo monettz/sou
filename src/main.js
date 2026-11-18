@@ -332,6 +332,7 @@
     const page = $(`[data-page="${id}"]`);
     pageLoadAnim(page); observeReveals(); observeCounters(); scrubWords(); playSplits(page, true); parallax();
     cfRender.forEach(f => f());
+    loadForms(page);
     if (id === 'checkout') renderCheckout();
     if (id === 'enrol') { const P = planDefs().find(p => p.id === co.plan), n = $('#enrolPlan'); if (P && co.picked) { n.hidden = false; n.innerHTML = `You chose <b>&nbsp;${P.name} — ${P.price} ${P.unit}</b>. Please mention this in the form.`; } else n.hidden = true; }
     if (id === 'assessment') renderAssess();
@@ -355,7 +356,9 @@
   function closeDrawer() { drawer.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
   burger.onclick = openDrawer; $('#drawerClose').onclick = closeDrawer;
   const modal = $('#taster'); let lastFocus;
-  function openTaster() { closeDrawer(); lastFocus = document.activeElement; modal.classList.add('open'); lenis && lenis.stop(); setTimeout(() => $('#tClose')?.focus(), 300); }
+  // Google Forms load only when their page or the taster modal is opened
+  const loadForms = (root) => root && $$('iframe[data-src]:not([src])', root).forEach(f => { f.src = f.dataset.src; });
+  function openTaster() { loadForms(modal); closeDrawer(); lastFocus = document.activeElement; modal.classList.add('open'); lenis && lenis.stop(); setTimeout(() => $('#tClose')?.focus(), 300); }
   function closeTaster() { modal.classList.remove('open'); lenis && lenis.start(); if (location.hash === '#taster') history.replaceState(null, '', '#' + (current || 'home')); lastFocus && lastFocus.focus && lastFocus.focus(); }
   $('#tClose').onclick = closeTaster;
   modal.addEventListener('click', e => { if (e.target === modal) closeTaster(); });
