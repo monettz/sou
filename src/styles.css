@@ -454,7 +454,7 @@ form{display:flex;flex-direction:column;gap:18px}
 .crash-list li{display:flex;gap:14px;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:18px 20px;font:600 17px/1.3 var(--body)}
 .crash-list svg{color:var(--bronze);flex:none}
 .form-card{display:flex;flex-direction:column;gap:16px}
-.gform{display:flex;flex-direction:column;gap:12px}
+.gform{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
 .gform iframe{width:100%;border:0;border-radius:16px;background:var(--white);max-height:78vh}
 .dialog .gform iframe{max-height:62vh}
 #asBox{gap:18px}
