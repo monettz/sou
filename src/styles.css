@@ -427,3 +427,53 @@ form{display:flex;flex-direction:column;gap:18px}
 }
 /* baked-in text sits on the right: when cropped, keep the student (left side) */
 .img-marquee img[src$="study-home.jpg"],.cf-card img[src$="study-home.jpg"]{object-position:left center}
+
+/* ===== Stage 01 content update: banner slider, arches, levels, assessment, embedded forms ===== */
+.banner{position:relative;background:var(--cream)}
+.banner-imgs{position:relative;width:100%;aspect-ratio:1672/941;overflow:hidden;background:var(--ink)}
+.banner-imgs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.1s ease}
+.banner-imgs img.on{opacity:1}
+.banner-cap{padding:22px 16px 4px;display:flex;flex-direction:column;gap:10px}
+.banner-cap .h1{font-size:clamp(30px,8vw,44px);margin:0}
+.banner-cap .lead{margin:0;font-size:16px}
+.banner-bar{background:var(--cream);padding:22px 0 30px;border-bottom:1px solid var(--line)}
+.banner-bar .hero-btns{justify-content:center;gap:14px}
+/* the wording is printed on the banner artwork, so the text copy is kept for screen readers only */
+.banner-cap{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.flex-sec{background:var(--cream)}
+.arches{display:flex;align-items:flex-end;justify-content:center;gap:clamp(10px,2.4vw,28px);width:100%;max-width:980px}
+.arches img{display:block;height:auto;object-fit:cover;border-radius:999px 999px 26px 26px;min-width:0}
+.arches .a-sm{width:28%;aspect-ratio:1/1.05}
+.arches .a-lg{width:40%;aspect-ratio:3/4}
+.grid.team{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.lvl{background:#36322E;border:1px solid #4A4540;border-radius:var(--r-md);padding:28px;display:flex;flex-direction:column;gap:10px}
+.lvl .n{font:600 40px/1 var(--display);color:var(--tan)}
+.lvl h3{margin:0;font:600 26px/1.1 var(--display);color:var(--cream)}
+.lvl p{margin:0;color:#E6D8C4;font-size:15px}
+.crash-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.crash-list li{display:flex;gap:14px;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:18px 20px;font:600 17px/1.3 var(--body)}
+.crash-list svg{color:var(--bronze);flex:none}
+.form-card{display:flex;flex-direction:column;gap:16px}
+.gform{display:flex;flex-direction:column;gap:12px}
+.gform iframe{width:100%;border:0;border-radius:16px;background:var(--white);max-height:78vh}
+.dialog .gform iframe{max-height:62vh}
+#asBox{gap:18px}
+#asBox .h3{margin:0}
+.as-pick{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.as-pick button{cursor:pointer;text-align:left;background:var(--cream);border:2px solid var(--line);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:6px;font-family:var(--body);color:var(--ink);transition:border-color .25s,transform .25s}
+.as-pick button:hover,.as-pick button:focus-visible{border-color:var(--bronze);transform:translateY(-2px)}
+.as-pick b{font:600 26px/1.1 var(--display)}
+.as-pick span{color:var(--muted);font-size:14px}
+.as-pick svg{color:var(--bronze-dk);margin-top:6px}
+.as-form{display:flex;flex-direction:column;gap:22px}
+.as-q{border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin:0;display:flex;flex-direction:column;gap:6px}
+.as-q legend{font:600 17px/1.4 var(--body);padding:0 6px;display:flex;gap:10px;align-items:baseline}
+.as-q legend span{flex:none;width:28px;height:28px;border-radius:50%;background:var(--sand);color:var(--bronze-dk);display:inline-flex;align-items:center;justify-content:center;font:800 14px/1 var(--ui)}
+.as-q label{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:12px;cursor:pointer;font-size:16px}
+.as-q label:hover{background:var(--cream)}
+.as-q input{width:20px;height:20px;accent-color:var(--bronze);flex:none}
+.err-sum{margin:0;color:#B3412F;font:700 14px/1.4 var(--ui)}
+.as-result{display:flex;flex-direction:column;gap:18px;align-items:flex-start}
+.lvl-big{display:flex;flex-direction:column;font:600 clamp(40px,7vw,64px)/1 var(--display);color:var(--ink)}
+.lvl-big small{font:800 13px/1.6 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--bronze-dk)}
+.as-sent{margin:0;font:700 14px/1.4 var(--ui);color:var(--ok)}

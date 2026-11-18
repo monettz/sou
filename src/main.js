@@ -28,15 +28,11 @@
   ];
   const tones = [['#8A6F4D', '#FFF7EF'], ['#D6B98C', '#2B2B2B'], ['#2B2B2B', '#FFF7EF'], ['#6E583C', '#FFF7EF']];
   const reviews = [
-    ['quran', 'AR', 'Aisha R.', 'Qur’an Reading · Adult learner', 'The teachers are patient and the structure keeps me consistent. I finally feel confident reading on my own.', 5],
-    ['arabic', 'YM', 'Yusuf M.', 'Arabic Language · University student', 'Booking the taster class was easy and the evening slots fit perfectly around my lectures.', 5],
-    ['arabic', 'FK', 'Fatima K.', 'Arabic Foundations · Student', 'Clear lessons, helpful notes and a teacher who actually tracks my progress. Highly recommended.', 5],
-    ['islamic', 'IB', 'Ibrahim B.', 'Islamic Studies · Adult learner', 'Practical and well explained. Every lesson connects back to daily life.', 5],
-    ['quran', 'NS', 'Noor S.', 'Qur’an Reading · Working professional', 'I look forward to every class after work. The quick quizzes keep me motivated between lessons.', 5],
-    ['quran', 'OH', 'Omar H.', 'Tajweed · College student', 'Being able to rewatch the lesson video with my notes made a huge difference before my test.', 4],
-    ['arabic', 'ZA', 'Zainab A.', 'Arabic Language · Intermediate', 'Grammar finally makes sense. Ustadha Maryam explains things in a way I can remember.', 5],
-    ['islamic', 'KM', 'Khalid M.', 'Seerah course · Adult learner', 'Well organised, always on time, and WhatsApp support is quick when I need to reschedule.', 5],
-    ['quran', 'HR', 'Hafsa R.', 'Qur’an Reading · Beginner', 'I started from the alphabet as an adult and never felt embarrassed. Truly supportive teachers.', 5],
+    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · Student 18+', 'My teacher is so kind, patient and always ensuring I understand before moving on.', 5],
+    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · Student 18+', 'The PowerPoints are also provided before each lesson, which is really helpful as it allows you to know what to expect and prepare beforehand.', 5],
+    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · Student 18+', 'The pace of the lessons is really good. There’s enough time to take detailed notes and reflect without ever feeling rushed.', 5],
+    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · Student 18+', 'We learn key terms, what is mandatory and what is Sunnah, as well as practical ways to get closer to Allah SWT and improve our relationship with Him.', 5],
+    ['islamic', 'A', 'Anonymous student', 'Islamic Studies · Student 18+', 'I’ve really been enjoying my Islamic Studies lessons. The lessons go into such beautiful detail about our deen, starting right from the very beginning. They are perfect for anyone who wants to build a strong foundation or strengthen their existing knowledge.', 5],
   ];
   const steps = [
     ['Sample a class', 'Book a free taster lesson and meet a teacher with no commitment.', ['Choose a subject and a preferred time', 'Reservation confirmed by email', 'Our team is notified to assign a teacher']],
@@ -46,10 +42,9 @@
     ['Begin study', 'Start learning with steady support and progress check-ins.', ['Progress tracker and teacher feedback', 'Homework quick quizzes', 'Diary notes linked to lesson videos']],
   ];
   const courses = [
-    { href: '#taster', taster: true, subject: 'Qur’an Reading & Tajweed', cta: 'Book a free taster', t: 'Qur’an Reading & Tajweed', d: 'From the Arabic alphabet to fluent recitation with correct rules.', img: 'post-class.jpg', tags: ['Students 16+', 'Adults'] },
-    { href: '#taster', taster: true, subject: 'Arabic Language', cta: 'Book a free taster', t: 'Arabic Language', d: 'Grammar, vocabulary and conversation to understand the Qur’an directly.', img: 'post-flyer.jpg', tags: ['Beginner', 'Intermediate'] },
-    { href: '#taster', taster: true, subject: 'Islamic Studies', cta: 'Book a free taster', t: 'Islamic Studies', d: 'Aqeedah, fiqh of worship, seerah and character, taught practically.', img: 'hero1.jpg', tags: ['Students 16+', 'Adults'] },
-    { href: '#taster', taster: true, subject: 'Qur’an Reading & Tajweed', cta: 'Book a free taster', t: 'Hifz Programme', d: 'Structured memorisation with daily revision and teacher listening.', img: 'hero2.jpg', tags: ['Students 16+', 'Adults'] },
+    { href: '#taster', taster: true, subject: 'Arabic Language', cta: 'Book a free taster', t: 'Discover the beauty of the Arabic language', d: 'Build your Arabic skills through structured lessons designed to develop your understanding, confidence and fluency.', img: 'post-flyer.jpg', tags: ['Arabic'] },
+    { href: '#taster', taster: true, subject: 'Islamic Studies', cta: 'Book a free taster', t: 'Grow in knowledge, strengthen your Deen', d: 'Embark on a journey of learning that deepens your understanding of Islam, strengthens your faith and inspires you to become a better Muslim.', img: 'hero1.jpg', tags: ['Islamic Studies'] },
+    { href: '#taster', taster: true, subject: 'Qur’an Reading & Tajweed', cta: 'Book a free taster', t: 'Build a lasting connection with the Qur’an', d: 'Strengthen your recitation, discover the beauty of its teachings and make the words of Allah a guiding light in your everyday life.', img: 'post-class.jpg', tags: ['Qur’an'] },
   ];
   const featured = [
     { href: '#post', cta: 'Read more', t: 'The winter timetable is here', d: 'New evening and weekend slots for every subject.', img: 'post-flyer.jpg', tags: ['Flyer'] },
@@ -58,22 +53,24 @@
     { href: '#post', cta: 'Read more', t: 'Online open day & Q&A', d: 'Meet our teachers live on 6 November, 7 PM.', img: 'about-online.jpg', tags: ['Event'] },
     { href: '#post', cta: 'Read more', t: 'Weekend Hifz circle for students', d: 'Small groups, Saturdays and Sundays.', img: 'hero2.jpg', tags: ['New class'] },
   ];
-  const teachers = [['AH', 'Ust. Ahmed Hassan', 'Qur’an & Tajweed', 'Ijazah in Hafs ‘an ‘Asim. 12 years teaching students and working adults.'], ['MA', 'Ustadha Maryam Ali', 'Arabic Language', 'MA in Arabic. Makes grammar simple and practical.'], ['BO', 'Ust. Bilal Okoye', 'Islamic Studies', 'Graduate in Shariah. Focus on fiqh of worship and seerah.'], ['SK', 'Ustadha Safiya Khan', 'Qur’an Reading', 'Specialist in beginners starting from the Arabic alphabet.']];
-  const faqs = [['Is the taster class really free?', 'Yes. Your first taster class is completely free and there is no obligation to buy a package afterwards.'], ['Who are the teachers?', 'Qualified, vetted teachers with recognised training — many with ijazah — trained in the SOU curriculum and safeguarding checked.'], ['Who are the classes for?', 'Our classes are for learners aged 16 and over — college and university students as well as working adults.'], ['What if I need to change my schedule?', 'Request a change in your student portal or contact us. We ask for 24 hours’ notice for lesson changes.'], ['Do you offer group discounts?', 'Yes — choose a Custom pack and describe what you need. We will send you a tailored quote.']];
-  const events = [{ d: 6, k: 'events', tag: 'Event', t: 'Online open day & Q&A', m: '7:00 PM · Live online' }, { d: 14, k: 'offers', tag: 'Offer', t: 'Bundle bonus lessons begin', m: 'Until 30 Nov' }, { d: 18, k: 'events', tag: 'Event', t: 'Tajweed evening cohort starts', m: '6:30 PM · Live online' }, { d: 18, k: 'news', tag: 'News', t: 'Teacher spotlight: Ustadha Maryam', m: 'Blog post' }, { d: 22, k: 'news', tag: 'News', t: 'Winter timetable published', m: 'Announcement' }, { d: 27, k: 'events', tag: 'Event', t: 'Arabic grammar weekend intensive', m: '10:00 AM – 1:00 PM · Live online' }];
+  const teachers = [['Y', 'Yasmine', 'Founder', 'Founder of Students of the Ummah.'], ['HB', 'Ustadha Hafssa Bachir', 'Head of Islamic Studies', 'Leads our Islamic Studies programme.'], ['H', 'Ustadha Hanan', 'Head of Arabic', 'Leads our Arabic language programme.'], ['H', 'Ustadha Hadjer', 'Head of Qur’an', 'Leads our Qur’an and recitation programme.'], ['S', 'Ustadha Safia', 'Head of Qaidah', 'Leads our Qaidah (reading foundations) programme.']];
+  const faqs = [['Is the taster class really free?', 'Yes. Your first taster class is completely free and there is no obligation to buy a package afterwards.'], ['Who are the teachers?', 'Qualified, vetted teachers with recognised training — many with ijazah — trained in the SOU curriculum and safeguarding checked.'], ['Who are the classes for?', 'Our classes are for learners aged 16 and over — college and university students as well as working adults.'], ['What if I need to change my schedule?', 'Request a change in your student portal or contact us. We ask for 24 hours’ notice for lesson changes.'], ['Do you offer group lessons?', 'Yes. Group lessons are £45/month with up to 5 students a class, or £40/month when you join with a friend or sibling. For anything else, choose a Custom pack and we will send you a tailored quote.'], ['How do I know which level I am?', 'Take our short online assessment for your chosen subject. Your teacher will then double-check your level of knowledge, recitation and speaking in a second assessment.']];
+  const events = [{ d: 6, k: 'events', tag: 'Event', t: 'Online open day & Q&A', m: '7:00 PM · Live online' }, { d: 14, k: 'offers', tag: 'Offer', t: 'Bundle bonus lessons begin', m: 'Until 30 Nov' }, { d: 18, k: 'events', tag: 'Event', t: 'Tajweed evening cohort starts', m: '6:30 PM · Live online' }, { d: 18, k: 'news', tag: 'News', t: 'Teacher spotlight: Ustadha Hanan', m: 'Blog post' }, { d: 22, k: 'news', tag: 'News', t: 'Winter timetable published', m: 'Announcement' }, { d: 27, k: 'events', tag: 'Event', t: 'Arabic grammar weekend intensive', m: '10:00 AM – 1:00 PM · Live online' }];
   const evColor = { events: '#8A6F4D', offers: '#D6B98C', news: '#2B2B2B' };
-  const planDefs = (g) => [
-    { id: 'single', name: 'Single lesson', desc: 'Try a subject or top up your learning.', price: g ? '£12' : '£20', unit: '/ lesson', feats: ['1 × 45-min lesson', 'Any subject & level', 'Book any open slot', 'Lesson notes after class'], cta: 'Buy single lesson' },
-    { id: 'b10', name: 'Bundle 10', desc: 'Steady weekly progress.', price: g ? '£110' : '£180', unit: '/ 10 lessons', save: 'Save 10%', feats: ['10 × 45-min lessons', 'Fixed weekly schedule', 'Orientation pack', 'Progress check every 5 lessons'], cta: 'Choose Bundle 10' },
-    { id: 'b20', name: 'Bundle 20', desc: 'Best value for committed learners.', price: g ? '£200' : '£340', unit: '/ 20 lessons', save: 'Save 15%', feats: ['20 × 45-min lessons', 'Priority time slots', 'Orientation pack + workbook', 'Monthly progress report'], cta: 'Choose Bundle 20', feat: true, badge: 'Best value' },
-    { id: 'custom', name: 'Custom pack', desc: 'Study groups, societies and special requirements.', price: 'Custom', unit: 'quoted for you', feats: ['Any number of lessons', 'Group discounts', 'Your preferred schedule', 'Personal learning plan'], cta: 'Describe your pack', custom: true },
+  const planDefs = () => [
+    { id: 'single', name: 'Single lesson', desc: 'Private one-to-one lessons in one subject.', price: '£60', unit: '/ month', feats: ['Arabic, Islamic Studies or Qur’an', 'Live private 45-minute lessons', '40-minute lesson + 5-minute Q&A (flexible)', '4 lessons a month (1 per week)', 'Lesson materials provided', 'Flexible times available'], cta: 'Enrol — single lesson' },
+    { id: 'group', name: 'Group lessons', desc: 'Learn together in a small live class.', price: '£45', unit: '/ month', save: '£40/month when you join with a friend or sibling', feats: ['Arabic, Islamic Studies or Qur’an', 'Live lessons, 5 students a class', '1-hour lessons', '50-minute lesson + 10-minute Q&A (fixed)', '4 lessons a month (1 fixed time per week)', 'Lesson materials provided'], cta: 'Enrol — group lessons' },
+    { id: 'bundle', name: 'Monthly bundle', desc: 'All three subjects taught weekly.', price: '£90', unit: '/ month', feats: ['Arabic, Islamic Studies and Qur’an', 'Live private 45-minute lessons', '35-minute lesson + 10-minute Q&A (fixed)', '4 lessons a month (1 fixed time per week)', 'Lesson materials provided'], cta: 'Enrol — monthly bundle', feat: true, badge: 'All 3 subjects' },
+    { id: 'crash', name: 'Crash course', desc: 'Fastest way to gain knowledge in a short time.', price: '£300', unit: '/ 15 lessons', feats: ['Choose one short course', 'Arabic reading & writing, Seerah, Fiqh of prayer and more'], cta: 'Enrol on a crash course', hide: true },
+    { id: 'custom', name: 'Custom pack', desc: 'Choose how you learn — e.g. Qaida only, memorisation, Seerah, Fiqh or Aqeedah.', price: 'Custom', unit: 'quoted for you', feats: ['Pick the subjects you want', 'Your preferred schedule', 'Personal learning plan', 'Contact us to describe your pack'], cta: 'Describe your pack', custom: true },
   ];
-  let mode = 'one';
+  const crash = ['Arabic reading and writing', 'Seerah of the Prophet ﷺ', 'Introduction to Islam (basics)', 'Fiqh of prayer (salah) and how to pray', 'Understanding halal and haram', 'Juz ‘Amma course'];
+  const levels = [['01', 'Beginners', 'Start from the foundations, step by step, with a patient teacher.'], ['02', 'Intermediate', 'Build on the basics towards confidence and fluency.'], ['03', 'Advanced', 'Deepen your knowledge, accuracy and understanding.'], ['04', 'Refresher courses', 'Revisit and strengthen what you have learned before.']];
 
   /* ---------- RENDERERS ---------- */
   const postCard = (p) => `<a class="post rv-up" href="#post"><span class="img"><img src="assets/${p.img}" alt="${p.alt}" width="800" height="534" loading="lazy" decoding="async"></span><span class="body"><span class="meta"><span class="chip">${p.tag}</span>${p.date}</span><h3>${p.title}</h3><span class="link">Read more ${icon('i-arrow', 18, 'arr')}</span></span></a>`;
   const reviewCard = (r, i) => `<figure class="rv rv-up" style="background:var(--white)"><span class="row" style="justify-content:space-between"><span class="stars" aria-label="${r[5]} out of 5">${'★'.repeat(r[5])}${'☆'.repeat(5 - r[5])}</span></span><blockquote>“${r[4]}”</blockquote><figcaption><span class="av" style="background:${tones[i % 4][0]};color:${tones[i % 4][1]}">${r[1]}</span><span><b style="display:block;font-family:var(--ui)">${r[2]}</b><span style="font-size:13px;color:var(--muted)">${r[3]}</span></span><span class="verified">Verified</span></figcaption></figure>`;
-  const planCard = (p) => `<div class="plan rv-up ${p.feat ? 'feat' : ''}"><span class="row" style="justify-content:space-between"><h3>${p.name}</h3>${p.badge ? `<span class="badge">${p.badge}</span>` : ''}</span><span class="desc">${p.desc}</span><span class="price"><b>${p.price}</b><span>${p.unit}</span></span>${p.save ? `<span class="save">${p.save}</span>` : ''}<ul>${p.feats.map(f => `<li>${f}</li>`).join('')}</ul><a class="btn ${p.feat ? 'btn-primary' : 'btn-outline'}" href="${p.custom ? '#packages' : '#checkout'}" data-plan="${p.id}" ${p.custom ? 'data-scroll="custom"' : ''}>${p.cta}</a></div>`;
+  const planCard = (p) => `<div class="plan rv-up ${p.feat ? 'feat' : ''}"><span class="row" style="justify-content:space-between"><h3>${p.name}</h3>${p.badge ? `<span class="badge">${p.badge}</span>` : ''}</span><span class="desc">${p.desc}</span><span class="price"><b>${p.price}</b><span>${p.unit}</span></span>${p.save ? `<span class="save">${p.save}</span>` : ''}<ul>${p.feats.map(f => `<li>${f}</li>`).join('')}</ul><a class="btn ${p.feat ? 'btn-primary' : 'btn-outline'}" href="${p.custom ? '#packages' : '#enrol'}" data-plan="${p.id}" ${p.custom ? 'data-scroll="custom"' : ''}>${p.cta}</a></div>`;
 
   function renderPosts() {
     $$('[data-posts]').forEach(el => { if (el.id === 'postGrid') return; el.innerHTML = posts.slice(0, 3).map(postCard).join(''); });
@@ -82,10 +79,10 @@
   function renderPostGrid(cat) { $('#postGrid').innerHTML = posts.filter(p => cat === 'all' || p.cat === cat).map(postCard).join(''); }
   function renderReviews(f = 'all') {
     $$('[data-reviews="3"]').forEach(el => el.innerHTML = reviews.slice(0, 3).map(reviewCard).join(''));
-    $('#rvGrid').innerHTML = reviews.map((r, i) => [r, i]).filter(([r]) => f === 'all' || r[0] === f).map(([r, i]) => reviewCard(r, i)).join('');
+    $('#rvGrid').innerHTML = reviews.map(reviewCard).join('');
   }
   function renderPlans() {
-    const ps = planDefs(mode === 'group');
+    const ps = planDefs().filter(p => !p.hide);
     $$('[data-plans]').forEach(el => el.innerHTML = ps.map(planCard).join(''));
   }
   function tabs(el, items, onPick) {
@@ -96,11 +93,13 @@
   function renderStatic() {
     $$('[data-steps]').forEach(el => el.innerHTML = steps.map((s, i) => `<li class="step ${i === 0 ? 'first' : ''}"><span class="n">0${i + 1}</span><h3>${s[0]}</h3><p>${s[1]}</p></li>`).join(''));
     $('[data-steps-detail]').innerHTML = steps.map((s, i) => `<div class="split rv-up" style="align-items:flex-start;gap:40px;padding-block:44px;border-top:${i ? '1px solid var(--line)' : '0'}"><div class="row" style="flex:1;gap:24px;flex-wrap:nowrap;align-items:flex-start"><span class="step-n" style="flex:none;width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:600 32px/1 var(--display);${i === 0 ? 'background:var(--bronze);color:var(--white)' : 'background:var(--sand);border:1px solid var(--tan);color:var(--bronze-dk)'}">0${i + 1}</span><div class="stack" style="gap:12px"><span class="eyebrow">Step 0${i + 1}</span><h2 class="h3" style="font-size:34px">${s[0]}</h2><p class="lead">${s[1]}</p></div></div><div class="card" style="flex:1"><span class="eyebrow" style="font-size:12px">What happens</span>${s[2].map(p => `<span class="row" style="flex-wrap:nowrap;gap:10px;align-items:flex-start">${icon('i-check', 20)}<span>${p}</span></span>`).join('')}</div></div>`).join('') + `<div class="row rv-up" style="padding-top:32px;border-top:1px solid var(--line)"><button class="btn btn-primary" data-taster>Start step 1 — Book a Taster Class</button><a class="btn btn-outline" href="#packages">Compare packages</a></div>`;
-    $('[data-teachers]').innerHTML = teachers.map((t, i) => `<div class="card lift rv-up" style="align-items:center;text-align:center"><span class="av" style="width:96px;height:96px;font:600 30px/1 var(--display);background:${tones[i][0]};color:${tones[i][1]}">${t[0]}</span><h3>${t[1]}</h3><b style="font:800 14px/1 var(--ui);color:var(--bronze-dk)">${t[2]}</b><p>${t[3]}</p></div>`).join('');
+    $('[data-teachers]').innerHTML = teachers.map((t, i) => `<div class="card lift rv-up" style="align-items:center;text-align:center"><span class="av" style="width:96px;height:96px;font:600 30px/1 var(--display);background:${tones[i % 4][0]};color:${tones[i % 4][1]}">${t[0]}</span><h3>${t[1]}</h3><b style="font:800 14px/1 var(--ui);color:var(--bronze-dk)">${t[2]}</b><p>${t[3]}</p></div>`).join('');
     $('[data-faq]').innerHTML = faqs.map((f, i) => `<details ${i === 0 ? 'open' : ''}><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('');
     $('[data-process]').innerHTML = [['Apply online', 'Send your details, CV and certificates.'], ['Interview', 'A short video call with our academic lead.'], ['Demo lesson', 'Teach a 20-minute sample lesson.'], ['Onboarding', 'Safeguarding checks, portal training and your first students.']].map((p, i, a) => `<li class="row" style="flex-wrap:nowrap;align-items:stretch;gap:16px"><span style="display:flex;flex-direction:column;align-items:center"><span style="width:44px;height:44px;border-radius:50%;background:var(--bronze);display:flex;align-items:center;justify-content:center;font:600 18px/1 var(--display)">${i + 1}</span>${i < a.length - 1 ? '<span style="flex:1;width:2px;background:var(--bronze);min-height:20px"></span>' : ''}</span><span style="padding:8px 0 24px"><b style="display:block;font:600 22px/1.1 var(--display)">${p[0]}</b><span style="color:var(--tan);font-size:15px">${p[1]}</span></span></li>`).join('');
     $('#bars').innerHTML = [[5, 88], [4, 9], [3, 2], [2, 1], [1, 0]].map(([n, p]) => `<span class="row" style="gap:10px;flex-wrap:nowrap;font:700 13px/1 var(--ui)"><span style="width:14px">${n}</span><span style="flex:1;height:8px;border-radius:999px;background:var(--sand)"><span class="bar" data-w="${p}" style="display:block;height:8px;border-radius:999px;background:var(--bronze);width:100%;transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ease)"></span></span><span style="width:34px;text-align:right;color:var(--muted)">${p}%</span></span>`).join('');
-    $('#cmp').innerHTML = [['Lesson length', '45 min', '45 min', '45 min', 'Flexible'], ['Same teacher every week', '—', '✓', '✓', '✓'], ['Orientation pack', '—', '✓', '✓ + workbook', '✓'], ['Progress tracker & quizzes', '✓', '✓', '✓', '✓'], ['Diary notes linked to videos', '✓', '✓', '✓', '✓'], ['Progress reports', '—', 'Every 5 lessons', 'Monthly', 'Agreed with you'], ['Reschedule with 24h notice', '✓', '✓', '✓', '✓']].map(r => `<tr><td>${r[0]}</td><td class="c">${r[1]}</td><td class="c">${r[2]}</td><td class="c" style="background:#FFFBF5">${r[3]}</td><td class="c">${r[4]}</td></tr>`).join('');
+    $('#cmp').innerHTML = [['Price', '£60 / month', '£45 / month', '£90 / month', '£300 / 15 lessons'], ['Subjects', '1 of Arabic, Islamic Studies or Qur’an', '1 of Arabic, Islamic Studies or Qur’an', 'All three, weekly', '1 short course'], ['Lesson type', 'Live, private', 'Live, up to 5 students', 'Live, private', 'Live'], ['Lesson length', '45 min (40 + 5 Q&A)', '1 hour (50 + 10 Q&A)', '45 min (35 + 10 Q&A)', '—'], ['Lessons', '4 a month (1 per week)', '4 a month (1 per week)', '4 a month (1 per week)', '15 lessons'], ['Schedule', 'Flexible times', 'Fixed weekly time', 'Fixed weekly time', 'Agreed with you'], ['Lesson materials', '✓', '✓', '✓', '✓']].map(r => `<tr><td>${r[0]}</td><td class="c">${r[1]}</td><td class="c">${r[2]}</td><td class="c" style="background:#FFFBF5">${r[3]}</td><td class="c">${r[4]}</td></tr>`).join('');
+    $$('[data-levels]').forEach(el => el.innerHTML = levels.map(l => `<div class="lvl rv-up"><span class="n">${l[0]}</span><h3>${l[1]}</h3><p>${l[2]}</p></div>`).join(''));
+    $$('[data-crash]').forEach(el => el.innerHTML = crash.map(c => `<li>${icon('i-check', 20)}<span>${c}</span></li>`).join(''));
     $$('[data-captcha]').forEach(el => el.outerHTML = `<input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><div class="captcha"><label><input type="checkbox" required> I’m not a robot</label><small class="row" style="gap:6px">${icon('i-shield', 16)}CAPTCHA spam protection</small></div>`);
     // stars
     const st = $('#stars'); let rating = 5;
@@ -162,21 +161,15 @@
 
   /* ---------- HERO BANNER SLIDES ---------- */
   const slides = [
-    { k: 'Live online classes for students 16+', t: 'Rooted learning for the <span class="hl">students of the Ummah</span>', b: 'Structured Qur’an, Arabic and Islamic studies with qualified teachers — at a pace and schedule that fits your life.', img: 0 },
-    { k: 'Winter term · Enrolment open', t: 'New evening cohorts <span class="hl">start this month</span>', b: 'Reserve your place now and begin with a free taster class. Places are limited.', img: 1 },
-    { k: 'Limited offer', t: 'Two bonus lessons with <span class="hl">every bundle</span>', b: 'Book any bundle before 30 November and enjoy extra sessions with your teacher.', img: 2 },
+    { t: 'Study Islam from the comfort of <span class="hl">your home.</span>', b: 'Flexible online learning designed to fit around your life, at a pace that works for you.' },
+    { t: 'Learn with confidence, <span class="hl">every step of the way.</span>', b: 'With experienced and supportive teachers by your side, feel empowered to progress in your Islamic studies at your own pace.' },
+    { t: 'Everything you need to learn, <span class="hl">all in one place.</span>', b: 'From interactive student dashboards and video lessons to direct access to teachers, quizzes and exams — experience Islamic learning in one structured environment.' },
   ];
   let sl = 0, slTimer;
   function showSlide(i) {
     sl = (i + slides.length) % slides.length; const s = slides[sl];
-    const parts = [$('#slKicker'), $('#slTitle'), $('#slBody')];
-    $$('.hero-bg img').forEach((im, j) => im.classList.toggle('on', j === s.img));
-    parts.forEach(p => { p.style.transition = 'opacity .35s'; p.style.opacity = 0; });
-    setTimeout(() => {
-      $('#slKicker').textContent = s.k; const T = $('#slTitle'); T.innerHTML = s.t; $('#slBody').textContent = s.b;
-      if (motionOn() && sio) { splitEl(T); T.classList.add('in'); requestAnimationFrame(() => requestAnimationFrame(() => T.classList.add('split-in'))); }
-      parts.forEach(p => p.style.opacity = 1);
-    }, reduce ? 0 : 350);
+    $$('.banner-imgs img').forEach((im, j) => im.classList.toggle('on', j === sl));
+    $('#slTitle').innerHTML = s.t; $('#slBody').textContent = s.b;
   }
   let slPaused = false;
   const slRestart = () => { clearInterval(slTimer); if (!reduce && !slPaused) slTimer = setInterval(() => showSlide(sl + 1), 6000); };
@@ -210,7 +203,7 @@
   // word-by-word colour reveal on scroll (Totopia SplitText effect)
   function splitWords() {
     $$('[data-words]').forEach(p => {
-      const hl = p.querySelector('.hl-word'); const hlText = hl ? hl.textContent : '';
+      const hlText = $$('.hl-word', p).map(h => h.textContent).join(' ');
       const text = p.textContent.replace(/\s+/g, ' ').trim();
       p.innerHTML = text.split(' ').map(w => `<span class="w${hlText && hlText.split(' ').includes(w.replace(/[^\w’]/g, '')) ? ' hl' : ''}">${w}</span>`).join(' ');
       if (!document.documentElement.classList.contains('motion')) $$('.w', p).forEach(w => w.classList.add('lit'));
@@ -340,6 +333,8 @@
     pageLoadAnim(page); observeReveals(); observeCounters(); scrubWords(); playSplits(page, true); parallax();
     cfRender.forEach(f => f());
     if (id === 'checkout') renderCheckout();
+    if (id === 'enrol') { const P = planDefs().find(p => p.id === co.plan), n = $('#enrolPlan'); if (P && co.picked) { n.hidden = false; n.innerHTML = `You chose <b>&nbsp;${P.name} — ${P.price} ${P.unit}</b>. Please mention this in the form.`; } else n.hidden = true; }
+    if (id === 'assessment') renderAssess();
   }
   let current = null;
   window.addEventListener('hashchange', route);
@@ -349,7 +344,7 @@
       const target = document.getElementById(s.dataset.scroll);
       if (target) { e.preventDefault(); const page = s.getAttribute('href'); if (page && page !== '#' + current && page.startsWith('#') && pages.includes(page.slice(1))) { location.hash = page; setTimeout(() => scrollToY(target.getBoundingClientRect().top + scrollY - 100), 80); } else scrollToY(target.getBoundingClientRect().top + scrollY - 100); }
     }
-    const pl = e.target.closest('[data-plan]'); if (pl && pl.dataset.plan !== 'custom') { co.plan = pl.dataset.plan; co.step = 0; }
+    const pl = e.target.closest('[data-plan]'); if (pl && pl.dataset.plan !== 'custom') { co.plan = pl.dataset.plan; co.step = 0; co.picked = true; }
     if (e.target.closest('[data-taster]')) { e.preventDefault(); openTaster(); }
   });
 
@@ -360,7 +355,7 @@
   function closeDrawer() { drawer.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
   burger.onclick = openDrawer; $('#drawerClose').onclick = closeDrawer;
   const modal = $('#taster'); let lastFocus;
-  function openTaster() { closeDrawer(); lastFocus = document.activeElement; modal.classList.add('open'); lenis && lenis.stop(); setTimeout(() => $('#tName')?.focus(), 300); }
+  function openTaster() { closeDrawer(); lastFocus = document.activeElement; modal.classList.add('open'); lenis && lenis.stop(); setTimeout(() => $('#tClose')?.focus(), 300); }
   function closeTaster() { modal.classList.remove('open'); lenis && lenis.start(); if (location.hash === '#taster') history.replaceState(null, '', '#' + (current || 'home')); lastFocus && lastFocus.focus && lastFocus.focus(); }
   $('#tClose').onclick = closeTaster;
   modal.addEventListener('click', e => { if (e.target === modal) closeTaster(); });
@@ -404,14 +399,13 @@
     else if (v === 'custom') { lbl.textContent = 'Number of learners'; sel.innerHTML = '<option>1</option><option>2</option><option>3–5</option><option>6+</option>'; }
     else { lbl.textContent = 'I am a…'; sel.innerHTML = '<option>Prospective student</option><option>Current student</option><option>Organisation</option>'; }
   });
-  $('#modeSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; mode = b.dataset.mode; $$('#modeSeg button').forEach(x => x.classList.toggle('on', x === b)); renderPlans(); observeReveals(); });
   $('#copyLink').onclick = async () => { try { await navigator.clipboard.writeText(location.href); $('#copied').textContent = 'Link copied'; } catch { $('#copied').textContent = 'Copy the address from your browser'; } };
   $('#addCal').onclick = e => { e.target.textContent = 'Added to calendar ✓'; };
 
   /* ---------- CHECKOUT ---------- */
-  const co = { step: 0, plan: 'b10', days: ['Tue', 'Sat'], time: 'Evening' };
+  const co = { step: 0, plan: 'bundle', days: ['Tue', 'Sat'], time: 'Evening' };
   function renderCheckout() {
-    const ps = planDefs(false).filter(p => !p.custom), P = ps.find(p => p.id === co.plan) || ps[1];
+    const ps = planDefs().filter(p => !p.custom), P = ps.find(p => p.id === co.plan) || ps[1];
     $('#coSteps').innerHTML = ['Package', 'Details', 'Schedule', 'Payment'].map((l, i) => `<li class="${i <= co.step ? 'on' : ''}"><i>${i < co.step ? '✓' : i + 1}</i>${l}</li>`).join('');
     $('#coPlan').textContent = P.name; $('#coDesc').textContent = P.desc; $('#coPrice').textContent = P.price; $('#coSched').textContent = (co.days.join(', ') || '—') + ' · ' + co.time;
     const nav = co.step < 4 ? `<div class="row" style="justify-content:space-between;border-top:1px solid var(--line);padding-top:22px;margin-top:auto"><button class="btn btn-outline" data-co="-1" ${co.step === 0 ? 'disabled style="opacity:.4"' : ''}>Back</button><button class="btn btn-primary" data-co="1">${co.step === 3 ? 'Pay ' + P.price + ' securely' : 'Continue'} ${icon('i-arrow', 18, 'arr')}</button></div>` : '';
@@ -431,11 +425,104 @@
     const c = e.target.closest('[data-co-chips] button'); if (c) { const g = c.parentElement.dataset.coChips; if (g === 'days') { const v = c.textContent; co.days = co.days.includes(v) ? co.days.filter(x => x !== v) : [...co.days, v]; } else co.time = c.textContent; renderCheckout(); }
   });
 
+  /* ---------- ASSESSMENT ---------- */
+  const SOU_EMAIL = 'studentsoftheummah@gmail.com';
+  const prevQ = ['Have you studied this subject before?', ['No, this is new to me', 'Yes, and I’m still studying it', 'Yes, but it’s been a while and I’d like to refresh']];
+  const quiz = {
+    quran: { name: 'Qur’an', qs: [
+      ['How well do you know the Arabic letters?', ['I don’t know them yet', 'I know some letters', 'I know all the letters', 'I know them well, including their joined forms']],
+      ['Can you read words with vowel marks (harakat)?', ['Not yet', 'Slowly, letter by letter', 'Yes, at a steady pace', 'Yes, fluently']],
+      ['How do you read from the Mushaf?', ['I can’t read from it yet', 'With a lot of difficulty', 'Steadily, with some mistakes', 'Fluently, with few mistakes']],
+      ['How familiar are you with tajweed rules (e.g. noon sakinah, madd)?', ['Not at all', 'I’ve heard of some', 'I know and apply the main rules', 'I apply most rules confidently']],
+      ['How much of the Qur’an have you memorised?', ['Al-Fatihah or less', 'A few short surahs', 'Most of Juz ‘Amma', 'More than Juz ‘Amma']]] },
+    arabic: { name: 'Arabic', qs: [
+      ['How well can you read Arabic script?', ['Not yet', 'Slowly, letter by letter', 'Steadily', 'Fluently']],
+      ['How much Arabic vocabulary do you know?', ['Almost none', 'A few common words', 'Everyday words and phrases', 'A wide vocabulary']],
+      ['How familiar are you with Arabic grammar (nahw and sarf)?', ['Not at all', 'I know a few basics', 'I understand sentence structure and verb forms', 'I can analyse sentences (i‘rab)']],
+      ['Can you understand a short Arabic text?', ['No', 'Only individual words', 'The general meaning', 'Most of it, in detail']],
+      ['Can you speak Arabic?', ['Not at all', 'A few phrases', 'Simple conversations', 'Comfortably on most topics']]] },
+    islamic: { name: 'Islamic Studies', qs: [
+      ['How confidently can you explain the pillars of Islam and Iman?', ['Not yet', 'I know some of them', 'I can list and explain them', 'In detail, with evidence']],
+      ['How well do you know the fiqh of purification and prayer?', ['Not at all', 'The basics of how to pray', 'The conditions, pillars and obligations', 'In detail, including what invalidates them']],
+      ['How familiar are you with the Seerah of the Prophet ﷺ?', ['Not yet', 'A few well-known events', 'The main stages of his life', 'In detail']],
+      ['Have you studied Aqeedah (Islamic belief)?', ['Not yet', 'A little', 'A structured introductory course', 'In depth']],
+      ['Have you studied Islamic subjects in a structured class before?', ['Never', 'Occasionally (talks, short courses)', 'Yes, a regular class', 'Yes, for several years']]] },
+  };
+  const as = { step: 'pick', subj: null, result: null };
+  const esc = (t) => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  function levelFor(scores, prev) {
+    const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+    if (prev === 2 && avg >= 0.8) return levels[3];
+    return avg < 1.2 ? levels[0] : avg < 2.2 ? levels[1] : levels[2];
+  }
+  function renderAssess() {
+    const box = $('#asBox'); if (!box) return;
+    if (as.step === 'pick') {
+      box.innerHTML = `<span class="eyebrow">Stage 1 · Online assessment</span><h2 class="h3">Which subject would you like to be assessed in?</h2><p style="color:var(--muted);margin:0">It takes about 2 minutes. At the end you can download your results.</p><div class="as-pick">${Object.entries(quiz).map(([k, q]) => `<button type="button" data-as-subj="${k}"><b>${q.name}</b><span>6 questions</span>${icon('i-arrow', 20)}</button>`).join('')}</div>`;
+    } else if (as.step === 'q') {
+      const q = quiz[as.subj], all = [...q.qs, prevQ];
+      box.innerHTML = `<form class="as-form" novalidate><span class="eyebrow">Stage 1 · ${q.name} assessment</span><h2 class="h3">Answer honestly — there are no wrong answers</h2>${all.map((x, i) => `<fieldset class="as-q"><legend><span>${i + 1}</span>${x[0]}</legend>${x[1].map((o, j) => `<label><input type="radio" name="q${i}" value="${j}" required> ${o}</label>`).join('')}</fieldset>`).join('')}<div class="fgrid"><label class="field" for="asName">Full name *<input id="asName" autocomplete="name" required placeholder="e.g. Aisha Rahman…"></label><label class="field" for="asEmail">Email *<input id="asEmail" type="email" autocomplete="email" spellcheck="false" autocapitalize="off" required placeholder="you@example.com"></label></div><label class="consent" for="asConsent"><input id="asConsent" type="checkbox" required> I agree to SOU receiving my results so they can contact me about my level.</label><p class="err-sum" role="alert" hidden></p><div class="row" style="justify-content:space-between"><button type="button" class="btn btn-outline" data-as-back>Change subject</button><button class="btn btn-primary" type="submit">See my result ${icon('i-arrow', 18, 'arr')}</button></div></form>`;
+    } else {
+      const r = as.result;
+      box.innerHTML = `<div class="as-result"><span class="eyebrow">Your result · ${r.subject}</span><span class="lvl-big"><small>Suggested level</small>${r.level[1]}</span><p class="lead" style="margin:0">${r.level[2]}</p><div class="note">Stage 2: your teacher will double-check your level of knowledge, recitation and speaking ability in a short live assessment during your first class.</div><p id="asSent" class="as-sent" role="status">Sending your results to SOU…</p><div class="row"><button type="button" class="btn btn-primary" data-as-dl>Download my results</button><button class="btn btn-outline" data-taster>Book a free taster</button><a class="btn btn-outline" href="#enrol">Enrol now</a></div><button type="button" class="link" data-as-restart style="background:none;border:0;padding:0;cursor:pointer">Take another assessment</button></div>`;
+    }
+  }
+  async function notifySOU(r) {
+    const el = () => $('#asSent');
+    const lines = r.answers.map(([q, a]) => `${q} — ${a}`).join('\n');
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/' + SOU_EMAIL, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ _subject: `New assessment completed: ${r.name} (${r.subject})`, _template: 'table', _captcha: 'false', Name: r.name, Email: r.email, Subject: r.subject, 'Suggested level': r.level[1], Date: r.date, Answers: lines }) });
+      if (!res.ok) throw new Error(res.status);
+      el() && (el().textContent = '✓ SOU has been notified and will be in touch about your level.');
+    } catch (err) {
+      const msg = encodeURIComponent(`Assalamu alaykum, I completed the ${r.subject} assessment. Name: ${r.name}. Email: ${r.email}. Suggested level: ${r.level[1]}.`);
+      el() && (el().innerHTML = `We couldn’t notify SOU automatically. <a href="https://wa.me/447907411836?text=${msg}" target="_blank" rel="noopener">Send your result on WhatsApp</a> instead.`);
+    }
+  }
+  function downloadResult(r) {
+    const W = 1200, pad = 80, c = document.createElement('canvas'); c.width = W; c.height = 1500; const x = c.getContext('2d');
+    const wrap = (t, X, Y, max, lh) => { const w = t.split(' '); let line = ''; for (const word of w) { const test = line ? line + ' ' + word : word; if (x.measureText(test).width > max && line) { x.fillText(line, X, Y); Y += lh; line = word; } else line = test; } x.fillText(line, X, Y); return Y + lh; };
+    const draw = (logo) => {
+      x.fillStyle = '#FFF7EF'; x.fillRect(0, 0, W, c.height); x.fillStyle = '#8A6F4D'; x.fillRect(0, 0, W, 14);
+      let y = 70; if (logo) { const lw = 300, lh = lw * logo.height / logo.width; x.drawImage(logo, pad, y, lw, lh); y += lh + 50; }
+      x.fillStyle = '#6E583C'; x.font = '700 26px Nunito, sans-serif'; x.fillText('ASSESSMENT RESULTS · STAGE 1', pad, y); y += 60;
+      x.fillStyle = '#2B2B2B'; x.font = '600 54px Poppins, sans-serif'; x.fillText(r.name, pad, y); y += 50;
+      x.fillStyle = '#5C554D'; x.font = '400 26px Poppins, sans-serif'; x.fillText(`${r.subject} · ${r.date}`, pad, y); y += 70;
+      x.fillStyle = '#F7E7CE'; x.fillRect(pad, y, W - pad * 2, 150); x.fillStyle = '#6E583C'; x.font = '700 24px Nunito, sans-serif'; x.fillText('SUGGESTED LEVEL', pad + 36, y + 52); x.fillStyle = '#2B2B2B'; x.font = '600 52px Poppins, sans-serif'; x.fillText(r.level[1], pad + 36, y + 115); y += 200;
+      x.font = '400 24px Poppins, sans-serif'; x.fillStyle = '#2B2B2B';
+      r.answers.forEach(([q, a], i) => { x.fillStyle = '#5C554D'; x.font = '600 23px Poppins, sans-serif'; y = wrap(`${i + 1}. ${q}`, pad, y, W - pad * 2, 32); x.fillStyle = '#2B2B2B'; x.font = '400 23px Poppins, sans-serif'; y = wrap(a, pad + 30, y, W - pad * 2 - 30, 32) + 14; });
+      x.fillStyle = '#5C554D'; x.font = '400 22px Poppins, sans-serif'; y = wrap('Stage 2: your teacher will double-check your level of knowledge, recitation and speaking ability during your first class.', pad, y + 20, W - pad * 2, 30);
+      x.fillStyle = '#8A6F4D'; x.font = '700 22px Nunito, sans-serif'; x.fillText(`${SOU_EMAIL} · WhatsApp 07907 411836`, pad, y + 30);
+      const out = document.createElement('canvas'); out.width = W; out.height = Math.min(c.height, y + 90); out.getContext('2d').drawImage(c, 0, 0);
+      out.toBlob(b => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = `SOU-${r.subject.replace(/\W+/g, '-')}-assessment.png`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }, 'image/png');
+    };
+    const img = new Image(); img.onload = () => draw(img); img.onerror = () => draw(null); img.src = 'assets/logo.png';
+  }
+  document.addEventListener('click', e => {
+    const s = e.target.closest('[data-as-subj]'); if (s) { as.subj = s.dataset.asSubj; as.step = 'q'; renderAssess(); scrollToY($('#asBox').getBoundingClientRect().top + scrollY - 110); return; }
+    if (e.target.closest('[data-as-back]') || e.target.closest('[data-as-restart]')) { as.step = 'pick'; as.result = null; renderAssess(); return; }
+    if (e.target.closest('[data-as-dl]') && as.result) downloadResult(as.result);
+  });
+  document.addEventListener('submit', e => {
+    const f = e.target.closest('.as-form'); if (!f) return; e.preventDefault();
+    const q = quiz[as.subj], all = [...q.qs, prevQ];
+    const missing = all.map((_, i) => i).filter(i => !f.querySelector(`input[name="q${i}"]:checked`));
+    const name = $('#asName').value.trim(), email = $('#asEmail').value.trim();
+    const errs = [];
+    if (missing.length) errs.push(`Answer question${missing.length > 1 ? 's' : ''} ${missing.map(i => i + 1).join(', ')}`);
+    if (!name) errs.push('enter your name'); if (!/^\S+@\S+\.\S+$/.test(email)) errs.push('enter a valid email'); if (!$('#asConsent').checked) errs.push('tick the consent box');
+    const sum = f.querySelector('.err-sum');
+    if (errs.length) { sum.hidden = false; sum.textContent = 'To see your result, please ' + errs.join(', ').replace(/^Answer/, 'answer') + '.'; announce(sum.textContent); return; }
+    const picks = all.map((_, i) => +f.querySelector(`input[name="q${i}"]:checked`).value);
+    as.result = { name, email, subject: q.name, level: levelFor(picks.slice(0, -1), picks[picks.length - 1]), date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }), answers: all.map((x, i) => [x[0], x[1][picks[i]]]) };
+    as.step = 'result'; renderAssess(); scrollToY($('#asBox').getBoundingClientRect().top + scrollY - 110);
+    notifySOU(as.result);
+  });
+
   /* ---------- INIT ---------- */
   renderStatic(); renderPosts(); renderReviews(); renderPlans(); splitWords(); renderCal();
   tabs($('#evTabs'), [['all', 'All'], ['events', 'Events'], ['offers', 'Offers'], ['news', 'News']], id => { evFilter = id; evDay = 0; renderCal(); });
   tabs($('#postTabs'), [['all', 'All'], ['flyer', 'Flyers & offers'], ['class', 'New classes'], ['blog', 'Blog']], id => renderPostGrid(id));
-  tabs($('#rvTabs'), [['all', 'All'], ['quran', 'Qur’an & Tajweed'], ['arabic', 'Arabic'], ['islamic', 'Islamic Studies']], id => renderReviews(id));
   addStars(); initSplits(); bindTilt();
   showSlide(0); slRestart();
   route();
