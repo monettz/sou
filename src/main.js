@@ -58,10 +58,10 @@
   const events = [{ d: 6, k: 'events', tag: 'Event', t: 'Online open day & Q&A', m: '7:00 PM · Live online' }, { d: 14, k: 'offers', tag: 'Offer', t: 'Bundle bonus lessons begin', m: 'Until 30 Nov' }, { d: 18, k: 'events', tag: 'Event', t: 'Tajweed evening cohort starts', m: '6:30 PM · Live online' }, { d: 18, k: 'news', tag: 'News', t: 'Teacher spotlight: Ustadha Hanan', m: 'Blog post' }, { d: 22, k: 'news', tag: 'News', t: 'Winter timetable published', m: 'Announcement' }, { d: 27, k: 'events', tag: 'Event', t: 'Arabic grammar weekend intensive', m: '10:00 AM – 1:00 PM · Live online' }];
   const evColor = { events: '#8A6F4D', offers: '#D6B98C', news: '#2B2B2B' };
   const planDefs = () => [
-    { id: 'single', name: 'Single lesson', desc: 'Private one-to-one lessons in one subject.', price: '£60', unit: '/ month', feats: ['Arabic, Islamic Studies or Qur’an', 'Live private 45-minute lessons', '40-minute lesson + 5-minute Q&A (flexible)', '4 lessons a month (1 per week)', 'Lesson materials provided', 'Flexible times available'], cta: 'Enrol — single lesson' },
-    { id: 'group', name: 'Group lessons', desc: 'Learn together in a small live class.', price: '£45', unit: '/ month', save: '£40/month when you join with a friend or sibling', feats: ['Arabic, Islamic Studies or Qur’an', 'Live lessons, 5 students a class', '1-hour lessons', '50-minute lesson + 10-minute Q&A (fixed)', '4 lessons a month (1 fixed time per week)', 'Lesson materials provided'], cta: 'Enrol — group lessons' },
-    { id: 'bundle', name: 'Monthly bundle', desc: 'All three subjects taught weekly.', price: '£90', unit: '/ month', feats: ['Arabic, Islamic Studies and Qur’an', 'Live private 45-minute lessons', '35-minute lesson + 10-minute Q&A (fixed)', '4 lessons a month (1 fixed time per week)', 'Lesson materials provided'], cta: 'Enrol — monthly bundle', feat: true, badge: 'All 3 subjects' },
-    { id: 'crash', name: 'Crash course', desc: 'Fastest way to gain knowledge in a short time.', price: '£300', unit: '/ 15 lessons', feats: ['Choose one short course', 'Arabic reading & writing, Seerah, Fiqh of prayer and more'], cta: 'Enrol on a crash course', hide: true },
+    { id: 'single', name: 'Single lesson', desc: 'Private one-to-one lessons in one subject.', price: '£60', unit: '/ month', feats: ['Arabic, Islamic Studies or Qur’an', 'Live private 45-minute lessons', '40-minute lesson + 5-minute Q&A (flexible)', '4 lessons a month (1 per week)', 'Lesson materials provided', 'Flexible times available'], cta: 'Pay now' },
+    { id: 'group', name: 'Group lessons', desc: 'Learn together in a small live class.', price: '£45', unit: '/ month', save: '£40/month when you join with a friend or sibling', feats: ['Arabic, Islamic Studies or Qur’an', 'Live lessons, 5 students a class', '1-hour lessons', '50-minute lesson + 10-minute Q&A (fixed)', '4 lessons a month (1 fixed time per week)', 'Lesson materials provided'], cta: 'Pay now' },
+    { id: 'bundle', name: 'Monthly bundle', desc: 'All three subjects taught weekly.', price: '£90', unit: '/ month', feats: ['Arabic, Islamic Studies and Qur’an', 'Live private 45-minute lessons', '35-minute lesson + 10-minute Q&A (fixed)', '4 lessons a month (1 fixed time per week)', 'Lesson materials provided'], cta: 'Pay now', feat: true, badge: 'All 3 subjects' },
+    { id: 'crash', name: 'Crash course', desc: 'Fastest way to gain knowledge in a short time.', price: '£300', unit: '/ 15 lessons', feats: ['Choose one short course', 'Arabic reading & writing, Seerah, Fiqh of prayer and more'], cta: 'Pay now', hide: true },
     { id: 'custom', name: 'Custom pack', desc: 'Choose how you learn — e.g. Qaida only, memorisation, Seerah, Fiqh or Aqeedah.', price: 'Custom', unit: 'quoted for you', feats: ['Pick the subjects you want', 'Your preferred schedule', 'Personal learning plan', 'Contact us to describe your pack'], cta: 'Describe your pack', custom: true },
   ];
   const crash = ['Arabic reading and writing', 'Seerah of the Prophet ﷺ', 'Introduction to Islam (basics)', 'Fiqh of prayer (salah) and how to pray', 'Understanding halal and haram', 'Juz ‘Amma course'];
@@ -70,7 +70,7 @@
   /* ---------- RENDERERS ---------- */
   const postCard = (p) => `<a class="post rv-up" href="#post"><span class="img"><img src="assets/${p.img}" alt="${p.alt}" width="800" height="534" loading="lazy" decoding="async"></span><span class="body"><span class="meta"><span class="chip">${p.tag}</span>${p.date}</span><h3>${p.title}</h3><span class="link">Read more ${icon('i-arrow', 18, 'arr')}</span></span></a>`;
   const reviewCard = (r, i) => `<figure class="rv rv-up" style="background:var(--white)"><span class="row" style="justify-content:space-between"><span class="stars" role="img" aria-label="${r[5]} out of 5">${[1, 2, 3, 4, 5].map(n => `<span class="${n <= r[5] ? '' : 'off'}">${icon('i-star', 18)}</span>`).join('')}</span></span><blockquote>“${r[4]}”</blockquote><figcaption><span class="av" style="background:${tones[i % 4][0]};color:${tones[i % 4][1]}">${r[1]}</span><span><b style="display:block;font-family:var(--ui)">${r[2]}</b><span style="font-size:13px;color:var(--muted)">${r[3]}</span></span><span class="verified">Verified</span></figcaption></figure>`;
-  const planCard = (p) => `<div class="plan rv-up ${p.feat ? 'feat' : ''}"><span class="row" style="justify-content:space-between"><h3>${p.name}</h3>${p.badge ? `<span class="badge">${p.badge}</span>` : ''}</span><span class="desc">${p.desc}</span><span class="price"><b>${p.price}</b><span>${p.unit}</span></span>${p.save ? `<span class="save">${p.save}</span>` : ''}<ul>${p.feats.map(f => `<li>${f}</li>`).join('')}</ul><a class="btn ${p.feat ? 'btn-primary' : 'btn-outline'}" href="${p.custom ? '#packages' : '#enrol'}" data-plan="${p.id}" ${p.custom ? 'data-scroll="custom"' : ''}>${p.cta}</a></div>`;
+  const planCard = (p) => `<div class="plan rv-up ${p.feat ? 'feat' : ''}"><span class="row" style="justify-content:space-between"><h3>${p.name}</h3>${p.badge ? `<span class="badge">${p.badge}</span>` : ''}</span><span class="desc">${p.desc}</span><span class="price"><b>${p.price}</b><span>${p.unit}</span></span>${p.save ? `<span class="save">${p.save}</span>` : ''}<ul>${p.feats.map(f => `<li>${f}</li>`).join('')}</ul><a class="btn ${p.feat ? 'btn-primary' : 'btn-outline'}" href="${p.custom ? '#packages' : '#enrol'}" data-plan="${p.id}" ${p.custom ? 'data-scroll="custom"' : ''} ${!p.custom && p.cta === 'Pay now' ? `data-pay="${p.id}"` : ''}>${p.cta}</a></div>`;
 
   function renderPosts() {
     $$('[data-posts]').forEach(el => { if (el.id === 'postGrid') return; el.innerHTML = posts.slice(0, 3).map(postCard).join(''); });
@@ -162,15 +162,17 @@
 
   /* ---------- HERO BANNER SLIDES ---------- */
   const slides = [
-    { t: 'Study Islam from the comfort of <span class="hl">your home.</span>', b: 'Flexible online learning designed to fit around your life, at a pace that works for you.' },
-    { t: 'Learn with confidence, <span class="hl">every step of the way.</span>', b: 'With experienced and supportive teachers by your side, feel empowered to progress in your Islamic studies at your own pace.' },
-    { t: 'Everything you need to learn, <span class="hl">all in one place.</span>', b: 'From interactive student dashboards and video lessons to direct access to teachers, quizzes and exams — experience Islamic learning in one structured environment.' },
+    { side: 'left', t: 'Everything You Need to Learn, <span class="hl">All in One Place.</span>', b: 'From interactive student dashboards and video lessons to direct access to teachers, quizzes and exams — experience Islamic learning in one structured environment.' },
+    { side: 'left', t: 'Learn With Confidence, <span class="hl">Every Step of the Way.</span>', b: 'With experienced and supportive teachers by your side, feel empowered to progress in your Islamic studies at your own pace.' },
+    { side: 'right', t: 'Study Islam From the Comfort of <span class="hl">Your Home.</span>', b: 'Flexible online learning designed to fit around your life, at a pace that works for you.' },
   ];
   let sl = 0, slTimer;
   function showSlide(i) {
     sl = (i + slides.length) % slides.length; const s = slides[sl];
     $$('.banner-imgs img').forEach((im, j) => im.classList.toggle('on', j === sl));
-    $('#slTitle').innerHTML = s.t; $('#slBody').textContent = s.b;
+    const cap = $('.banner-cap'), ban = $('.banner');
+    cap.classList.add('swap');
+    setTimeout(() => { ban.dataset.side = s.side; $('#slTitle').innerHTML = s.t; $('#slBody').textContent = s.b; cap.classList.remove('swap'); }, reduce ? 0 : 450);
   }
   let slPaused = false;
   const slRestart = () => { clearInterval(slTimer); if (!reduce && !slPaused) slTimer = setInterval(() => showSlide(sl + 1), 6000); };
@@ -431,6 +433,53 @@
 
   /* ---------- ASSESSMENT ---------- */
   const SOU_EMAIL = 'studentsoftheummah@gmail.com';
+
+  /* ---------- PAY NOW (form is emailed to SOU) ---------- */
+  const payModal = $('#pay'), payForm = $('#payForm'), payMainHTML = $('#payMain').innerHTML;
+  let payLast;
+  function payPlans() { return planDefs().filter(p => !p.custom && p.cta === 'Pay now'); }
+  function drawPayPick() {
+    const P = payPlans().find(p => p.id === $('#pyPlan').value);
+    $('#payPick').innerHTML = P ? `<b>${P.name}</b><span>${P.price} <small>${P.unit}</small></span>` : '';
+  }
+  function openPay(id) {
+    if (!$('#payForm')) $('#payMain').innerHTML = payMainHTML;
+    const sel = $('#pyPlan');
+    sel.innerHTML = '<option value="">Choose a package</option>' + payPlans().map(p => `<option value="${p.id}">${p.name} (${p.price})</option>`).join('');
+    sel.value = id || ''; drawPayPick();
+    closeDrawer(); payLast = document.activeElement; payModal.classList.add('open'); lenis && lenis.stop();
+    setTimeout(() => $('#payClose')?.focus(), 300);
+  }
+  function closePay() { payModal.classList.remove('open'); lenis && lenis.start(); payLast && payLast.focus && payLast.focus(); }
+  payModal.addEventListener('click', e => { if (e.target === payModal || e.target.closest('#payClose') || e.target.closest('[data-pay-close]')) closePay(); });
+  payModal.addEventListener('change', e => { if (e.target.id === 'pyPlan') drawPayPick(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && payModal.classList.contains('open')) closePay(); });
+  document.addEventListener('click', e => { const b = e.target.closest('[data-pay]'); if (b) { e.preventDefault(); openPay(b.dataset.pay); } });
+  payModal.addEventListener('submit', async e => {
+    const f = e.target.closest('#payForm'); if (!f) return;
+    e.preventDefault();
+    $$('.err', f).forEach(x => x.remove()); $$('[aria-invalid]', f).forEach(x => x.removeAttribute('aria-invalid'));
+    const bad = $$('[required]', f).filter(i => i.type === 'checkbox' ? !i.checked : !i.value.trim() || (i.type === 'email' && !/^\S+@\S+\.\S+$/.test(i.value)) || (i.id === 'pyAge' && +i.value < 16));
+    if (bad.length) {
+      bad.forEach(i => { i.setAttribute('aria-invalid', 'true'); const msg = i.type === 'checkbox' ? 'Please tick to continue' : i.id === 'pyAge' ? 'SOU lessons are for learners aged 16+' : i.type === 'email' && i.value ? 'Enter a valid email' : 'This field is required'; i.closest('label').insertAdjacentHTML('beforeend', `<span class="err" style="color:#B3412F;font:700 13px/1.2 var(--ui)">${msg}</span>`); });
+      bad[0].focus(); return;
+    }
+    const P = payPlans().find(p => p.id === $('#pyPlan').value);
+    const data = { _subject: `Pay now request: ${P ? P.name : 'Package'} — ${$('#pyName').value.trim()}`, _template: 'table', _captcha: 'false', _replyto: $('#pyEmail').value.trim() };
+    $$('input[name], select[name], textarea[name]', f).forEach(i => { data[i.name] = i.id === 'pyPlan' ? (P ? `${P.name} — ${P.price} ${P.unit}` : '') : i.value.trim(); });
+    const btn = $('#paySend'), err = $('#payErr');
+    btn.disabled = true; btn.textContent = 'Sending…'; err.hidden = true;
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/' + SOU_EMAIL, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || out.success === 'false' || out.success === false) throw new Error(out.message || res.status);
+      $('#payMain').innerHTML = `<button class="close" id="payClose" type="button" aria-label="Close">${icon('i-close', 18)}</button><div class="success" role="status"><span class="tick" style="color:var(--ok)">${icon('i-check', 36)}</span><h3 class="h3">Thank you, ${data['Full name'].split(' ')[0]}!</h3><p style="color:var(--muted);max-width:440px">Your details have been sent to the SOU team. We’ll email you a secure payment link and confirm your teacher and schedule within 1 working day.</p><button class="btn btn-primary" type="button" data-pay-close>Done</button></div>`;
+    } catch (ex) {
+      const msg = encodeURIComponent(`Hello SOU, I'd like to pay for: ${data.Package}. Name: ${data['Full name']}. Email: ${data.Email}. Phone: ${data.Phone}.`);
+      err.innerHTML = `Sorry, we couldn’t send your details just now. Please try again, or <a href="https://wa.me/447907411836?text=${msg}" target="_blank" rel="noopener">message us on WhatsApp</a> or email <a href="mailto:${SOU_EMAIL}">${SOU_EMAIL}</a>.`;
+      err.hidden = false; btn.disabled = false; btn.innerHTML = `Submit ${icon('i-arrow', 18)}`;
+    }
+  });
   const prevQ = ['Have you studied this subject before?', ['No, this is new to me', 'Yes, and I’m still studying it', 'Yes, but it’s been a while and I’d like to refresh']];
   const quiz = {
     quran: { name: 'Qur’an', qs: [

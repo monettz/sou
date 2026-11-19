@@ -442,8 +442,34 @@ form{display:flex;flex-direction:column;gap:18px}
 .banner-cap .lead{margin:0;font-size:16px}
 .banner-bar{background:var(--cream);padding:22px 0 30px;border-bottom:1px solid var(--line)}
 .banner-bar .hero-btns{justify-content:center;gap:14px}
-/* the wording is printed on the banner artwork, so the text copy is kept for screen readers only */
-.banner-cap{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* banner headings are real text over the photos */
+.banner-cap{transition:opacity .45s ease,transform .45s ease}
+.banner-cap.swap{opacity:0;transform:translateY(10px)}
+.banner-cap .h1{line-height:1.08}
+@media (min-width:900px){
+  .banner-imgs::after{content:"";position:absolute;inset:0;transition:background .9s ease;pointer-events:none}
+  .banner[data-side="left"] .banner-imgs::after{background:linear-gradient(90deg,rgba(28,24,20,.88) 0%,rgba(28,24,20,.66) 42%,rgba(28,24,20,0) 70%)}
+  .banner[data-side="right"] .banner-imgs::after{background:linear-gradient(270deg,rgba(255,247,239,.92) 0%,rgba(255,247,239,.7) 36%,rgba(255,247,239,0) 60%)}
+  .banner-cap{position:absolute;top:0;bottom:0;width:min(46%,640px);padding:0;justify-content:center;gap:18px;z-index:1}
+  .banner[data-side="left"] .banner-cap{left:max(5vw,32px);color:var(--cream)}
+  .banner[data-side="right"] .banner-cap{right:max(5vw,32px);text-align:right;align-items:flex-end}
+  .banner-cap .h1{font-size:clamp(38px,4.2vw,66px)}
+  .banner-cap .lead{font-size:clamp(16px,1.35vw,20px);max-width:520px}
+  .banner[data-side="left"] .banner-cap .h1{color:var(--cream)}
+  .banner[data-side="left"] .banner-cap .hl{color:var(--tan)}
+  .banner[data-side="left"] .banner-cap .lead{color:#EFE3D2}
+  .banner[data-side="right"] .banner-cap .lead{color:var(--muted)}
+}
+/* pay now modal */
+.pay-pick{display:flex;flex-direction:column;gap:4px;padding:16px 18px;border:1px solid #4A4540;border-radius:16px}
+.pay-pick:empty{display:none}
+.pay-pick b{font:600 20px/1.2 var(--display)}
+.pay-pick span{font:800 26px/1.1 var(--ui);color:var(--tan)}
+.pay-pick small{font-size:14px;font-weight:600}
+.pay-err{margin:0;padding:12px 14px;border-radius:12px;background:#FBEAE6;color:#8E2F1F;font-size:14px}
+.pay-err a{color:inherit;font-weight:700}
+#payForm .btn[type=submit]{align-self:flex-start}
+@media (max-width:640px){#payForm .btn[type=submit]{align-self:stretch}}
 .flex-sec{background:var(--cream)}
 .arches{display:flex;align-items:flex-end;justify-content:center;gap:clamp(10px,2.4vw,28px);width:100%;max-width:980px}
 .arches img{display:block;height:auto;object-fit:cover;border-radius:999px 999px 26px 26px;min-width:0}
