@@ -169,7 +169,11 @@
   let sl = 0, slTimer;
   function showSlide(i) {
     sl = (i + slides.length) % slides.length; const s = slides[sl];
-    $$('.banner-imgs img').forEach((im, j) => im.classList.toggle('on', j === sl));
+    $$('.banner-imgs img').forEach((im, j) => {
+      if (j === sl) { im.classList.remove('out'); im.classList.add('on'); }
+      else if (im.classList.contains('on')) { im.classList.remove('on'); im.classList.add('out'); }
+      else if (im.classList.contains('out')) { im.style.transition = 'none'; im.classList.remove('out'); void im.offsetWidth; im.style.transition = ''; }
+    });
     const cap = $('.banner-cap'), ban = $('.banner');
     cap.classList.add('swap');
     setTimeout(() => { ban.dataset.side = s.side; $('#slTitle').innerHTML = s.t; $('#slBody').textContent = s.b; cap.classList.remove('swap'); }, reduce ? 0 : 450);
