@@ -46,7 +46,7 @@
     { href: '#post', cta: 'Read more', t: 'Online open day & Q&A', d: 'Meet our teachers live on 6 November, 7 PM.', img: 'about-online.jpg', tags: ['Event'] },
     { href: '#post', cta: 'Read more', t: 'Weekend Hifz circle for students', d: 'Small groups, Saturdays and Sundays.', img: 'hero2.jpg', tags: ['New class'] },
   ];
-  const teachers = [['Y', 'Yasmine', 'Founder', 'Founder of Students of the Ummah.'], ['HB', 'Ustadha Hafssa Bachir', 'Head of Islamic Studies', 'Leads our Islamic Studies programme.'], ['H', 'Ustadha Hanan', 'Head of Arabic', 'Leads our Arabic language programme.'], ['H', 'Ustadha Hadjer', 'Head of Qur’an', 'Leads our Qur’an and recitation programme.'], ['S', 'Ustadha Safia', 'Head of Qaidah', 'Leads our Qaidah (reading foundations) programme.']];
+  const teachers = [['Y', 'Yasmine', 'Founder', 'Founder of Students of the Ummah.'], ['HB', 'Ustadha Hafssa B', 'Head of Islamic Studies', 'Leads our Islamic Studies programme.'], ['H', 'Ustadha Hanan', 'Head of Arabic', 'Leads our Arabic language programme.'], ['H', 'Ustadha Hadjer', 'Head of Qur’an', 'Leads our Qur’an and recitation programme.'], ['S', 'Ustadha Safia', 'Head of Qaidah', 'Leads our Qaidah (reading foundations) programme.']];
   const faqs = [['Is the taster class really free?', 'Yes. Your first taster class is completely free and there is no obligation to buy a package afterwards.'], ['Who are the teachers?', 'Qualified, vetted teachers with recognised training — many with ijazah — trained in the SOU curriculum and safeguarding checked.'], ['Who are the classes for?', 'Our classes are for learners aged 16 and over — college and university students as well as working adults.'], ['What if I need to change my schedule?', 'Request a change in your student portal or contact us. We ask for 24 hours’ notice for lesson changes.'], ['Do you offer group lessons?', 'Yes. Group lessons are £45/month with up to 5 students a class, or £40/month when you join with a friend or sibling. For anything else, choose a Custom pack and we will send you a tailored quote.'], ['How do I know which level I am?', 'Take our short online assessment for your chosen subject. Your teacher will then double-check your level of knowledge, recitation and speaking in a second assessment.']];
   const events = [{ d: 6, k: 'events', tag: 'Event', t: 'Online open day & Q&A', m: '7:00 PM · Live online' }, { d: 14, k: 'offers', tag: 'Offer', t: 'Bundle bonus lessons begin', m: 'Until 30 Nov' }, { d: 18, k: 'events', tag: 'Event', t: 'Tajweed evening cohort starts', m: '6:30 PM · Live online' }, { d: 18, k: 'news', tag: 'News', t: 'Teacher spotlight: Ustadha Hanan', m: 'Blog post' }, { d: 22, k: 'news', tag: 'News', t: 'Winter timetable published', m: 'Announcement' }, { d: 27, k: 'events', tag: 'Event', t: 'Arabic grammar weekend intensive', m: '10:00 AM – 1:00 PM · Live online' }];
   const evColor = { events: '#8A6F4D', offers: '#D6B98C', news: '#2B2B2B' };
@@ -86,7 +86,7 @@
   function renderStatic() {
     $$('[data-steps]').forEach(el => el.innerHTML = steps.map((s, i) => `<li class="step ${i === 0 ? 'first' : ''}"><span class="n">0${i + 1}</span><h3>${s[0]}</h3><p>${s[1]}</p></li>`).join(''));
     $('[data-steps-detail]').innerHTML = steps.map((s, i) => `<div class="split rv-up" style="align-items:flex-start;gap:40px;padding-block:44px;border-top:${i ? '1px solid var(--line)' : '0'}"><div class="row" style="flex:1;gap:24px;flex-wrap:nowrap;align-items:flex-start"><span class="step-n" style="flex:none;width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:600 32px/1 var(--display);${i === 0 ? 'background:var(--bronze);color:var(--white)' : 'background:var(--sand);border:1px solid var(--tan);color:var(--bronze-dk)'}">0${i + 1}</span><div class="stack" style="gap:12px"><span class="eyebrow">Step 0${i + 1}</span><h2 class="h3" style="font-size:34px">${s[0]}</h2><p class="lead">${s[1]}</p></div></div><div class="card" style="flex:1"><span class="eyebrow" style="font-size:12px">What happens</span>${s[2].map(p => `<span class="row" style="flex-wrap:nowrap;gap:10px;align-items:flex-start">${icon('i-check', 20)}<span>${p}</span></span>`).join('')}</div></div>`).join('') + `<div class="row rv-up" style="padding-top:32px;border-top:1px solid var(--line)"><button class="btn btn-primary" data-taster>Start step 1 — Book a Taster Class</button><a class="btn btn-outline" href="#packages">Compare packages</a></div>`;
-    $('[data-teachers]').innerHTML = teachers.map((t, i) => `<div class="card lift rv-up member"><span class="av" style="background:${tones[i % 4][0]};color:${tones[i % 4][1]}">${t[0]}</span><span class="who"><h3>${t[1]}</h3><b>${t[2]}</b><p>${t[3]}</p></span></div>`).join('');
+    $('[data-teachers]').innerHTML = teachers.map((t, i) => `<div class="card member rail-item"><span class="av" style="background:${tones[i % 4][0]};color:${tones[i % 4][1]}">${t[0]}</span><span class="who"><h3>${t[1]}</h3><b>${t[2]}</b><p>${t[3]}</p></span></div>`).join('');
     $('[data-faq]').innerHTML = faqs.map((f, i) => `<details ${i === 0 ? 'open' : ''}><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('');
     $('[data-process]').innerHTML = [['Apply online', 'Send your details, CV and certificates.'], ['Interview', 'A short video call with our academic lead.'], ['Demo lesson', 'Teach a 20-minute sample lesson.'], ['Onboarding', 'Safeguarding checks, portal training and your first students.']].map((p, i, a) => `<li class="row" style="flex-wrap:nowrap;align-items:stretch;gap:16px"><span style="display:flex;flex-direction:column;align-items:center"><span style="width:44px;height:44px;border-radius:50%;background:var(--bronze);display:flex;align-items:center;justify-content:center;font:600 18px/1 var(--display)">${i + 1}</span>${i < a.length - 1 ? '<span style="flex:1;width:2px;background:var(--bronze);min-height:20px"></span>' : ''}</span><span style="padding:8px 0 24px"><b style="display:block;font:600 22px/1.1 var(--display)">${p[0]}</b><span style="color:var(--tan);font-size:15px">${p[1]}</span></span></li>`).join('');
     $('#bars').innerHTML = [[5, 88], [4, 9], [3, 2], [2, 1], [1, 0]].map(([n, p]) => `<span class="row" style="gap:10px;flex-wrap:nowrap;font:700 13px/1 var(--ui)"><span style="width:14px">${n}</span><span style="flex:1;height:8px;border-radius:999px;background:var(--sand)"><span class="bar" data-w="${p}" style="display:block;height:8px;border-radius:999px;background:var(--bronze);width:100%;transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ease)"></span></span><span style="width:34px;text-align:right;color:var(--muted)">${p}%</span></span>`).join('');
@@ -176,6 +176,25 @@
   }
   let slPaused = false;
   const slRestart = () => { clearInterval(slTimer); if (!reduce && !slPaused) slTimer = setInterval(() => showSlide(sl + 1), 6000); };
+
+  /* ---------- RAILS: same-size cards that slide right to left, like the hero ---------- */
+  function initRail(rail) {
+    const track = rail.querySelector('.rail-track'); if (!track || track.dataset.ready) return;
+    const items = [...track.children], n = items.length; if (n < 2) return;
+    track.dataset.ready = '1';
+    // a copy of every card follows the originals, so the loop never shows a gap
+    items.forEach(it => { const c = it.cloneNode(true); c.setAttribute('aria-hidden', 'true'); c.removeAttribute('id'); track.append(c); });
+    let idx = 0, timer;
+    const step = () => { const k = track.children; return k[1].getBoundingClientRect().left - k[0].getBoundingClientRect().left; };
+    const place = (anim) => { track.style.transition = anim ? '' : 'none'; track.style.transform = `translateX(${-idx * step()}px)`; if (!anim) { void track.offsetWidth; track.style.transition = ''; } };
+    track.addEventListener('transitionend', e => { if (e.target === track && idx >= n) { idx = 0; place(false); } });
+    const next = () => { if (rail.offsetParent === null || document.hidden) return; idx++; place(true); };
+    const start = () => { clearInterval(timer); timer = setInterval(next, 3500); };
+    rail.addEventListener('pointerenter', () => clearInterval(timer)); rail.addEventListener('pointerleave', start);
+    window.addEventListener('resize', () => place(false));
+    start();
+  }
+  // (rails start in INIT below, once the teacher cards have been rendered)
 
   /* ---------- MOTION ---------- */
   let io;
@@ -608,6 +627,7 @@
 
   /* ---------- INIT ---------- */
   renderStatic(); renderPosts(); renderReviews(); renderPlans(); splitWords(); renderCal();
+  $$('[data-rail]').forEach(initRail);
   tabs($('#evTabs'), [['all', 'All'], ['events', 'Events'], ['offers', 'Offers'], ['news', 'News']], id => { evFilter = id; evDay = 0; renderCal(); });
   tabs($('#postTabs'), [['all', 'All'], ['flyer', 'Flyers & offers'], ['class', 'New classes'], ['blog', 'Blog']], id => renderPostGrid(id));
   addStars(); initSplits(); bindTilt();

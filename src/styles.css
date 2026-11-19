@@ -523,3 +523,16 @@ form{display:flex;flex-direction:column;gap:18px}
 }
 .mail{font-size:15px}
 .rv figcaption > span:nth-child(2){min-width:0}
+
+/* rails: equal rectangles sliding right to left (1 per view on phones, 2 on tablets, 3 on desktop) */
+.rail{--per:1;--gap:16px;width:100%;overflow:hidden}
+.rail-track{display:flex;gap:var(--gap);transition:transform .9s cubic-bezier(.65,0,.35,1);will-change:transform}
+.rail-item{flex:0 0 calc((100% - (var(--per) - 1) * var(--gap)) / var(--per));min-width:0}
+@media (min-width:640px){.rail{--per:2;--gap:20px}}
+@media (min-width:1000px){.rail{--per:3;--gap:24px}}
+.rail-photos{max-width:980px}
+.rail-photos .rail-item{display:block;width:100%;aspect-ratio:3/4;height:auto;object-fit:cover;border-radius:24px}
+.rail-team .member{height:260px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:24px}
+.rail-team .member .av{width:84px;height:84px;font-size:26px;flex:none}
+.rail-team .member .who{align-items:center;gap:6px}
+.rail-team .member h3{font-size:21px}
