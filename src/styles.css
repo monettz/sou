@@ -347,7 +347,6 @@ form{display:flex;flex-direction:column;gap:18px}
 .curtain.cover{transform:none;transition:transform .55s cubic-bezier(.76,0,.24,1)}
 .curtain.cover .mark,.curtain.cover .ar{opacity:1;transform:none}
 .curtain.leave{transform:translateY(-100%);transition:transform .7s cubic-bezier(.76,0,.24,1)}
-.progress{position:fixed;left:0;top:0;height:3px;width:100%;z-index:70;background:var(--bronze);transform-origin:left;transform:scaleX(0)}
 
 /* split-word headings */
 .motion .sw{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
@@ -369,7 +368,7 @@ form{display:flex;flex-direction:column;gap:18px}
 .tilt{transform-style:preserve-3d;will-change:transform}
 .plan.tilt:hover,.post.tilt:hover{transform:none}
 
-.no-motion .curtain,.no-motion .progress{display:none}
+.no-motion .curtain{display:none}
 .no-motion *,.no-motion *::before,.no-motion *::after{animation:none !important;transition:none !important}
 
 /* responsive */

@@ -278,11 +278,10 @@
     $$('.page-hero').forEach(h => put(h, 'right:-70px;top:30px;opacity:.4', 280, true));
     $$('section.dark').forEach(h => { put(h, 'right:-90px;top:-60px;color:#8A6F4D', 320, false); put(h, 'left:-60px;bottom:-80px;color:#8A6F4D;opacity:.35', 220, true); });
   }
-  // curtain + progress bar
+  // page-change curtain
   const curtain = document.createElement('div'); curtain.className = 'curtain'; curtain.setAttribute('aria-hidden', 'true');
   curtain.innerHTML = '<span class="mark"><img src="assets/logo.png" alt="" width="549" height="167"></span>';
-  const bar = document.createElement('div'); bar.className = 'progress'; bar.setAttribute('aria-hidden', 'true');
-  document.body.append(curtain, bar);
+  document.body.append(curtain);
   function withCurtain(swap) {
     if (!motionOn()) { swap(); return; }
     curtain.classList.remove('leave'); void curtain.offsetWidth; curtain.classList.add('cover');
@@ -297,8 +296,6 @@
       const f = el.dataset.parallax ? +el.dataset.parallax : -0.08;
       el.style.translate = `0 ${((r.top + r.height / 2) - vh / 2) * f}px`;
     });
-    const max = document.documentElement.scrollHeight - vh;
-    bar.style.transform = `scaleX(${max > 0 ? Math.min(1, (lenis ? lenis.scroll : scrollY) / max) : 0})`;
   }
   function bindTilt() {
     if (!motionOn() || !matchMedia('(hover:hover)').matches) return;
