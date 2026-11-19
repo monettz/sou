@@ -3,19 +3,12 @@
   'use strict';
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  let pref = null; try { pref = localStorage.getItem('sou-motion'); } catch (e) {}
-  // Animations are on by default for everyone; visitors can switch them off in the footer or menu
-  const reduce = pref === 'off';
-  const osReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; // autoplaying loops start paused for these visitors
-  if (osReduce) document.documentElement.classList.add('calm');
+  // Animations are always on for every visitor
+  const reduce = false;
+  const SOU_EMAIL = 'studentsoftheummah@gmail.com';
   const icon = (id, s = 18, cls = '') => `<svg width="${s}" height="${s}" class="${cls}" aria-hidden="true"><use href="#${id}"/></svg>`;
   if (!reduce && 'IntersectionObserver' in window) document.documentElement.classList.add('motion');
   else document.documentElement.classList.add('no-motion');
-  // Animations on/off switch (footer + menu); defaults to the device's reduce-motion setting
-  const toggleHTML = `<button type="button" class="motion-toggle" aria-pressed="${!reduce}"><i aria-hidden="true"></i>Animations ${reduce ? 'off' : 'on'}</button>`;
-  document.querySelector('.legal')?.insertAdjacentHTML('beforeend', toggleHTML);
-  document.querySelector('.drawer .bottom')?.insertAdjacentHTML('afterbegin', toggleHTML);
-  document.addEventListener('click', e => { if (!e.target.closest('.motion-toggle')) return; try { localStorage.setItem('sou-motion', reduce ? 'on' : 'off'); } catch (err) {} location.reload(); });
 
   /* ---------- DATA ---------- */
   const posts = [
@@ -344,7 +337,7 @@
     cfRender.forEach(f => f());
     loadForms(page);
     if (id === 'checkout') renderCheckout();
-    if (id === 'enrol') { const P = planDefs().find(p => p.id === co.plan), n = $('#enrolPlan'); if (P && co.picked) { n.hidden = false; n.innerHTML = `You chose <b>&nbsp;${P.name} — ${P.price} ${P.unit}</b>. Please mention this in the form.`; } else n.hidden = true; }
+    if (id === 'enrol') { fillEnrolPlans(); const P = planDefs().find(p => p.id === co.plan), n = $('#enrolPlan'); if (P && co.picked) { n.hidden = false; n.innerHTML = `You chose <b>&nbsp;${P.name} — ${P.price} ${P.unit}</b>. Please mention this in the form.`; } else n.hidden = true; }
     if (id === 'assessment') renderAssess();
   }
   let current = null;
@@ -377,24 +370,63 @@
   /* ---------- FORMS ---------- */
   const live = document.createElement('div'); live.className = 'sr'; live.setAttribute('aria-live', 'polite'); document.body.appendChild(live);
   const announce = (t) => { live.textContent = ''; setTimeout(() => { live.textContent = t; }, 50); };
+  /* ---------- FORMS → SOU EMAIL ---------- */
+  const formLabel = { taster: 'free trial booking', enrol: 'enrolment', contact: 'contact', review: 'review', custom: 'custom package', teach: 'teacher application' };
+  // readable field name = the label's own text (without the * and error messages)
+  const fieldName = (c) => { const l = c.closest('label'); if (!l) return c.name || c.id; return [...l.childNodes].filter(n => n.nodeType === 3 || (n.nodeName === 'SPAN' && !n.classList.contains('err'))).map(n => n.textContent).join('').replace(/\*/g, '').trim() || c.name; };
+  async function sendToSOU(f) {
+    const kind = f.dataset.form, fd = new FormData(), get = (n) => (f.querySelector(`[name=${n}]`)?.value || '').trim();
+    $$('input, select, textarea', f).forEach(c => {
+      if (c.type === 'checkbox' || c.type === 'radio' || c.classList.contains('hp') || c.closest('[hidden]')) return;
+      if (c.type === 'file') { if (c.files[0]) fd.append('attachment', c.files[0]); return; }
+      const v = c.tagName === 'SELECT' ? (c.selectedOptions[0]?.textContent || '') : c.value.trim();
+      fd.append(fieldName(c), v || '—');
+    });
+    if (kind === 'review') fd.append('Rating', ($$('#stars [aria-checked="true"]')[0]?.dataset.n || '5') + ' / 5');
+    const extra = kind === 'enrol' ? ` — ${$('#enPlan').selectedOptions[0]?.textContent || ''}` : kind === 'contact' ? ` (${$('#ctPurpose').selectedOptions[0]?.textContent || ''})` : '';
+    fd.append('_subject', `SOU website: ${formLabel[kind] || kind}${extra} — ${get('name') || 'new submission'}`);
+    fd.append('_template', 'table'); fd.append('_captcha', 'false');
+    if (get('email')) fd.append('_replyto', get('email'));
+    const res = await fetch('https://formsubmit.co/ajax/' + SOU_EMAIL, { method: 'POST', headers: { Accept: 'application/json' }, body: fd });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || out.success === 'false' || out.success === false) throw new Error(out.message || res.status);
+  }
+  function fillEnrolPlans() {
+    const sel = $('#enPlan'); if (!sel) return;
+    sel.innerHTML = '<option value="">Choose a package</option>' + planDefs().filter(p => !p.custom).map(p => `<option value="${p.id}">${p.name} (${p.price} ${p.unit})</option>`).join('');
+    if (co.picked) sel.value = co.plan;
+  }
   const successHTML = {
-    taster: ['Your taster class is reserved', 'We’ve emailed your confirmation. Our team has also been notified and will confirm your teacher and class link shortly.', '<a class="btn btn-primary" href="#packages">Next: select a plan</a>'],
-    contact: ['Message sent', 'A copy is on its way to your email and the right team member will reply within one working day.', ''],
+    taster: ['Your free trial request is sent', 'Thank you! Our team will email you shortly to confirm your teacher, day and time.', '<a class="btn btn-primary" href="#packages">See our packages</a>'],
+    enrol: ['Enrolment received', 'Thank you! Our team will email you to confirm your package, teacher and schedule, with a secure payment link.', ''],
+    contact: ['Message sent', 'Thank you! The right team member will reply within one working day.', ''],
     review: ['Thank you for your review', 'We appreciate your feedback. It will appear once our team has reviewed it.', ''],
-    custom: ['Request received', 'We’ve emailed you a copy. Our team will send a tailored quote within one working day.', ''],
+    custom: ['Request received', 'Thank you! Our team will send you a tailored quote within one working day.', ''],
     teach: ['Application received', 'Our academic lead will review your application and contact you within 5 working days.', ''],
   };
-  document.addEventListener('submit', e => {
+  document.addEventListener('submit', async e => {
     const f = e.target.closest('form[data-form]'); if (!f) return;
     e.preventDefault();
     const bad = $$('[required]', f).filter(i => i.type === 'checkbox' ? !i.checked : !i.value.trim() || (i.type === 'email' && !/^\S+@\S+\.\S+$/.test(i.value)));
     $$('.err', f).forEach(x => x.remove());
     if (bad.length) { bad.forEach(i => { i.setAttribute('aria-invalid', 'true'); const lbl = i.closest('label, .captcha'); lbl && lbl.insertAdjacentHTML('beforeend', `<span class="err" style="color:#B3412F;font:700 13px/1.2 var(--ui)">${i.type === 'checkbox' ? 'Tick this box to continue' : i.type === 'email' && i.value ? 'Enter a valid email, like name@example.com' : 'Fill in this field to continue'}</span>`); }); bad[0].focus(); announce(bad.length === 1 ? '1 field needs attention' : bad.length + ' fields need attention'); return; }
+    // send everything to the SOU inbox (skipped silently for bots that fill the hidden field)
+    const btn = f.querySelector('[type=submit]'), btnHTML = btn.innerHTML; $$('.form-fail', f).forEach(x => x.remove());
+    if (!f.querySelector('input.hp')?.value) {
+      btn.disabled = true; btn.textContent = 'Sending…';
+      try { await sendToSOU(f); }
+      catch (err) {
+        const who = (f.querySelector('[name=name]')?.value || '').trim();
+        const wa = encodeURIComponent(`Hello SOU, my name is ${who}. I tried to send the ${formLabel[f.dataset.form] || 'website'} form.`);
+        btn.insertAdjacentHTML('beforebegin', `<p class="pay-err form-fail" role="alert">Sorry, we couldn’t send this just now. Please try again, or <a href="https://wa.me/447907411836?text=${wa}" target="_blank" rel="noopener">message us on WhatsApp</a> or email <a href="mailto:${SOU_EMAIL}">${SOU_EMAIL}</a>.</p>`);
+        btn.disabled = false; btn.innerHTML = btnHTML; return;
+      }
+    }
     const [h, p, extra] = successHTML[f.dataset.form];
     const holder = f.parentElement; const original = holder.innerHTML;
     holder.innerHTML = `<div class="success" role="status"><span class="tick">${icon('i-check', 36)}</span><h3 class="h3">${h}</h3><p style="color:var(--muted);max-width:440px">${p}</p><div class="row" style="justify-content:center">${extra}<button class="btn btn-outline" type="button" data-reset>Done</button></div></div>`;
     holder.querySelector('.tick').style.color = 'var(--ok)';
-    holder.querySelector('[data-reset]').onclick = () => { holder.innerHTML = original; if (f.dataset.form === 'taster') closeTaster(); };
+    holder.querySelector('[data-reset]').onclick = () => { holder.innerHTML = original; if (f.dataset.form === 'enrol') fillEnrolPlans(); if (f.dataset.form === 'taster') closeTaster(); };
     holder.querySelector('.btn-primary')?.addEventListener('click', closeTaster);
   });
   document.addEventListener('input', e => { if (e.target.getAttribute('aria-invalid')) { e.target.removeAttribute('aria-invalid'); e.target.closest('label')?.querySelector('.err')?.remove(); } });
@@ -439,7 +471,6 @@
   });
 
   /* ---------- ASSESSMENT ---------- */
-  const SOU_EMAIL = 'studentsoftheummah@gmail.com';
 
   /* ---------- PAY NOW (form is emailed to SOU) ---------- */
   const payModal = $('#pay'), payForm = $('#payForm'), payMainHTML = $('#payMain').innerHTML;
