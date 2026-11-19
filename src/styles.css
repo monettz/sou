@@ -450,6 +450,10 @@ form{display:flex;flex-direction:column;gap:18px}
   .banner[data-side="left"] .banner-cap .hl{color:var(--tan)}
   .banner[data-side="left"] .banner-cap .lead{color:#EFE3D2}
   .banner[data-side="right"] .banner-cap .lead{color:var(--muted)}
+  /* bright photo with the words on the left: soft cream fade and dark text */
+  .banner[data-side="left-light"] .banner-imgs::after{background:linear-gradient(90deg,rgba(255,247,239,.92) 0%,rgba(255,247,239,.72) 38%,rgba(255,247,239,0) 62%)}
+  .banner[data-side="left-light"] .banner-cap{left:max(5vw,32px)}
+  .banner[data-side="left-light"] .banner-cap .lead{color:var(--muted)}
 }
 /* pay now modal */
 .pay-pick{display:flex;flex-direction:column;gap:4px;padding:16px 18px;border:1px solid #4A4540;border-radius:16px}

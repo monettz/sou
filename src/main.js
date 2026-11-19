@@ -157,7 +157,7 @@
   const slides = [
     { side: 'left', t: 'Everything You Need to Learn, <span class="hl">All in One Place.</span>', b: 'From interactive student dashboards and video lessons to direct access to teachers, quizzes and exams — experience Islamic learning in one structured environment.' },
     { side: 'left', t: 'Learn With Confidence, <span class="hl">Every Step of the Way.</span>', b: 'With experienced and supportive teachers by your side, feel empowered to progress in your Islamic studies at your own pace.' },
-    { side: 'right', t: 'Study Islam From the Comfort of <span class="hl">Your Home.</span>', b: 'Flexible online learning designed to fit around your life, at a pace that works for you.' },
+    { side: 'left-light', t: 'Study Islam From the Comfort of <span class="hl">Your Home.</span>', b: 'Flexible online learning designed to fit around your life, at a pace that works for you.' },
   ];
   let sl = 0, slTimer;
   function showSlide(i) {
