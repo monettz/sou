@@ -221,10 +221,9 @@
       ws.forEach((w, i) => w.classList.toggle('lit', i < n));
     });
   }
-  // header hide on scroll down
+  // scroll effects (the header always stays in place)
   let lastY = 0;
   function onScroll(y) {
-    const hdr = $('#hdr'); if (y > 200 && y > lastY + 4) hdr.classList.add('hide'); else if (y < lastY - 4 || y < 200) hdr.classList.remove('hide');
     lastY = y; scrubWords(); parallax();
   }
   // Native scrolling: smooth-scroll libraries hijack the mouse wheel and can leave the page unscrollable

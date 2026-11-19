@@ -74,10 +74,7 @@ p{margin:0}
 .link .arr{transition:transform .3s var(--ease)}
 
 /* announcement + header */
-.announce{background:var(--ink);color:var(--cream);font:600 14px/1.4 var(--ui);text-align:center;padding:10px max(16px,env(safe-area-inset-left,0px))}
-.announce a{color:var(--tan);margin-left:8px}
-.header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--sand);border-bottom:1px solid var(--line);transition:transform .45s var(--ease)}
-.header.hide{transform:translateY(-110%)}
+.header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--sand);border-bottom:1px solid var(--line)}
 .header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:84px}
 .logo{display:block;flex:none;line-height:0}
 .logo img{height:52px;width:auto;max-width:none}
@@ -503,7 +500,6 @@ form{display:flex;flex-direction:column;gap:18px}
 .lvl-big{display:flex;flex-direction:column;font:600 clamp(40px,7vw,64px)/1 var(--display);color:var(--ink)}
 .lvl-big small{font:800 13px/1.6 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--bronze-dk)}
 .as-sent{margin:0;font:700 14px/1.4 var(--ui);color:var(--ok)}
-.announce a{display:inline-flex;align-items:center;gap:4px}
 .drawer nav a span{display:inline-flex;align-items:center}
 
 /* course cards */
