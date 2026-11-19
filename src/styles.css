@@ -445,8 +445,10 @@ form{display:flex;flex-direction:column;gap:18px}
 .banner-bar{background:var(--cream);padding:22px 0 30px;border-bottom:1px solid var(--line)}
 .banner-bar .hero-btns{justify-content:center;gap:14px}
 /* banner headings are real text over the photos */
-.banner-cap{transition:opacity .45s ease,transform .45s ease}
-.banner-cap.swap{opacity:0;transform:translateY(10px)}
+/* words travel with the photo: old text exits left, new text enters from the right */
+.banner-cap{transition:opacity .5s ease,transform .55s cubic-bezier(.65,0,.35,1)}
+.banner-cap.swap{opacity:0;transform:translateX(-120px)}
+.banner-cap.enter{opacity:0;transform:translateX(120px);transition:none}
 .banner-cap .h1{line-height:1.08}
 @media (min-width:900px){
   .banner-imgs::after{content:"";position:absolute;inset:0;transition:background .9s ease;pointer-events:none}

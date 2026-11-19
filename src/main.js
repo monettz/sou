@@ -176,7 +176,10 @@
     });
     const cap = $('.banner-cap'), ban = $('.banner');
     cap.classList.add('swap');
-    setTimeout(() => { ban.dataset.side = s.side; $('#slTitle').innerHTML = s.t; $('#slBody').textContent = s.b; cap.classList.remove('swap'); }, reduce ? 0 : 450);
+    setTimeout(() => {
+      ban.dataset.side = s.side; $('#slTitle').innerHTML = s.t; $('#slBody').textContent = s.b;
+      cap.classList.add('enter'); cap.classList.remove('swap'); void cap.offsetWidth; cap.classList.remove('enter');
+    }, reduce ? 0 : 500);
   }
   let slPaused = false;
   const slRestart = () => { clearInterval(slTimer); if (!reduce && !slPaused) slTimer = setInterval(() => showSlide(sl + 1), 6000); };
