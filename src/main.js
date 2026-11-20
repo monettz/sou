@@ -35,7 +35,7 @@
     ['Begin study', 'Start learning with steady support and progress check-ins.', ['Progress tracker and teacher feedback', 'Homework quick quizzes', 'Diary notes linked to lesson videos']],
   ];
   const courses = [
-    { href: '#taster', taster: true, subject: 'Arabic Language', cta: 'Book a free taster', t: 'Discover the beauty of the Arabic language', d: 'Build your Arabic skills through structured lessons designed to develop your understanding, confidence and fluency.', img: 'banner-teacher.jpg', tags: ['Arabic'] },
+    { href: '#taster', taster: true, subject: 'Arabic Language', cta: 'Book a free taster', t: 'Discover the beauty of the Arabic language', d: 'Build your Arabic skills through structured lessons designed to develop your understanding, confidence and fluency.', img: 'lesson-arabic.jpg', tags: ['Arabic'] },
     { href: '#taster', taster: true, subject: 'Islamic Studies', cta: 'Book a free taster', t: 'Grow in knowledge, strengthen your Deen', d: 'Embark on a journey of learning that deepens your understanding of Islam, strengthens your faith and inspires you to become a better Muslim.', img: 'lesson-islamic.jpg', tags: ['Islamic Studies'] },
     { href: '#taster', taster: true, subject: 'Qur’an Reading & Tajweed', cta: 'Book a free taster', t: 'Build a lasting connection with the Qur’an', d: 'Strengthen your recitation, discover the beauty of its teachings and make the words of Allah a guiding light in your everyday life.', img: 'lesson-quran.jpg', tags: ['Qur’an'] },
   ];
