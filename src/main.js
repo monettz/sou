@@ -38,6 +38,7 @@
     { href: '#taster', taster: true, subject: 'Arabic Language', cta: 'Book a free taster', t: 'Discover the beauty of the Arabic language', d: 'Build your Arabic skills through structured lessons designed to develop your understanding, confidence and fluency.', img: 'lesson-arabic.jpg', tags: ['Arabic'] },
     { href: '#taster', taster: true, subject: 'Islamic Studies', cta: 'Book a free taster', t: 'Grow in knowledge, strengthen your Deen', d: 'Embark on a journey of learning that deepens your understanding of Islam, strengthens your faith and inspires you to become a better Muslim.', img: 'lesson-islamic.jpg', tags: ['Islamic Studies'] },
     { href: '#taster', taster: true, subject: 'Qur’an Reading & Tajweed', cta: 'Book a free taster', t: 'Build a lasting connection with the Qur’an', d: 'Strengthen your recitation, discover the beauty of its teachings and make the words of Allah a guiding light in your everyday life.', img: 'lesson-quran.jpg', tags: ['Qur’an'] },
+    { href: '#packages', scroll: 'crash', subject: 'Islamic Crash Courses', cta: 'Book', t: 'Fastest way to gain knowledge in a short time', d: 'Choose what you want to perfect from our short courses.', img: 'lesson-crash.jpg', tags: ['Islamic Crash Courses'] },
   ];
   const featured = [
     { href: '#post', cta: 'Read more', t: 'The winter timetable is here', d: 'New evening and weekend slots for every subject.', img: 'post-flyer.jpg', tags: ['Flyer'] },
@@ -91,7 +92,7 @@
     $('[data-process]').innerHTML = [['Apply online', 'Send your details, CV and certificates.'], ['Interview', 'A short video call with our academic lead.'], ['Demo lesson', 'Teach a 20-minute sample lesson.'], ['Onboarding', 'Safeguarding checks, portal training and your first students.']].map((p, i, a) => `<li class="row" style="flex-wrap:nowrap;align-items:stretch;gap:16px"><span style="display:flex;flex-direction:column;align-items:center"><span style="width:44px;height:44px;border-radius:50%;background:var(--bronze);display:flex;align-items:center;justify-content:center;font:600 18px/1 var(--display)">${i + 1}</span>${i < a.length - 1 ? '<span style="flex:1;width:2px;background:var(--bronze);min-height:20px"></span>' : ''}</span><span style="padding:8px 0 24px"><b style="display:block;font:600 22px/1.1 var(--display)">${p[0]}</b><span style="color:var(--tan);font-size:15px">${p[1]}</span></span></li>`).join('');
     $('#bars').innerHTML = [[5, 88], [4, 9], [3, 2], [2, 1], [1, 0]].map(([n, p]) => `<span class="row" style="gap:10px;flex-wrap:nowrap;font:700 13px/1 var(--ui)"><span style="width:14px">${n}</span><span style="flex:1;height:8px;border-radius:999px;background:var(--sand)"><span class="bar" data-w="${p}" style="display:block;height:8px;border-radius:999px;background:var(--bronze);width:100%;transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ease)"></span></span><span style="width:34px;text-align:right;color:var(--muted)">${p}%</span></span>`).join('');
     $('#cmp').innerHTML = [['Price', '£60 / month', '£45 / month', '£90 / month', '£300 / 15 lessons'], ['Subjects', '1 of Arabic, Islamic Studies or Qur’an', '1 of Arabic, Islamic Studies or Qur’an', 'All three, weekly', '1 short course'], ['Lesson type', 'Live, private', 'Live, up to 5 students', 'Live, private', 'Live'], ['Lesson length', '45 min (40 + 5 Q&A)', '1 hour (50 + 10 Q&A)', '45 min (35 + 10 Q&A)', '—'], ['Lessons', '4 a month (1 per week)', '4 a month (1 per week)', '4 a month (1 per week)', '15 lessons'], ['Schedule', 'Flexible times', 'Fixed weekly time', 'Fixed weekly time', 'Agreed with you'], ['Lesson materials', 'CHK', 'CHK', 'CHK', 'CHK']].map(r => `<tr><td>${r[0]}</td>${r.slice(1).map((v, k) => `<td class="c"${k === 2 ? ' style="background:#FFFBF5"' : ''}>${v === 'CHK' ? `<span class="tick-c" aria-label="Included">${icon('i-check', 20)}</span>` : v}</td>`).join('')}</tr>`).join('');
-    $$('[data-courses]').forEach(el => el.innerHTML = courses.map(c => `<a class="post course rv-up" href="#taster" data-taster data-subject="${c.subject}"><span class="img"><img src="assets/${c.img}" alt="" width="800" height="534" loading="lazy" decoding="async"></span><span class="body"><span class="meta"><span class="chip">${c.tags[0]}</span></span><h3>${c.t}</h3><p>${c.d}</p><span class="link">${c.cta} ${icon('i-arrow', 18, 'arr')}</span></span></a>`).join(''));
+    $$('[data-courses]').forEach(el => el.innerHTML = courses.map(c => `<a class="post course rv-up" ${c.scroll ? `href="${c.href}" data-scroll="${c.scroll}"` : `href="#taster" data-taster data-subject="${c.subject}"`}><span class="img"><img src="assets/${c.img}" alt="" width="800" height="534" loading="lazy" decoding="async"></span><span class="body"><span class="meta"><span class="chip">${c.tags[0]}</span></span><h3>${c.t}</h3><p>${c.d}</p><span class="link">${c.cta} ${icon('i-arrow', 18, 'arr')}</span></span></a>`).join(''));
     $$('[data-levels]').forEach(el => el.innerHTML = levels.map(l => `<div class="lvl rv-up"><span class="n">${l[0]}</span><h3>${l[1]}</h3><p>${l[2]}</p></div>`).join(''));
     $$('[data-crash]').forEach(el => el.innerHTML = crash.map(c => `<li>${icon('i-check', 20)}<span>${c}</span></li>`).join(''));
     $$('[data-captcha]').forEach(el => el.outerHTML = `<input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><div class="captcha"><label><input type="checkbox" required> I’m not a robot</label><small class="row" style="gap:6px">${icon('i-shield', 16)}CAPTCHA spam protection</small></div>`);
@@ -340,6 +341,7 @@
     closeDrawer();
     withCurtain(() => show(id, false));
   }
+  let pendingScroll = null; // section to jump to once the page a link opens is on screen
   function show(id, initial) {
     current = id;
     $$('[data-page]').forEach(p => p.classList.toggle('active', p.dataset.page === id));
@@ -351,6 +353,7 @@
     pageLoadAnim(page); observeReveals(); observeCounters(); scrubWords(); playSplits(page, true); parallax();
     cfRender.forEach(f => f());
     loadForms(page);
+    if (pendingScroll && page.contains(pendingScroll)) { const t = pendingScroll; pendingScroll = null; setTimeout(() => scrollToY(t.getBoundingClientRect().top + scrollY - 100), 150); }
     if (id === 'checkout') renderCheckout();
     if (id === 'enrol') { fillEnrolPlans(); const P = planDefs().find(p => p.id === co.plan), n = $('#enrolPlan'); if (P && co.picked) { n.hidden = false; n.innerHTML = `You chose <b>&nbsp;${P.name} — ${P.price} ${P.unit}</b>. Please mention this in the form.`; } else n.hidden = true; }
     if (id === 'assessment') renderAssess();
@@ -361,7 +364,7 @@
     const s = e.target.closest('[data-scroll]');
     if (s) {
       const target = document.getElementById(s.dataset.scroll);
-      if (target) { e.preventDefault(); const page = s.getAttribute('href'); if (page && page !== '#' + current && page.startsWith('#') && pages.includes(page.slice(1))) { location.hash = page; setTimeout(() => scrollToY(target.getBoundingClientRect().top + scrollY - 100), 80); } else scrollToY(target.getBoundingClientRect().top + scrollY - 100); }
+      if (target) { e.preventDefault(); const page = s.getAttribute('href'); if (page && page !== '#' + current && page.startsWith('#') && pages.includes(page.slice(1))) { pendingScroll = target; location.hash = page; } else scrollToY(target.getBoundingClientRect().top + scrollY - 100); }
     }
     const pl = e.target.closest('[data-plan]'); if (pl && pl.dataset.plan !== 'custom') { co.plan = pl.dataset.plan; co.step = 0; co.picked = true; }
     if (e.target.closest('[data-taster]')) { e.preventDefault(); openTaster(); }
