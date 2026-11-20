@@ -38,6 +38,7 @@
     { href: '#taster', taster: true, subject: 'Arabic Language', cta: 'Book a free taster', t: 'Discover the beauty of the Arabic language', d: 'Build your Arabic skills through structured lessons designed to develop your understanding, confidence and fluency.', img: 'lesson-arabic.jpg', tags: ['Arabic'] },
     { href: '#taster', taster: true, subject: 'Islamic Studies', cta: 'Book a free taster', t: 'Grow in knowledge, strengthen your Deen', d: 'Embark on a journey of learning that deepens your understanding of Islam, strengthens your faith and inspires you to become a better Muslim.', img: 'lesson-islamic.jpg', tags: ['Islamic Studies'] },
     { href: '#taster', taster: true, subject: 'Qur’an Reading & Tajweed', cta: 'Book a free taster', t: 'Build a lasting connection with the Qur’an', d: 'Strengthen your recitation, discover the beauty of its teachings and make the words of Allah a guiding light in your everyday life.', img: 'lesson-quran.jpg', tags: ['Qur’an'] },
+    { href: '#packages', scroll: 'crash', subject: 'Islamic Crash Courses', cta: 'Book', t: 'Fastest way to gain knowledge in a short time', d: 'Choose what you want to perfect from our short courses.', img: 'lesson-crash.jpg', tags: ['Islamic Crash Courses'] },
   ];
   const featured = [
     { href: '#post', cta: 'Read more', t: 'The winter timetable is here', d: 'New evening and weekend slots for every subject.', img: 'post-flyer.jpg', tags: ['Flyer'] },
@@ -158,6 +159,9 @@
     { side: 'left', t: 'Everything You Need to Learn, <span class="hl">All in One Place.</span>', b: 'From interactive student dashboards and video lessons to direct access to teachers, quizzes and exams — experience Islamic learning in one structured environment.' },
     { side: 'left', t: 'Learn With Confidence, <span class="hl">Every Step of the Way.</span>', b: 'With experienced and supportive teachers by your side, feel empowered to progress in your Islamic studies at your own pace.' },
     { side: 'left-light', t: 'Study Islam From the Comfort of <span class="hl">Your Home.</span>', b: 'Flexible online learning designed to fit around your life, at a pace that works for you.' },
+    { side: 'left-light', t: 'Discover the beauty of <span class="hl">the Arabic language.</span>', b: 'Build your Arabic skills through structured lessons designed to develop your understanding, confidence and fluency.' },
+    { side: 'left', t: 'Grow in knowledge, <span class="hl">strengthen your Deen.</span>', b: 'Embark on a journey of learning that deepens your understanding of Islam, strengthens your faith and inspires you to become a better Muslim.' },
+    { side: 'left-light', t: 'Build a lasting connection <span class="hl">with the Qur’an.</span>', b: 'Strengthen your recitation, discover the beauty of its teachings and make the words of Allah a guiding light in your everyday life.' },
   ];
   let sl = 0, slTimer;
   function showSlide(i) {
