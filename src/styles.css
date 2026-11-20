@@ -429,32 +429,41 @@ form{display:flex;flex-direction:column;gap:18px}
 .banner-cap{padding:22px 16px 4px;display:flex;flex-direction:column;gap:10px}
 .banner-cap .h1{font-size:clamp(30px,8vw,44px);margin:0}
 .banner-cap .lead{margin:0;font-size:16px}
-.banner-bar{background:var(--cream);padding:22px 0 30px;border-bottom:1px solid var(--line)}
-.banner-bar .hero-btns{justify-content:center;gap:14px}
+/* phones: buttons sit under the words on the cream background */
+.banner-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;padding:22px 16px 30px;border-bottom:1px solid var(--line)}
 /* banner headings are real text over the photos */
 /* words travel with the photo: old text exits left, new text enters from the right */
 .banner-cap{transition:opacity .5s ease,transform .55s cubic-bezier(.65,0,.35,1)}
 .banner-cap.swap{opacity:0;transform:translateX(-120px)}
 .banner-cap.enter{opacity:0;transform:translateX(120px);transition:none}
 .banner-cap .h1{line-height:1.08}
-@media (min-width:900px){
+/* tablets and desktops: words and buttons sit together inside the hero photo */
+@media (min-width:768px){
+  .banner-imgs{aspect-ratio:auto;height:clamp(540px,56.25vw,820px)}
   .banner-imgs::after{content:"";position:absolute;inset:0;transition:background .9s ease;pointer-events:none}
-  .banner[data-side="left"] .banner-imgs::after{background:linear-gradient(90deg,rgba(28,24,20,.88) 0%,rgba(28,24,20,.66) 42%,rgba(28,24,20,0) 70%)}
-  .banner[data-side="right"] .banner-imgs::after{background:linear-gradient(270deg,rgba(255,247,239,.92) 0%,rgba(255,247,239,.7) 36%,rgba(255,247,239,0) 60%)}
-  .banner-cap{position:absolute;top:0;bottom:0;width:min(46%,640px);padding:0;justify-content:center;gap:18px;z-index:1}
-  .banner[data-side="left"] .banner-cap{left:max(5vw,32px);color:var(--cream)}
-  .banner[data-side="right"] .banner-cap{right:max(5vw,32px);text-align:right;align-items:flex-end}
-  .banner-cap .h1{font-size:clamp(38px,4.2vw,66px)}
-  .banner-cap .lead{font-size:clamp(16px,1.35vw,20px);max-width:520px}
+  .banner[data-side="left"] .banner-imgs::after{background:linear-gradient(90deg,rgba(28,24,20,.9) 0%,rgba(28,24,20,.7) 45%,rgba(28,24,20,0) 78%)}
+  .banner[data-side="left-light"] .banner-imgs::after{background:linear-gradient(90deg,rgba(255,247,239,.94) 0%,rgba(255,247,239,.78) 45%,rgba(255,247,239,0) 74%)}
+  .banner-over{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;gap:32px;padding:0 max(5vw,32px) clamp(64px,9vw,150px);pointer-events:none}
+  .banner-over>*{pointer-events:auto}
+  .banner-cap{width:min(64%,620px);padding:0;gap:18px}
+  .banner-cap .h1{font-size:clamp(36px,4.3vw,64px)}
+  .banner-cap .lead{font-size:clamp(16px,1.35vw,20px);max-width:540px}
+  .banner-btns{justify-content:flex-start;gap:12px;padding:0;border:0;max-width:min(92%,720px)}
+  .banner-btns .btn{min-height:52px;padding:12px 24px;font-size:16px}
+  /* dark photos: light words, outline buttons in cream */
   .banner[data-side="left"] .banner-cap .h1{color:var(--cream)}
   .banner[data-side="left"] .banner-cap .hl{color:var(--tan)}
   .banner[data-side="left"] .banner-cap .lead{color:#EFE3D2}
-  .banner[data-side="right"] .banner-cap .lead{color:var(--muted)}
-  /* bright photo with the words on the left: soft cream fade and dark text */
-  .banner[data-side="left-light"] .banner-imgs::after{background:linear-gradient(90deg,rgba(255,247,239,.92) 0%,rgba(255,247,239,.72) 38%,rgba(255,247,239,0) 62%)}
-  .banner[data-side="left-light"] .banner-cap{left:max(5vw,32px)}
+  .banner[data-side="left"] .banner-btns .btn-outline{border-color:var(--cream);color:var(--cream);background:rgba(28,24,20,.4)}
+  .banner[data-side="left"] .banner-btns .btn-outline:hover{background:var(--cream);color:var(--ink)}
+  /* bright photo: dark words and buttons */
   .banner[data-side="left-light"] .banner-cap .lead{color:var(--muted)}
+  .banner[data-side="left-light"] .banner-btns .btn-outline{background:rgba(255,247,239,.6)}
+  .banner-btns .btn-outline{transition:background-color .6s,color .6s,border-color .6s,transform .3s var(--ease)}
 }
+@media (min-width:1100px){.banner-cap{width:min(48%,640px)}}
+/* tablets: slightly smaller buttons so all three fit on one line */
+@media (min-width:768px) and (max-width:1099px){.banner-btns{gap:10px}.banner-btns .btn{padding:11px 18px;font-size:15px;min-height:48px}}
 /* pay now modal */
 .pay-pick{display:flex;flex-direction:column;gap:4px;padding:16px 18px;border:1px solid #4A4540;border-radius:16px}
 .pay-pick:empty{display:none}
