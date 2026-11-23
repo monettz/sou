@@ -161,12 +161,33 @@ export function startPortal(app) {
 
   function go(hash) { if (location.hash === hash) route(); else location.hash = hash; }
 
-  function route() {
+  // page change: a dark curtain with the SOU logo covers the screen, the new page is
+  // drawn behind it, then the curtain lifts (same transition as the website)
+  const curtain = document.createElement('div');
+  curtain.className = 'sou-curtain'; curtain.setAttribute('aria-hidden', 'true');
+  curtain.innerHTML = '<img src="/assets/logo-light.png" alt="" width="549" height="167">';
+  document.body.appendChild(curtain);
+  const calm = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let turn = 0;
+  function lift() {
+    curtain.classList.add('leave'); curtain.classList.remove('cover');
+    setTimeout(() => curtain.classList.remove('leave'), 650);
+  }
+  function withCurtain(fn, first) {
+    if (calm()) { fn(); return; }
+    const me = ++turn;
+    if (first) { curtain.classList.add('cover', 'instant'); fn(); requestAnimationFrame(() => { curtain.classList.remove('instant'); setTimeout(lift, 350); }); return; }
+    curtain.classList.remove('leave'); void curtain.offsetWidth; curtain.classList.add('cover');
+    setTimeout(() => { if (me !== turn) return; fn(); setTimeout(() => { if (me === turn) lift(); }, 120); }, 480);
+  }
+
+  function route(first) {
     const path = (location.hash.replace(/^#\/?/, '') || '');
     const target = app.resolve(path, who());
     if (target.redirect) { go(target.redirect); return; }
     if (target.logout) session.clear();
-    render(target.view);
+    if (current && current.name === target.view) { render(target.view); return; }
+    withCurtain(() => render(target.view), first === true);
   }
 
   // phone layout: the sidebar becomes a scrollable bar on top
@@ -180,5 +201,5 @@ export function startPortal(app) {
     if (current) draw();
   });
   window.addEventListener('hashchange', route);
-  route();
+  route(true);
 }
