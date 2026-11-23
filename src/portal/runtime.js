@@ -115,6 +115,9 @@ export function startPortal(app) {
       inst._rerender = () => draw();
     }
     styleEl.textContent = view.styles;
+    // play the enter animation once per page (not on every redraw)
+    root.classList.remove('entering'); void root.offsetWidth; root.classList.add('entering');
+    clearTimeout(render.t); render.t = setTimeout(() => root.classList.remove('entering'), 1300);
     document.title = `${view.title} · SOU`;
     draw();
     window.scrollTo(0, 0);

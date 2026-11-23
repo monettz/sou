@@ -94,3 +94,54 @@ html { -webkit-text-size-adjust: 100%; }
 .menu-toggle .m-close { display: none; }
 .side.open .menu-toggle .m-open { display: none; }
 .side.open .menu-toggle .m-close { display: inline; }
+
+/* ======================= one type scale for every screen ======================= */
+#app .main h1, #notif-title { font-size: clamp(26px, 1.6vw + 18px, 32px) !important; line-height: 1.15 !important; }
+#app .main h2 { font-size: 20px !important; line-height: 1.25 !important; }
+#app .main h2[style*="font-size: 24px"], #app .main h2[style*="font-size: 26px"] { font-size: 24px !important; }
+#app .main .btn { font-size: 15px !important; }
+#app .main .small { font-size: 13px; }
+#app .side .nav { font-size: 15px; }
+@media (max-width: 760px) {
+  #app .main h2[style*="font-size: 24px"], #app .main h2[style*="font-size: 26px"] { font-size: 21px !important; }
+}
+
+/* back link (notifications) */
+.back-link { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; min-height: 44px; font: 800 14px/1 Nunito, system-ui, sans-serif; color: #6E583C; text-decoration: none; }
+.back-link:hover { color: #2B2B2B; }
+
+/* ======================= motion ======================= */
+@keyframes sou-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes sou-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sou-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes sou-drop { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+/* page enter: content rises in, card by card */
+#app.entering .main > *, #app.entering .lg-box, #app.entering .st-col > *, #app.entering [data-role] { animation: sou-up .55s cubic-bezier(.2,.7,.2,1) both; }
+#app.entering .main > *:nth-child(2) { animation-delay: .06s; }
+#app.entering .main > *:nth-child(3) { animation-delay: .12s; }
+#app.entering .main > *:nth-child(4) { animation-delay: .18s; }
+#app.entering .main > *:nth-child(n+5) { animation-delay: .24s; }
+#app.entering .st-col > *:nth-child(2) { animation-delay: .08s; }
+#app.entering .st-col > *:nth-child(3) { animation-delay: .16s; }
+#app.entering .main .card { animation: sou-up .6s cubic-bezier(.2,.7,.2,1) both; animation-delay: inherit; }
+#app.entering .side { animation: sou-fade .4s ease both; }
+#app.entering .bar i, #app.entering .main [style*="background: #F0E2CC"] > i { transform-origin: left; animation: sou-grow .9s cubic-bezier(.2,.7,.2,1) .25s both; }
+
+/* hover and press feedback */
+#app .btn, #app .lg-submit, #app button.opt, #app .role, #app .act, #app .chip { transition: background-color .2s, color .2s, border-color .2s, transform .15s, box-shadow .2s; }
+#app .btn:active, #app .lg-submit:active, #app button.opt:active, #app .act:active { transform: scale(.97); }
+#app a.card, #app .item, #app .offer, #app .req, #app .rep, #app .conv, #app .note, #app .n, #app a.row, #app .les { transition: transform .2s, box-shadow .2s, background-color .2s; }
+@media (hover: hover) {
+  #app a.card:hover, #app .item:hover, #app .offer:hover, #app .req:hover, #app .rep:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(110, 88, 60, .14); }
+  #app .note:hover, #app .n:hover { transform: translateX(3px); }
+  #app button.opt:hover { border-color: #8A6F4D !important; }
+}
+#app .side .nav { transition: background-color .2s, color .2s, padding-left .2s; }
+@media (hover: hover) { #app .side .nav:not(.on):hover { padding-left: 18px !important; } }
+
+/* phone menu opens with a short drop */
+#app .side.open > nav, #app .side.open > a.nav, #app .side.open > div { animation: sou-drop .25s ease both; }
+
+/* chat bubbles and new list items slide in when added */
+#app .msg:last-of-type { animation: sou-up .35s ease both; }

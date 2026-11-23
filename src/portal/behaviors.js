@@ -200,12 +200,18 @@ const screens = {
   },
 
   'Student-Quiz'(root) {
-    const submit = byText(root, 'Submit answers')[0];
+    // a started quiz must be finished before leaving it
+    root.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href]');
+      if (!link || !root.querySelector('main[data-inprogress="true"]')) return;
+      e.preventDefault(); e.stopPropagation();
+      toast('Finish the quiz first · once started it must be completed', 'err');
+    }, true);
+    const submit = byText(root, 'Submit quiz')[0];
     submit?.addEventListener('click', () => setTimeout(() => {
       const m = txt(document.querySelector('#app')).match(/(\d) \/ 3/);
-      if (m) { db.update(x => { x.quizResult = { score: +m[1], total: 3 }; }); toast('Answers submitted · saved to your progress'); }
-    }, 50));
-    on(byText(root, 'Save & finish later'), (e, a) => { toast('Saved · you can finish this quiz before Saturday'); location.hash = a.getAttribute('href'); });
+      if (m) { db.update(x => { x.quizResult = { score: +m[1], total: 3 }; }); db.notify('teacher', 'Quiz submitted: Letters that join', `Aisha Rahman · ${m[1]}/3 · 1 written answer to mark`); toast('Quiz submitted · saved to your progress'); }
+    }, 60));
   },
 
   'Student-Chat'(root) { chat(root, 'student'); },
@@ -268,7 +274,15 @@ const screens = {
     on(byText(root, 'Download PDF'), () => window.print());
   },
 
-  'Notifications'(root, ctx) { renderNotifications(root, ctx.who()?.role); },
+  'Notifications'(root, ctx) {
+    const role = ctx.who()?.role;
+    renderNotifications(root, role);
+    const home = { student: '#/dashboard', teacher: '#/teacher', support: '#/support', super: '#/super' }[role] || '#/';
+    const back = document.createElement('a');
+    back.href = home; back.className = 'back-link'; back.dataset.wired = '1';
+    back.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Back to dashboard';
+    root.firstElementChild?.firstElementChild?.before(back);
+  },
 
   /* ---------- teacher ---------- */
   'Teacher-Dashboard'(root) {
@@ -324,6 +338,8 @@ const screens = {
       const cnt = byText(root, '4 questions', 'span')[0] || $('.small', qWrap); if (cnt) cnt.textContent = `${$$('.q', qWrap).length} questions`;
     }));
     on(byText(root, 'Save draft'), () => toast('Draft saved'));
+    const show = $('#qs', root);
+    if (show) { show.checked = db.get().showAnswers !== false; show.addEventListener('change', () => { db.update(x => { x.showAnswers = show.checked; }); toast(show.checked ? 'Students will see the right answers after submitting' : 'Students will only see right / wrong, not the answers'); }); }
     on(byText(root, 'Preview as student'), () => ctx.go(ctx.linkTo('Student-Lesson-Quiz')));
     on(byText(root, 'Publish to students'), () => {
       const title = $('#qt', root).value.trim() || 'New quiz';
