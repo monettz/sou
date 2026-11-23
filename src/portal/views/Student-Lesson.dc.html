@@ -27,6 +27,20 @@ a{color:#6E583C}a:hover{color:#2B2B2B}
 .time{display:inline-flex;align-self:flex-start;padding:3px 9px;border-radius:999px;background:#2B2B2B;color:#FFF7EF;font:800 12px/1.2 Nunito,sans-serif;text-decoration:none}
 .les{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;font-size:14px}
 .les.now{background:#F7E7CE;font-weight:600}
+.les{cursor:pointer;transition:background-color .2s}
+.les:hover:not(.locked):not(.now){background:#FBF1E2}
+.les:focus-visible{outline:2px solid #8A6F4D;outline-offset:2px}
+.les.now .dot{color:#8A6F4D}
+.les.locked{color:#8C8378;cursor:not-allowed}
+.les.locked .dot{color:#A89A86;border-color:#E4CFAE}
+.les .small{white-space:nowrap}
+@media (max-width:760px){
+  .hint-dots{display:none}
+  [lang="ar"][dir="rtl"]{font-size:46px !important;gap:18px !important;padding-bottom:40px}
+  .les{font-size:13px;padding:10px 8px;gap:10px}
+  .les .small{font-size:11px}
+  main .btn{flex:1 1 0}
+}
 .dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;border:2px solid #CDB48D;box-sizing:border-box}
 .dot.done{background:#3F7D4E;border-color:#3F7D4E;color:#fff}
 .av{width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font:800 12px/1 Nunito,sans-serif;flex:none}
@@ -70,8 +84,8 @@ a{color:#6E583C}a:hover{color:#2B2B2B}
               <span title="Note at 04:35" style="position: absolute; left: 38%; top: -5px; width: 16px; height: 16px; border-radius: 50%; background: #FFF7EF; border: 3px solid #8A6F4D; box-sizing: border-box"></span>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between; color: #FFF7EF; font: 700 14px/1 Nunito, sans-serif">
-              <span style="display: flex; align-items: center; gap: 14px"><button type="button" aria-label="Pause" style="width: 44px; height: 44px; border-radius: 50%; border: 0; background: #FFF7EF; color: #2B2B2B; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg></button>04:35 / 12:10</span>
-              <span>Dots on the timeline = your notes</span>
+              <span style="display: flex; align-items: center; gap: 14px; white-space: nowrap"><button type="button" aria-label="Pause" style="width: 44px; height: 44px; border-radius: 50%; border: 0; background: #FFF7EF; color: #2B2B2B; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg></button>04:35 / 12:10</span>
+              <span class="hint-dots">Dots on the timeline = your notes</span>
             </div>
           </div>
         </div>
@@ -92,7 +106,7 @@ a{color:#6E583C}a:hover{color:#2B2B2B}
           <div class="les"><span class="dot done"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span>Lesson 2 · Middle and end shapes<span class="small" style="margin-left: auto">11:40</span></div>
           <div class="les now"><span class="dot" style="border-color: #8A6F4D"></span>Lesson 3 · Joining the letters<span class="small" style="margin-left: auto">Watching</span></div>
           <div class="les"><span class="dot"></span>Lesson 4 · Letters that never join forward<span class="small" style="margin-left: auto">09:15</span></div>
-          <div class="les"><span class="dot"></span>Quiz · Letters that join<span class="small" style="margin-left: auto">10 questions</span></div>
+          <div class="les"><span class="dot"></span>Quiz · Letters that join<span class="small" style="margin-left: auto">4 questions</span></div>
         </div>
       </div>
 

@@ -147,20 +147,106 @@ const screens = {
     const d = db.get();
     const list = $('.note', root)?.parentElement;
     const tpl = $('.note', root);
-    const addNote = (n) => { const el = tpl.cloneNode(true); $('.time', el).textContent = n.time; $('span', el).textContent = n.text; list.insertBefore(el, list.firstElementChild); };
-    d.notes.filter(n => n.lesson === SAMPLE_NOTE_LESSON).forEach(addNote);
+    // notes belong to a lesson: the panel shows the notes of the lesson that is open
+    const lessonKey = (n) => (n === 3 ? SAMPLE_NOTE_LESSON : `Module 2 · L${n}`);
+    const addNote = (n) => { const el = tpl.cloneNode(true); el.dataset.lesson = n.lesson; $('.time', el).textContent = n.time; $('span', el).textContent = n.text; list.insertBefore(el, list.firstElementChild); };
+    $$('.note', root).forEach(n => { n.dataset.lesson = SAMPLE_NOTE_LESSON; });
+    d.notes.filter(n => /^Module 2 · L\d$/.test(n.lesson)).forEach(addNote);
     $$('.note', root).forEach(n => { const t = txt($('span', n)); if (d.hiddenSeed.includes(t)) n.remove(); else if (d.noteEdits[t]) $('span', n).textContent = d.noteEdits[t]; });
+    const empty = document.createElement('span'); empty.className = 'small'; empty.textContent = 'No notes for this lesson yet. Pause the video and write one.';
+    list?.appendChild(empty);
+    const noteTime = $('label[for="nt"] .time', root);
+    const showNotes = (n) => { const key = lessonKey(n); let shown = 0; $$('.note', root).forEach(el => { const on = el.dataset.lesson === key; el.style.display = on ? '' : 'none'; if (on) shown++; }); empty.style.display = shown ? 'none' : ''; };
     const ta = $('#nt', root);
     on(byText(root, 'Save note'), () => {
       const text = ta.value.trim(); if (!text) { toast('Write your note first', 'err'); ta.focus(); return; }
-      const n = { id: Date.now(), text, lesson: SAMPLE_NOTE_LESSON, time: '04:35', course: 'Arabic', written: nowLabel() };
-      db.update(x => x.notes.unshift(n)); addNote(n); ta.value = '';
-      toast('Note saved at 04:35 · you will find it in your Diary');
+      const cur = db.get().lessonCurrent || 3; const at = noteTime ? txt(noteTime) : '04:35';
+      const n = { id: Date.now(), text, lesson: lessonKey(cur), time: at, course: 'Arabic', written: nowLabel() };
+      db.update(x => x.notes.unshift(n)); addNote(n); ta.value = ''; showNotes(cur);
+      toast(`Note saved at ${at} · you will find it in your Diary`);
     });
-    const done = byText(root, 'Mark as complete')[0];
-    const setDone = () => { if (!done) return; done.textContent = 'Completed'; done.disabled = true; const row = byText(root, 'Lesson 3 · Joining', '.les')[0]; if (row) { const dot = $('.dot', row); dot.classList.add('done'); dot.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>'; $('.small', row).textContent = 'Done'; } };
-    if (d.lessonDone) setDone();
-    on(done, () => { db.update(x => { x.lessonDone = true; }); setDone(); toast('Lesson 3 marked as complete · progress updated'); });
+    // module playlist: open any lesson you have reached, lessons unlock in order, the quiz opens at the end
+    const LESSONS = [
+      { n: 1, title: 'Letter shapes at the start of a word', len: '10:02', glyphs: ['بـ', 'تـ', 'ثـ'] },
+      { n: 2, title: 'Middle and end shapes', len: '11:40', glyphs: ['ـبـ', 'ـتـ', 'ـث'] },
+      { n: 3, title: 'Joining the letters', len: '12:10', glyphs: ['ب', 'ت', 'ث'], resume: '04:35' },
+      { n: 4, title: 'Letters that never join forward', len: '09:15', glyphs: ['ا', 'د', 'ر', 'و'] },
+    ];
+    const ICON_DONE = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>';
+    const ICON_LOCK = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></svg>';
+    const ICON_PLAY = '<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>';
+    const state = () => { const x = db.get(); const done = new Set(x.lessonsDone || [1, 2]); if (x.lessonDone) done.add(3); return { done, current: x.lessonCurrent || 3 }; };
+    const unlocked = (n, done) => n === 1 || done.has(n - 1);
+    const card = byText(root, 'Module 2 · Joining letters', 'h2')[0]?.parentElement;
+    const quizRow = $$('.les', card).pop();
+    const doneBtn = byText(root, 'Mark as complete')[0];
+    const glyphBox = $('[lang="ar"][dir="rtl"]', root);
+    const timeLabel = $$('span', root).find(s => /^\d\d:\d\d \/ \d\d:\d\d$/.test(txt(s)));
+    const chip = $('main .chip', root);
+    const h1 = $('main h1', root);
+    const meta = h1?.nextElementSibling;
+    const marks = $$('[title^="Note at"]', root);
+    const fill = marks[0]?.parentElement.querySelector('i');
+    // header with progress
+    const head = $('h2', card);
+    const prog = document.createElement('div');
+    prog.style.cssText = 'display:flex;flex-direction:column;gap:6px;margin:-2px 0 8px';
+    prog.innerHTML = '<span class="small" data-prog></span><div style="height:6px;border-radius:999px;background:#F0E2CC;overflow:hidden"><i data-progbar style="display:block;height:100%;width:0;background:#3F7D4E;border-radius:999px;transition:width .4s"></i></div>';
+    head.after(prog);
+    const rows = $$('.les', card).slice(0, 4);
+    const paint = () => {
+      const { done, current } = state();
+      rows.forEach((row, i) => {
+        const L = LESSONS[i]; const isDone = done.has(L.n); const open = unlocked(L.n, done); const now = L.n === current;
+        row.classList.toggle('now', now); row.classList.toggle('locked', !open);
+        row.setAttribute('aria-current', now ? 'true' : 'false'); row.setAttribute('aria-disabled', open ? 'false' : 'true');
+        const dot = $('.dot', row); dot.className = 'dot' + (isDone ? ' done' : ''); dot.style.borderColor = now && !isDone ? '#8A6F4D' : '';
+        dot.innerHTML = isDone ? ICON_DONE : !open ? ICON_LOCK : now ? ICON_PLAY : '';
+        $('.small', row).textContent = now ? 'Watching' : isDone ? `Done · ${L.len}` : open ? L.len : 'Locked';
+      });
+      const quizOpen = done.has(4);
+      quizRow.classList.toggle('locked', !quizOpen); quizRow.setAttribute('aria-disabled', quizOpen ? 'false' : 'true');
+      $('.dot', quizRow).innerHTML = quizOpen ? '' : ICON_LOCK;
+      $('.small', quizRow).textContent = quizOpen ? '4 questions · open' : 'Opens after lesson 4';
+      const n = [1, 2, 3, 4].filter(k => done.has(k)).length;
+      $('[data-prog]', prog).textContent = `${n} of 4 lessons done${quizOpen ? ' · quiz unlocked' : ''}`;
+      $('[data-progbar]', prog).style.width = `${n * 25}%`;
+      // the player shows the current lesson
+      const L = LESSONS[current - 1];
+      if (glyphBox) glyphBox.innerHTML = L.glyphs.map(g => `<span>${g}</span>`).join('');
+      if (timeLabel) timeLabel.lastChild.textContent = `${L.resume || '00:00'} / ${L.len}`;
+      if (fill) fill.style.width = L.resume ? '38%' : '0%';
+      marks.forEach(m => { m.style.display = L.n === 3 ? '' : 'none'; });
+      if (noteTime) noteTime.textContent = L.resume || '00:00';
+      showNotes(L.n);
+      if (chip) chip.textContent = `Module 2 · Lesson ${L.n}`;
+      if (h1) h1.textContent = L.title;
+      if (meta) meta.textContent = `Ustadha Hanan · ${parseInt(L.len, 10)} min · Lesson materials: worksheet (PDF)`;
+      if (doneBtn) { const isDone = done.has(L.n); doneBtn.textContent = isDone ? 'Completed' : 'Mark as complete'; doneBtn.disabled = isDone; }
+    };
+    const open = (n) => {
+      const { done } = state();
+      if (!unlocked(n, done)) { toast(`Finish lesson ${n - 1} first to unlock this one`, 'err'); return; }
+      db.update(x => { x.lessonCurrent = n; }); paint();
+      root.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    rows.forEach((row, i) => {
+      row.tabIndex = 0; row.setAttribute('role', 'button'); row.dataset.wired = '1';
+      row.addEventListener('click', () => open(i + 1));
+      row.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i + 1); } });
+    });
+    quizRow.tabIndex = 0; quizRow.setAttribute('role', 'button');
+    const openQuiz = () => { if (!state().done.has(4)) { toast('Finish lesson 4 to unlock the quiz', 'err'); return; } location.hash = '#/homework'; };
+    quizRow.addEventListener('click', openQuiz);
+    quizRow.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openQuiz(); } });
+    on(doneBtn, () => {
+      const { current } = state();
+      db.update(x => { const s = new Set(x.lessonsDone || [1, 2]); if (x.lessonDone) s.add(3); s.add(current); x.lessonsDone = [...s]; if (current === 3) x.lessonDone = true; });
+      if (current < 4) { toast(`Lesson ${current} complete · lesson ${current + 1} is unlocked`); db.update(x => { x.lessonCurrent = current + 1; }); }
+      else toast('Module complete · the quiz is unlocked');
+      paint();
+    });
+    paint();
     on(byText(root, 'Download worksheet'), () => { download('joining-the-letters-worksheet.txt', 'SOU · Arabic Beginners · Module 2, Lesson 3: Joining the letters\n\n1. Join: ب + ت + ث\n2. Write the word "book" (كتاب)\n3. Circle the letters that never join forward: ا د ذ ر ز و\n'); toast('Worksheet downloaded'); });
     const pause = $('button[aria-label="Pause"], button[aria-label="Play"]', root);
     on(pause, () => { const playing = pause.getAttribute('aria-label') === 'Pause'; pause.setAttribute('aria-label', playing ? 'Play' : 'Pause'); pause.innerHTML = playing ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg>' : '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg>'; });
