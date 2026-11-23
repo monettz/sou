@@ -372,7 +372,7 @@ form{display:flex;flex-direction:column;gap:18px}
 .no-motion *,.no-motion *::before,.no-motion *::after{animation:none !important;transition:none !important}
 
 /* responsive */
-@media (max-width:1080px){.nav{display:none}.burger{display:inline-flex}}
+@media (max-width:1080px){.nav{display:none}.burger{display:inline-flex}.hlogin{display:none}}
 @media (max-width:860px){
   .sec{padding-block:64px}
   .split,.cal-wrap,.co{flex-direction:column;align-items:stretch;gap:32px}

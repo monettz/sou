@@ -1,0 +1,105 @@
+// Staff portal (/admin): teachers, Light admins and the Super admin.
+// Not linked from the public website.
+import './base.css';
+import { startPortal } from './runtime.js';
+
+const ROUTES = {
+  teacher: 'Teacher-Dashboard',
+  'teacher/students': 'Teacher-Students',
+  'teacher/student': 'Teacher-Student-Profile',
+  'teacher/homework': 'Teacher-Quiz-Builder',
+  'teacher/chat': 'Teacher-Chat',
+  'teacher/calendar': 'Teacher-Calendar',
+  support: 'Support-Dashboard',
+  'support/view': 'Support-View-As',
+  'support/calendar': 'Support-Calendar',
+  'support/courses': 'Support-Course-Approvals',
+  'support/attendance': 'Support-Attendance',
+  'support/reports': 'Support-Reports',
+  'support/create-login': 'Support-Create-Login',
+  super: 'Admin-Dashboard',
+  'super/approvals': 'Admin-Approvals',
+  'super/users': 'Admin-Users',
+  'super/create-staff': 'Admin-Create-Staff',
+  notifications: 'Notifications',
+  // staff can preview what students see (read-only screens)
+  'preview/dashboard': 'Student-Dashboard',
+  'preview/lesson': 'Student-Lesson',
+  'preview/lesson-check': 'Student-Lesson-Quiz',
+  'preview/homework': 'Student-Quiz',
+  'preview/diary': 'Student-Diary',
+  'preview/chat': 'Student-Chat',
+  'preview/calendar': 'Student-Calendar',
+  'preview/library': 'Student-Library',
+  'preview/reports': 'Student-Reports',
+};
+const BY_VIEW = Object.fromEntries(Object.entries(ROUTES).map(([slug, view]) => [view, slug]));
+const HOME = { teacher: '#/teacher', support: '#/support', super: '#/super' };
+
+// which route areas each role may open
+const ALLOWED = {
+  teacher: ['teacher', 'notifications', 'preview'],
+  support: ['support', 'teacher', 'notifications', 'preview'],
+  super: ['super', 'support', 'teacher', 'notifications', 'preview'],
+};
+const area = (path) => path.split('/')[0];
+
+startPortal({
+  views: import.meta.glob(['./views/*.dc.html', '!./views/Login-Student.dc.html'], { query: '?raw', import: 'default', eager: true }),
+  sessionKey: 'sou-staff-session',
+  linkTo(view) {
+    if (view === 'Login-Staff' || view === 'Login-Student') return '#/logout';
+    if (view === 'Activate-Account') return '#/activate';
+    return BY_VIEW[view] ? '#/' + BY_VIEW[view] : '#/';
+  },
+  resolve(path, who) {
+    if (path === 'logout') return { logout: true, view: 'Login-Staff' };
+    if (path === 'activate') return { view: 'Activate-Account' };
+    if (path === 'login' || path === '') return who ? { redirect: HOME[who.role] } : { view: 'Login-Staff' };
+    if (!who) return { redirect: '#/login' };
+    if (!ROUTES[path] || !ALLOWED[who.role].includes(area(path))) return { redirect: HOME[who.role] };
+    return { view: ROUTES[path] };
+  },
+  after(view, root, { session, go, who }) {
+    if (view === 'Login-Staff') {
+      const step1 = root.querySelector('#staff-step1');
+      const step2 = root.querySelector('#staff-step2');
+      const err = root.querySelector('#staff-error');
+      let pending = null;
+      step2.style.opacity = '.45';
+      step2.addEventListener('submit', () => {
+        if (!pending) { step1.querySelector('input')?.focus(); return; }
+        const code = [...step2.querySelectorAll('.code')].map(i => i.value).join('');
+        if (!/^\d{6}$/.test(code)) { step2.querySelector('.code')?.focus(); return; }
+        session.set(pending);
+        go(HOME[pending.role]);
+      });
+      step1.addEventListener('submit', () => {
+        const email = root.querySelector('#se').value.trim();
+        const pw = root.querySelector('#sp').value;
+        const fail = (msg) => { err.textContent = msg; err.hidden = false; };
+        if (!/^\S+@\S+\.\S+$/.test(email)) return fail('Enter your SOU work email.');
+        if (!pw) return fail('Enter your password.');
+        err.hidden = true;
+        // Demo only: the role comes from the database once accounts are connected.
+        const role = /^(admin|founder|yasmine)@/i.test(email) ? 'super' : /^support@/i.test(email) ? 'support' : 'teacher';
+        pending = { role, email };
+        if (role === 'teacher') { session.set(pending); go(HOME.teacher); return; }
+        step2.style.opacity = '1';
+        step2.querySelector('.code')?.focus();
+      });
+      // move between the 6 code boxes as people type
+      step2.querySelectorAll('.code').forEach((box, i, all) => box.addEventListener('input', () => { box.value = box.value.replace(/\D/g, '').slice(0, 1); if (box.value && all[i + 1]) all[i + 1].focus(); }));
+      root.querySelectorAll('[data-demo-role]').forEach(a => a.addEventListener('click', (e) => {
+        e.preventDefault();
+        session.set({ role: a.dataset.demoRole, email: 'demo@studentsoftheummah.com' });
+        go(HOME[a.dataset.demoRole]);
+      }));
+    }
+    if (view === 'Notifications') {
+      const role = who()?.role;
+      root.querySelectorAll('[data-role]').forEach(el => { el.hidden = el.dataset.role !== role; });
+      const t = root.querySelector('#notif-title'); if (t) t.textContent = 'My notifications';
+    }
+  },
+});

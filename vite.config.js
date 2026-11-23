@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { resolve } from 'node:path';
 
 export default defineConfig({
   base: './',
@@ -7,5 +8,12 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsInlineLimit: 0,
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),     // public website
+        portal: resolve(__dirname, 'portal/index.html'), // student portal (website Log in)
+        admin: resolve(__dirname, 'admin/index.html'),   // staff portal (not linked from the website)
+      },
+    },
   },
 });

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Light admin dashboard</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFF7EF;font-family:Poppins,system-ui,sans-serif;color:#2B2B2B}
+a{color:#6E583C}a:hover{color:#2B2B2B}
+.side{flex:1 1 240px;max-width:270px;background:#2B2B2B;color:#FFF7EF;padding:24px 16px;display:flex;flex-direction:column;gap:6px;box-sizing:border-box}
+.nav{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;font:700 15px/1.2 Nunito,sans-serif;color:#F2E6D3;text-decoration:none;min-height:44px;box-sizing:border-box}
+.nav:hover{background:#3A3734;color:#fff}
+.nav.on{background:#8A6F4D;color:#fff}
+.main{flex:999 1 560px;min-width:0;padding:28px 36px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:22px}
+.card{background:#fff;border:1px solid #E4CFAE;border-radius:20px;padding:22px;box-sizing:border-box}
+.h2{font:700 20px/1.2 'Baloo Chettan 2',sans-serif;margin:0}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:#F7E7CE;font:700 12px/1.2 Nunito,sans-serif;color:#6E583C}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:8px 16px;border-radius:999px;font:800 14px/1 Nunito,sans-serif;border:2px solid #2B2B2B;color:#2B2B2B;text-decoration:none;box-sizing:border-box;background:transparent}
+.stat{flex:1 1 170px;display:flex;flex-direction:column;gap:6px}
+.big{font:800 30px/1 'Baloo Chettan 2',sans-serif}
+.small{font-size:13px;color:#5C554D}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #F0E4D0}
+.row:last-child{border-bottom:0}
+.av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 13px/1 Nunito,sans-serif;flex:none;background:#F7E7CE}
+.tag{display:inline-flex;padding:3px 9px;border-radius:999px;font:700 12px/1.2 Nunito,sans-serif}
+.warn{background:#FBEAE6;color:#8E2F1F}.mid{background:#F7E7CE;color:#6E583C}.ok{background:#EEF5EF;color:#2F6B3D}
+table{border-collapse:collapse;width:100%;min-width:0;font-size:14px}
+th,td{padding:10px 8px;border-bottom:1px solid #EFE1CA;text-align:left}
+th{font:800 12px/1.2 Nunito,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#6E583C;background:#FBF1E2}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+  <aside class="side">
+    <span style="background: #FFF7EF; border-radius: 14px; padding: 8px 12px; line-height: 0; align-self: flex-start; margin-bottom: 6px"><img src="/assets/logo.png" alt="SOU" style="height: 34px; width: auto"></span>
+    <span style="font: 800 11px/1.2 Nunito, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #D6B98C; margin: 6px 8px 12px">Staff portal · Light admin</span>
+    <nav aria-label="Light admin portal" style="display: flex; flex-direction: column; gap: 4px">
+      <a class="nav on" href="Support-Dashboard.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Overview</a>
+      <a class="nav" href="Support-View-As.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M9 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>Students</a>
+      <a class="nav" href="Support-View-As.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM8 7h7"/></svg>Teachers &amp; courses</a>
+      <a class="nav" href="Support-View-As.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Chats</a>
+      <a class="nav" href="Support-Dashboard.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9a2.5 2.5 0 1 1 3 2.5c-.5.2-.5.7-.5 1.5M12 17h.01"/></svg>Help requests</a>
+      <a class="nav" href="Support-Calendar.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v15H4zM4 10h16M9 3v4M15 3v4"/></svg>Calendar</a>
+      <a class="nav" href="Support-Attendance.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v3H8zM6 5H4v16h16V5h-2M9 14l2 2 4-4"/></svg>Attendance</a>
+      <a class="nav" href="Support-Course-Approvals.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4v16H5zM11 4h4v16h-4zM17 5l3 .8-3.5 14.2-3-.8z"/></svg>Courses &amp; library</a>
+      <a class="nav" href="Support-Reports.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h3"/></svg>Reports &amp; messages</a>
+      <a class="nav" href="Support-Create-Login.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M8.5 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19 8v6M16 11h6"/></svg>Create login</a>
+      <a class="nav" href="Notifications.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg>Notifications</a>
+    </nav>
+    <a class="nav" href="Login-Staff.dc.html" style="margin-top: auto"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg>Log out</a>
+  </aside>
+
+  <main class="main">
+    <div style="display: flex; gap: 12px; align-items: center; padding: 12px 16px; border-radius: 14px; background: #F7E7CE; font-size: 14px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6E583C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+      <span><b>Light admin access:</b> open any portal and chat, assign classes, approve courses, track attendance, send reports and create student or teacher logins. Deleting or suspending accounts is for the Super admin.</span>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px">
+      <h1 style="margin: 0; font: 800 32px/1.15 'Baloo Chettan 2', sans-serif">Support overview</h1>
+      <label for="fa" style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 16px; border: 1px solid #CDB48D; border-radius: 999px; background: #fff; min-width: 320px; box-sizing: border-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5C554D" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM21 21l-4.3-4.3"/></svg>
+        <input id="fa" placeholder="Find any student or teacher" style="border: 0; outline: 0; font: 400 15px/1.4 Poppins, sans-serif; flex: 1; min-width: 0; background: transparent">
+      </label>
+    </div>
+
+    <div class="card" style="display: flex; flex-wrap: wrap; gap: 20px">
+      <div class="stat"><span class="small">Active students</span><span class="big">142</span><span class="small">+11 this month</span></div>
+      <div class="stat"><span class="small">Courses to approve</span><span class="big">2</span><span class="small">+ 3 library items</span></div>
+      <div class="stat"><span class="small">Attendance today</span><span class="big">94%</span><span class="small">3 students absent</span></div>
+      <div class="stat"><span class="small">Open help requests</span><span class="big">4</span><span class="small">Oldest 1 day</span></div>
+      <div class="stat"><span class="small">Chats waiting &gt; 24h</span><span class="big">6</span><span class="small">Teacher hasn't replied</span></div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-start">
+      <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+        <div class="card" style="display: flex; flex-direction: column; gap: 4px">
+          <h2 class="h2" style="margin-bottom: 6px">Help requests</h2>
+          <div class="row"><span style="display: flex; align-items: center; gap: 12px"><span class="av">AR</span><span style="display: flex; flex-direction: column; gap: 2px"><b>Aisha Rahman</b><span class="small">"My worksheet won't download"</span></span></span><a class="btn" href="Support-View-As.dc.html">Help</a></div>
+          <div class="row"><span style="display: flex; align-items: center; gap: 12px"><span class="av">OB</span><span style="display: flex; flex-direction: column; gap: 2px"><b>Omar Bello</b><span class="small">"Can I switch to the evening group?"</span></span></span><a class="btn" href="Support-View-As.dc.html">Help</a></div>
+          <div class="row"><span style="display: flex; align-items: center; gap: 12px"><span class="av">SF</span><span style="display: flex; flex-direction: column; gap: 2px"><b>Ustadha Safia</b><span class="small">"How do I add a second module?"</span></span></span><a class="btn" href="Support-View-As.dc.html">Help</a></div>
+        </div>
+        <div class="card" style="display: flex; flex-direction: column; gap: 4px">
+          <h2 class="h2" style="margin-bottom: 6px">Chats waiting for a reply</h2>
+          <div class="row"><span style="display: flex; flex-direction: column; gap: 2px"><b>Yusuf Ali → Ustadha Hanan</b><span class="small">"Can we move Monday's class?" · 26 h</span></span><span class="tag warn">26 h</span></div>
+          <div class="row"><span style="display: flex; flex-direction: column; gap: 2px"><b>Hamza Idris → Ustadha Hadjer</b><span class="small">"Is ikhfa the same as idgham?" · 30 h</span></span><span class="tag warn">30 h</span></div>
+        </div>
+      </div>
+      <div class="card" style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+        <h2 class="h2">Teachers at a glance</h2>
+        <div style="overflow-x: auto">
+          <table>
+            <thead><tr><th>Teacher</th><th>Students</th><th>Avg progress</th><th>To mark</th><th><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Open</span></th></tr></thead>
+            <tbody>
+              <tr><td><b>Ustadha Hanan</b><br><span class="small">Arabic</span></td><td>18</td><td>64%</td><td><span class="tag mid">5</span></td><td><a class="btn" href="Teacher-Dashboard.dc.html">View</a></td></tr>
+              <tr><td><b>Ustadha Hadjer</b><br><span class="small">Qur'an</span></td><td>24</td><td>71%</td><td><span class="tag warn">12</span></td><td><a class="btn" href="Teacher-Dashboard.dc.html">View</a></td></tr>
+              <tr><td><b>Ustadha Hafssa B</b><br><span class="small">Islamic Studies</span></td><td>21</td><td>68%</td><td><span class="tag ok">0</span></td><td><a class="btn" href="Teacher-Dashboard.dc.html">View</a></td></tr>
+              <tr><td><b>Ustadha Safia</b><br><span class="small">Qaidah</span></td><td>15</td><td>59%</td><td><span class="tag mid">3</span></td><td><a class="btn" href="Teacher-Dashboard.dc.html">View</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <span class="small">Sample numbers for illustration.</span>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

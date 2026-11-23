@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Send reports and messages</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFF7EF;font-family:Poppins,system-ui,sans-serif;color:#2B2B2B}
+a{color:#6E583C}a:hover{color:#2B2B2B}
+.side{flex:1 1 240px;max-width:270px;background:#2B2B2B;color:#FFF7EF;padding:24px 16px;display:flex;flex-direction:column;gap:4px;box-sizing:border-box}
+.nav{display:flex;align-items:center;gap:12px;padding:9px 14px;border-radius:12px;font:700 15px/1.2 Nunito,sans-serif;color:#F2E6D3;text-decoration:none;min-height:44px;box-sizing:border-box}
+.nav:hover{background:#3A3734;color:#fff}
+.nav.on{background:#8A6F4D;color:#fff}
+.main{flex:999 1 560px;min-width:0;padding:28px 36px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px}
+.card{background:#fff;border:1px solid #E4CFAE;border-radius:20px;padding:20px;box-sizing:border-box}
+.h2{font:700 20px/1.2 'Baloo Chettan 2',sans-serif;margin:0}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;min-height:40px;box-sizing:border-box;border-radius:12px;background:#fff;border:2px solid #E4CFAE;font:700 14px/1.2 Nunito,sans-serif;color:#2B2B2B;cursor:pointer}
+.chip.on{border-color:#8A6F4D;background:#FBF1E2}
+.tag{display:inline-flex;padding:3px 9px;border-radius:999px;font:700 11px/1.2 Nunito,sans-serif;background:#F7E7CE;color:#6E583C;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 20px;border-radius:999px;font:800 15px/1 Nunito,sans-serif;border:2px solid #2B2B2B;color:#2B2B2B;text-decoration:none;box-sizing:border-box;background:transparent;cursor:pointer}
+.btn.p{background:#8A6F4D;border-color:#8A6F4D;color:#fff}
+.small{font-size:13px;color:#5C554D}
+.field{display:flex;flex-direction:column;gap:6px;font:700 14px/1.3 Nunito,sans-serif}
+.field select,.field input,.field textarea{font:400 15px/1.5 Poppins,sans-serif;border:1px solid #CDB48D;border-radius:12px;padding:10px 14px;min-height:46px;box-sizing:border-box;background:#fff;color:#2B2B2B}
+.auto{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.auto div{padding:12px;border-radius:12px;background:#FFF7EF;display:flex;flex-direction:column;gap:3px}
+.auto b{font:800 22px/1 'Baloo Chettan 2',sans-serif}
+.sent{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid #F0E4D0;font-size:14px}
+.sent:last-child{border-bottom:0}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+  <aside class="side">
+    <span style="background: #FFF7EF; border-radius: 14px; padding: 8px 12px; line-height: 0; align-self: flex-start; margin-bottom: 6px"><img src="/assets/logo.png" alt="SOU" style="height: 34px; width: auto"></span>
+    <span style="font: 800 11px/1.2 Nunito, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #D6B98C; margin: 6px 8px 10px">Staff portal · Light admin</span>
+    <nav aria-label="Light admin portal" style="display: flex; flex-direction: column; gap: 2px">
+      <a class="nav" href="Support-Dashboard.dc.html">Overview</a>
+      <a class="nav" href="Support-View-As.dc.html">Students</a>
+      <a class="nav" href="Support-View-As.dc.html">Teachers</a>
+      <a class="nav" href="Support-View-As.dc.html">Chats</a>
+      <a class="nav" href="Support-Calendar.dc.html">Calendar</a>
+      <a class="nav" href="Support-Attendance.dc.html">Attendance</a>
+      <a class="nav" href="Support-Course-Approvals.dc.html">Courses &amp; library</a>
+      <a class="nav on" href="Support-Reports.dc.html">Reports &amp; messages</a>
+      <a class="nav" href="Support-Create-Login.dc.html">Create login</a>
+      <a class="nav" href="Notifications.dc.html">Notifications</a>
+    </nav>
+    <a class="nav" href="Login-Staff.dc.html" style="margin-top: auto">Log out</a>
+  </aside>
+
+  <main class="main">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <h1 style="margin: 0; font: 800 32px/1.15 'Baloo Chettan 2', sans-serif">Reports &amp; messages</h1>
+      <span style="color: #5C554D">Send progress reports and messages to one student, a class, or everyone. Students get them in their portal and by email.</span>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+      <form class="card" style="flex: 2 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <b style="font-family: Nunito, sans-serif">What are you sending?</b>
+          <div role="radiogroup" aria-label="Type" style="display: flex; flex-wrap: wrap; gap: 8px"><button class="chip on" type="button" role="radio" aria-checked="true">Progress report</button><button class="chip" type="button" role="radio" aria-checked="false">Message / announcement</button></div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+          <label class="field" for="r1">Send to<select id="r1"><option>One student: Aisha Rahman</option><option>A class: Arabic Beginners</option><option>All students</option></select></label>
+          <label class="field" for="r2">Period<select id="r2"><option>November 2026</option></select></label>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <b style="font-family: Nunito, sans-serif">Filled in automatically</b>
+          <div class="auto">
+            <div><span class="small">Attendance</span><b>7 / 8</b></div>
+            <div><span class="small">Lessons done</span><b>6</b></div>
+            <div><span class="small">Quiz average</span><b>86%</b></div>
+            <div><span class="small">Homework on time</span><b>4 / 4</b></div>
+          </div>
+          <span class="small">Teacher's comment is pulled in from Ustadha Hanan's notes.</span>
+        </div>
+        <label class="field" for="r3">Message from SOU (optional)<textarea id="r3" rows="3">Masha'Allah, a great month Aisha! Keep up the steady practice over the winter break.</textarea></label>
+        <label for="r4" style="display: flex; gap: 10px; align-items: center; font-size: 14px; color: #5C554D"><input id="r4" type="checkbox" checked style="width: 20px; height: 20px; accent-color: #8A6F4D"> Also email a PDF copy</label>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px"><button class="btn p" type="button">Send report</button><a class="btn" href="Student-Reports.dc.html">Preview what the student sees</a><button class="btn" type="button">Schedule for 1 Dec</button></div>
+      </form>
+
+      <div class="card" style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+        <h2 class="h2" style="margin-bottom: 6px">Recently sent</h2>
+        <div class="sent"><span><b>November reports</b><br><span class="small">142 students · scheduled 1 Dec</span></span><span class="tag">Scheduled</span></div>
+        <div class="sent"><span><b>Winter break timetable</b><br><span class="small">All students · 28 Nov</span></span><span class="tag" style="background: #EEF5EF; color: #2F6B3D">Sent · 96% read</span></div>
+        <div class="sent"><span><b>Missed classes check-in</b><br><span class="small">Zainab Khan · 26 Nov</span></span><span class="tag" style="background: #EEF5EF; color: #2F6B3D">Read</span></div>
+        <div class="sent"><span><b>October reports</b><br><span class="small">131 students · 1 Nov</span></span><span class="tag" style="background: #EEF5EF; color: #2F6B3D">Sent</span></div>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

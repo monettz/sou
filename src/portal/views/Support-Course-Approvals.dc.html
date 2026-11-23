@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Approve courses and library items</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;family=Amiri&amp;display=swap">
+<style>
+body{margin:0;background:#FFF7EF;font-family:Poppins,system-ui,sans-serif;color:#2B2B2B}
+a{color:#6E583C}a:hover{color:#2B2B2B}
+.side{flex:1 1 240px;max-width:270px;background:#2B2B2B;color:#FFF7EF;padding:24px 16px;display:flex;flex-direction:column;gap:4px;box-sizing:border-box}
+.nav{display:flex;align-items:center;gap:12px;padding:9px 14px;border-radius:12px;font:700 15px/1.2 Nunito,sans-serif;color:#F2E6D3;text-decoration:none;min-height:44px;box-sizing:border-box}
+.nav:hover{background:#3A3734;color:#fff}
+.nav.on{background:#8A6F4D;color:#fff}
+.main{flex:999 1 560px;min-width:0;padding:28px 36px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px}
+.card{background:#fff;border:1px solid #E4CFAE;border-radius:20px;padding:20px;box-sizing:border-box}
+.h2{font:700 20px/1.2 'Baloo Chettan 2',sans-serif;margin:0}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;min-height:36px;box-sizing:border-box;border-radius:999px;background:#F7E7CE;font:700 13px/1.2 Nunito,sans-serif;color:#6E583C;border:0}
+.chip.on{background:#2B2B2B;color:#FFF7EF}
+.tag{display:inline-flex;padding:3px 9px;border-radius:999px;font:700 11px/1.2 Nunito,sans-serif;background:#F7E7CE;color:#6E583C;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 20px;border-radius:999px;font:800 15px/1 Nunito,sans-serif;border:2px solid #2B2B2B;color:#2B2B2B;text-decoration:none;box-sizing:border-box;background:transparent;cursor:pointer}
+.btn.p{background:#8A6F4D;border-color:#8A6F4D;color:#fff}
+.small{font-size:13px;color:#5C554D}
+.req{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;text-decoration:none;color:#2B2B2B;border:1px solid transparent}
+.req.sel{background:#FBF1E2;border-color:#CDB48D}
+.ic{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none;background:#F7E7CE;color:#6E583C}
+.chk{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:14px}
+.ok{width:22px;height:22px;border-radius:50%;background:#3F7D4E;color:#fff;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.lesson{display:flex;justify-content:space-between;gap:10px;padding:9px 12px;border-radius:10px;background:#FFF7EF;font-size:14px}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+  <aside class="side">
+    <span style="background: #FFF7EF; border-radius: 14px; padding: 8px 12px; line-height: 0; align-self: flex-start; margin-bottom: 6px"><img src="/assets/logo.png" alt="SOU" style="height: 34px; width: auto"></span>
+    <span style="font: 800 11px/1.2 Nunito, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #D6B98C; margin: 6px 8px 10px">Staff portal · Light admin</span>
+    <nav aria-label="Light admin portal" style="display: flex; flex-direction: column; gap: 2px">
+      <a class="nav" href="Support-Dashboard.dc.html">Overview</a>
+      <a class="nav" href="Support-View-As.dc.html">Students</a>
+      <a class="nav" href="Support-View-As.dc.html">Teachers</a>
+      <a class="nav" href="Support-View-As.dc.html">Chats</a>
+      <a class="nav" href="Support-Calendar.dc.html">Calendar</a>
+      <a class="nav" href="Support-Attendance.dc.html">Attendance</a>
+      <a class="nav on" href="Support-Course-Approvals.dc.html">Courses &amp; library</a>
+      <a class="nav" href="Support-Reports.dc.html">Reports &amp; messages</a>
+      <a class="nav" href="Support-Create-Login.dc.html">Create login</a>
+      <a class="nav" href="Notifications.dc.html">Notifications</a>
+    </nav>
+    <a class="nav" href="Login-Staff.dc.html" style="margin-top: auto">Log out</a>
+  </aside>
+
+  <main class="main">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <h1 style="margin: 0; font: 800 32px/1.15 'Baloo Chettan 2', sans-serif">Courses &amp; library</h1>
+      <span style="color: #5C554D">Nothing a teacher adds is shown to students until it is approved here.</span>
+    </div>
+    <div role="group" aria-label="Show" style="display: flex; flex-wrap: wrap; gap: 8px"><button class="chip on" type="button">Waiting for approval · 5</button><button class="chip" type="button">Live courses · 14</button><button class="chip" type="button">Library · 64 items</button><button class="chip" type="button">+ Add to library</button></div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+      <div class="card" style="flex: 1 1 300px; max-width: 380px; min-width: 0; display: flex; flex-direction: column; gap: 6px; padding: 12px">
+        <a class="req sel" href="Support-Course-Approvals.dc.html"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM8 7h7"/></svg></span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0"><b style="font-size: 15px">Arabic for travellers</b><span class="small">Course · Ustadha Hanan</span></span><span class="tag">New course</span></a>
+        <a class="req" href="Support-Course-Approvals.dc.html"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4v16H5zM11 4h4v16h-4zM17 5l3 .8-3.5 14.2-3-.8z"/></svg></span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0"><b style="font-size: 15px">Fiqh of prayer</b><span class="small">Crash course · Ustadha Hafssa B</span></span><span class="tag">Crash course</span></a>
+        <a class="req" href="Support-Course-Approvals.dc.html"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0"><b style="font-size: 15px">Lesson 4: Letters that never join</b><span class="small">New lesson · Arabic Beginners</span></span><span class="tag">Lesson</span></a>
+        <a class="req" href="Support-Course-Approvals.dc.html"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5"/></svg></span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0"><b style="font-size: 15px">Tuhfat al-Atfal (PDF)</b><span class="small">Library book · Ustadha Hadjer</span></span><span class="tag">Book</span></a>
+        <a class="req" href="Support-Course-Approvals.dc.html"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0"><b style="font-size: 15px">How to make wudu</b><span class="small">Library video · Ustadha Hafssa B</span></span><span class="tag">Video</span></a>
+      </div>
+
+      <div class="card" style="flex: 2 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px">
+          <div style="display: flex; flex-direction: column; gap: 4px"><span class="tag" style="align-self: flex-start">New course · submitted 22 Nov</span><h2 class="h2" style="font-size: 26px">Arabic for travellers</h2><span class="small">By Ustadha Hanan · Arabic · Beginners · 3 modules, 12 lessons, 2 quizzes</span></div>
+          <a class="btn" href="Student-Lesson.dc.html">Preview as student</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <b style="font-family: Nunito, sans-serif">Contents</b>
+          <div class="lesson"><span>Module 1 · Greetings and introductions</span><span class="small">4 lessons · 1 quiz</span></div>
+          <div class="lesson"><span>Module 2 · At the airport and hotel</span><span class="small">4 lessons</span></div>
+          <div class="lesson"><span>Module 3 · Shopping and directions</span><span class="small">4 lessons · 1 quiz</span></div>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <b style="font-family: Nunito, sans-serif; margin-bottom: 4px">Checks</b>
+          <span class="chk"><span class="ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span>All 12 videos play</span>
+          <span class="chk"><span class="ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span>Worksheets (PDF) attached to every lesson</span>
+          <span class="chk"><span class="ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span>Quizzes have correct answers set</span>
+        </div>
+        <label for="fb" style="display: flex; flex-direction: column; gap: 6px; font: 700 14px/1.3 Nunito, sans-serif">Note to the teacher (optional)<textarea id="fb" rows="2" style="font: 400 15px/1.5 Poppins, sans-serif; border: 1px solid #CDB48D; border-radius: 12px; padding: 10px 14px; box-sizing: border-box">Lovely course, approved. Could Module 2 have one more speaking exercise?</textarea></label>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px"><button class="btn p" type="button">Approve &amp; publish</button><button class="btn" type="button">Ask for changes</button></div>
+        <div style="padding: 12px 14px; border-radius: 12px; background: #2B2B2B; color: #FFF7EF; font-size: 13px; line-height: 1.5">For <b>crash courses</b>, publishing also announces it to <b>everyone</b>: all students, teachers and admins get a notification, and it appears as an offer in the student Library.</div>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

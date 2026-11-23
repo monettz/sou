@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Student profile for teacher</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;family=Amiri&amp;display=swap">
+<style>
+body{margin:0;background:#FFF7EF;font-family:Poppins,system-ui,sans-serif;color:#2B2B2B}
+a{color:#6E583C}a:hover{color:#2B2B2B}
+.side{flex:1 1 240px;max-width:270px;background:#2B2B2B;color:#FFF7EF;padding:24px 16px;display:flex;flex-direction:column;gap:6px;box-sizing:border-box}
+.nav{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;font:700 15px/1.2 Nunito,sans-serif;color:#F2E6D3;text-decoration:none;min-height:44px;box-sizing:border-box}
+.nav:hover{background:#3A3734;color:#fff}
+.nav.on{background:#8A6F4D;color:#fff}
+.main{flex:999 1 560px;min-width:0;padding:28px 36px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px}
+.card{background:#fff;border:1px solid #E4CFAE;border-radius:20px;padding:22px;box-sizing:border-box}
+.h2{font:700 20px/1.2 'Baloo Chettan 2',sans-serif;margin:0}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:#F7E7CE;font:700 12px/1.2 Nunito,sans-serif;color:#6E583C}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 18px;border-radius:999px;font:800 15px/1 Nunito,sans-serif;border:2px solid #2B2B2B;color:#2B2B2B;text-decoration:none;box-sizing:border-box;background:transparent;cursor:pointer}
+.btn.p{background:#8A6F4D;border-color:#8A6F4D;color:#fff}
+.small{font-size:13px;color:#5C554D}
+.bar{height:8px;border-radius:999px;background:#F0E2CC;overflow:hidden}
+.bar i{display:block;height:100%;background:#8A6F4D;border-radius:999px}
+.mod{display:flex;flex-direction:column;gap:6px;padding:10px 0;border-bottom:1px solid #F0E4D0}
+.mod:last-child{border-bottom:0}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #F0E4D0;font-size:14px}
+.row:last-child{border-bottom:0}
+.tag{display:inline-flex;padding:3px 9px;border-radius:999px;font:700 12px/1.2 Nunito,sans-serif}
+.ok{background:#EEF5EF;color:#2F6B3D}.mid{background:#F7E7CE;color:#6E583C}
+.time{display:inline-flex;align-self:flex-start;padding:3px 9px;border-radius:999px;background:#2B2B2B;color:#FFF7EF;font:800 12px/1.2 Nunito,sans-serif;text-decoration:none}
+.note{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:14px;background:#FFF7EF;border:1px solid #EFE1CA}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+  <aside class="side">
+    <span style="background: #FFF7EF; border-radius: 14px; padding: 8px 12px; line-height: 0; align-self: flex-start; margin-bottom: 6px"><img src="/assets/logo.png" alt="SOU" style="height: 34px; width: auto"></span>
+    <span style="font: 800 11px/1.2 Nunito, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #D6B98C; margin: 6px 8px 12px">Staff portal · Teacher</span>
+    <nav aria-label="Teacher portal" style="display: flex; flex-direction: column; gap: 4px">
+      <a class="nav" href="Teacher-Dashboard.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Dashboard</a>
+      <a class="nav on" href="Teacher-Students.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M9 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM22 19v-1a4 4 0 0 0-3-3.9M16 4.1a4 4 0 0 1 0 7.8"/></svg>My students</a>
+      <a class="nav" href="Teacher-Quiz-Builder.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14v16H5zM9 12l2 2 4-4"/></svg>Homework &amp; quizzes</a>
+      <a class="nav" href="Teacher-Quiz-Builder.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM8 7h7"/></svg>My courses</a>
+      <a class="nav" href="Teacher-Chat.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Chat</a>
+      <a class="nav" href="Teacher-Calendar.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v15H4zM4 10h16M9 3v4M15 3v4"/></svg>Calendar &amp; attendance</a>
+      <a class="nav" href="Notifications.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg>Notifications</a>
+    </nav>
+    <a class="nav" href="Login-Staff.dc.html" style="margin-top: auto"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg>Log out</a>
+  </aside>
+
+  <main class="main">
+    <nav aria-label="Breadcrumb" class="small" style="display: flex; gap: 8px"><a href="Teacher-Students.dc.html">My students</a><span aria-hidden="true">/</span><span>Aisha Rahman</span></nav>
+    <div class="card" style="display: flex; flex-wrap: wrap; align-items: center; gap: 18px">
+      <span style="width: 64px; height: 64px; border-radius: 50%; background: #D6B98C; display: flex; align-items: center; justify-content: center; font: 800 20px/1 Nunito, sans-serif">AR</span>
+      <div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 6px">
+        <h1 style="margin: 0; font: 800 30px/1.1 'Baloo Chettan 2', sans-serif">Aisha Rahman</h1>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="chip">Arabic Beginners</span><span class="chip">Single lesson · 1-to-1</span><span class="chip">Enrolled 14 Oct 2026</span><span class="chip">Mondays 6:00 PM</span></div>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap">
+        <a class="btn" href="Teacher-Chat.dc.html">Message</a>
+        <a class="btn p" href="Teacher-Quiz-Builder.dc.html">Set homework</a>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+      <div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+        <div class="card" style="display: flex; flex-direction: column; gap: 6px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px"><h2 class="h2">Progress</h2><b style="font: 800 26px/1 'Baloo Chettan 2', sans-serif">62%</b></div>
+          <div class="mod"><span style="display: flex; justify-content: space-between; font-size: 14px"><b>Module 1 · The alphabet</b><span class="small">8/8 lessons</span></span><div class="bar"><i style="width: 100%"></i></div></div>
+          <div class="mod"><span style="display: flex; justify-content: space-between; font-size: 14px"><b>Module 2 · Joining letters</b><span class="small">2/5 · watching lesson 3</span></span><div class="bar"><i style="width: 40%"></i></div></div>
+          <div class="mod"><span style="display: flex; justify-content: space-between; font-size: 14px"><b>Module 3 · Short vowels</b><span class="small">4/6</span></span><div class="bar"><i style="width: 67%"></i></div></div>
+          <div class="mod"><span style="display: flex; justify-content: space-between; font-size: 14px"><b>Module 4 · Reading words</b><span class="small">0/5</span></span><div class="bar"><i style="width: 0%"></i></div></div>
+        </div>
+        <div class="card" style="display: flex; flex-direction: column; gap: 4px">
+          <h2 class="h2" style="margin-bottom: 6px">Homework &amp; quizzes</h2>
+          <div class="row"><span><b>Letters that join</b><br><span class="small">Submitted today · 3/3 multiple-choice</span></span><span class="tag mid">Written answer to mark</span></div>
+          <div class="row"><span><b>Short vowels</b><br><span class="small">17 Nov</span></span><span class="tag ok">9 / 10</span></div>
+          <div class="row"><span><b>The alphabet, part 2</b><br><span class="small">3 Nov</span></span><span class="tag ok">8 / 10</span></div>
+        </div>
+      </div>
+
+      <div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+        <form class="card" style="display: flex; flex-direction: column; gap: 12px; border: 2px solid #8A6F4D">
+          <span class="chip" style="align-self: flex-start">Mark this answer</span>
+          <b>Q4 · Write the word for "book" with all its letters joined.</b>
+          <div lang="ar" dir="rtl" style="font: 400 34px/1.3 Amiri, serif; padding: 10px 16px; border-radius: 12px; background: #FFF7EF">كتاب</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px">
+            <button class="btn p" type="button">Correct (1/1)</button>
+            <button class="btn" type="button">Partly (½)</button>
+            <button class="btn" type="button">Incorrect (0)</button>
+          </div>
+          <label for="cm" style="display: flex; flex-direction: column; gap: 6px; font: 700 14px/1.3 Nunito, sans-serif">Comment for Aisha (optional)<textarea id="cm" rows="2" style="font: 400 15px/1.5 Poppins, sans-serif; border: 1px solid #CDB48D; border-radius: 12px; padding: 10px 14px; box-sizing: border-box">Beautiful joining. Watch the height of the alif.</textarea></label>
+        </form>
+        <div class="card" style="display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><h2 class="h2">Aisha's diary</h2><span class="chip">Read-only</span></div>
+          <div class="note"><a class="time" href="Student-Lesson.dc.html">Module 2 · L3 · 04:35</a><span style="font-size: 14px">Ba, ta, tha only differ by their dots.</span><button type="button" style="align-self: flex-start; min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid #CDB48D; background: #fff; font: 700 13px/1 Nunito, sans-serif; color: #6E583C; cursor: pointer">Add a comment</button></div>
+          <div class="note"><a class="time" href="Student-Lesson.dc.html">Module 2 · L3 · 02:10</a><span style="font-size: 14px">The teeth (small bumps) stay when a letter joins.</span></div>
+          <div class="note"><a class="time" href="Student-Lesson.dc.html">Module 1 · L7 · 08:02</a><span style="font-size: 14px">Kha and ha look the same except the dot on top. I mix them up!</span><span class="chip" style="align-self: flex-start; background: #EEF5EF; color: #2F6B3D">You replied: "Let's practise them on Monday."</span></div>
+          <span class="small">Clicking a time opens the same video at that second, so you see exactly what Aisha was watching.</span>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1150}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

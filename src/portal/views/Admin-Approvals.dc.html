@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Approve and send invite</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFF7EF;font-family:Poppins,system-ui,sans-serif;color:#2B2B2B}
+a{color:#6E583C}a:hover{color:#2B2B2B}
+.side{flex:1 1 240px;max-width:270px;background:#2B2B2B;color:#FFF7EF;padding:24px 16px;display:flex;flex-direction:column;gap:6px;box-sizing:border-box}
+.nav{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;font:700 15px/1.2 Nunito,sans-serif;color:#F2E6D3;text-decoration:none;min-height:44px;box-sizing:border-box}
+.nav:hover{background:#3A3734;color:#fff}
+.nav.on{background:#8A6F4D;color:#fff}
+.badge{margin-left:auto;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:#D6B98C;color:#2B2B2B;font:800 12px/22px Nunito,sans-serif;text-align:center;box-sizing:border-box}
+.main{flex:999 1 560px;min-width:0;padding:28px 36px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px}
+.card{background:#fff;border:1px solid #E4CFAE;border-radius:20px;padding:22px;box-sizing:border-box}
+.h2{font:700 20px/1.2 'Baloo Chettan 2',sans-serif;margin:0}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;min-height:36px;box-sizing:border-box;border-radius:999px;background:#F7E7CE;font:700 13px/1.2 Nunito,sans-serif;color:#6E583C;border:0}
+.chip.on{background:#2B2B2B;color:#FFF7EF}
+.tag{display:inline-flex;padding:3px 9px;border-radius:999px;font:700 12px/1.2 Nunito,sans-serif}
+.ok{background:#EEF5EF;color:#2F6B3D}.warn{background:#FBEAE6;color:#8E2F1F}.mid{background:#F7E7CE;color:#6E583C}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 20px;border-radius:999px;font:800 15px/1 Nunito,sans-serif;border:2px solid #2B2B2B;color:#2B2B2B;text-decoration:none;box-sizing:border-box;background:transparent;cursor:pointer}
+.btn.p{background:#8A6F4D;border-color:#8A6F4D;color:#fff}
+.btn.d{border-color:#B3412F;color:#8E2F1F}
+.small{font-size:13px;color:#5C554D}
+.req{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;text-decoration:none;color:#2B2B2B;border:1px solid transparent}
+.req.sel{background:#FBF1E2;border-color:#CDB48D}
+.av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 13px/1 Nunito,sans-serif;flex:none;background:#F7E7CE}
+.kv{display:flex;flex-direction:column;gap:2px;font-size:14px}
+.field{display:flex;flex-direction:column;gap:6px;font:700 14px/1.3 Nunito,sans-serif}
+.field select,.field input{font:400 15px/1.4 Poppins,sans-serif;border:1px solid #CDB48D;border-radius:12px;padding:11px 14px;min-height:46px;box-sizing:border-box;background:#fff;color:#2B2B2B}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+  <aside class="side">
+    <span style="background: #FFF7EF; border-radius: 14px; padding: 8px 12px; line-height: 0; align-self: flex-start; margin-bottom: 6px"><img src="/assets/logo.png" alt="SOU" style="height: 34px; width: auto"></span>
+    <span style="font: 800 11px/1.2 Nunito, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #D6B98C; margin: 6px 8px 12px">Staff portal · Super admin</span>
+    <nav aria-label="Super admin portal" style="display: flex; flex-direction: column; gap: 4px">
+      <a class="nav" href="Admin-Dashboard.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Dashboard</a>
+      <a class="nav on" href="Admin-Approvals.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/></svg>Approvals<span class="badge">7</span></a>
+      <a class="nav" href="Admin-Users.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M9 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM22 19v-1a4 4 0 0 0-3-3.9M16 4.1a4 4 0 0 1 0 7.8"/></svg>All users</a>
+      <a class="nav" href="Admin-Create-Staff.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>Staff &amp; roles</a>
+      <a class="nav" href="Support-View-As.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>View any portal</a>
+      <a class="nav" href="Admin-Users.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Activity log</a>
+      <a class="nav" href="Support-Calendar.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v15H4zM4 10h16M9 3v4M15 3v4"/></svg>Calendar</a>
+      <a class="nav" href="Notifications.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg>Notifications</a>
+    </nav>
+    <a class="nav" href="Login-Staff.dc.html" style="margin-top: auto"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg>Log out</a>
+  </aside>
+
+  <main class="main">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <h1 style="margin: 0; font: 800 32px/1.15 'Baloo Chettan 2', sans-serif">Approvals</h1>
+      <span style="color: #5C554D">Requests from the website's Enrol / Pay now and Teach with SOU forms land here.</span>
+    </div>
+    <div role="group" aria-label="Type" style="display: flex; flex-wrap: wrap; gap: 8px">
+      <button class="chip on" type="button">Students · 5</button>
+      <button class="chip" type="button">Teachers · 2</button>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+      <div class="card" style="flex: 1 1 300px; max-width: 400px; min-width: 0; display: flex; flex-direction: column; gap: 6px; padding: 14px">
+        <a class="req sel" href="Admin-Approvals.dc.html"><span class="av">FN</span><span style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0"><b style="font-size: 15px">Fatima Noor</b><span class="small">Monthly bundle · 2 h ago</span></span><span class="tag {{ fatimaTagCls }}">{{ fatimaTag }}</span></a>
+        <a class="req" href="Admin-Approvals.dc.html"><span class="av">HI</span><span style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0"><b style="font-size: 15px">Hamza Idris</b><span class="small">Crash course · 5 h ago</span></span><span class="tag warn">Not paid</span></a>
+        <a class="req" href="Admin-Approvals.dc.html"><span class="av">LS</span><span style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0"><b style="font-size: 15px">Layla Said</b><span class="small">Group lessons · yesterday</span></span><span class="tag ok">Paid</span></a>
+        <a class="req" href="Admin-Approvals.dc.html"><span class="av">DA</span><span style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0"><b style="font-size: 15px">Dawud Abubakar</b><span class="small">Single lesson · yesterday</span></span><span class="tag ok">Paid</span></a>
+        <a class="req" href="Admin-Approvals.dc.html"><span class="av">RQ</span><span style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0"><b style="font-size: 15px">Rania Qureshi</b><span class="small">Free taster booked</span></span><span class="tag mid">Taster</span></a>
+      </div>
+
+      <div class="card" style="flex: 2 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center">
+          <div style="display: flex; align-items: center; gap: 14px"><span class="av" style="width: 52px; height: 52px; font-size: 16px">FN</span><span style="display: flex; flex-direction: column; gap: 3px"><h2 class="h2" style="font-size: 24px">Fatima Noor</h2><span class="small">Enrol form · 21 Nov, 8:14 AM</span></span></div>
+          <span class="tag ok">Payment confirmed · £90 / month · auto-renews</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; padding: 16px; border-radius: 16px; background: #FFF7EF">
+          <span class="kv"><span class="small">Email</span><b>fatima.n@example.com</b></span>
+          <span class="kv"><span class="small">Phone</span><b>07700 900456</b></span>
+          <span class="kv"><span class="small">Age</span><b>24</b></span>
+          <span class="kv"><span class="small">Subjects</span><b>All three</b></span>
+          <span class="kv"><span class="small">Level (assessment)</span><b>Beginner</b></span>
+          <span class="kv"><span class="small">Preferred times</span><b>Weekday evenings</b></span>
+        </div>
+        <div class="kv"><span class="small">Her message</span><span>"I'd like to start before Ramadan if possible."</span></div>
+
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; gap: 14px">
+            <b style="font-family: Nunito, sans-serif">Assign teachers</b>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+              <label class="field" for="t1">Arabic<select id="t1"><option>Ustadha Hanan</option></select></label>
+              <label class="field" for="t2">Islamic Studies<select id="t2"><option>Ustadha Hafssa B</option></select></label>
+              <label class="field" for="t3">Qur'an<select id="t3"><option>Ustadha Hadjer</option></select></label>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+              <label class="field" for="t4">Lesson day &amp; time<input id="t4" value="Tuesdays 7:00 PM"></label>
+              <label class="field" for="t5">Start date<input id="t5" value="Tue 26 Nov 2026"></label>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px">
+              <button class="btn p" type="button" onClick="{{ approve }}">Approve &amp; send invite</button>
+              <button class="btn" type="button">Ask for more info</button>
+              <button class="btn d" type="button">Decline</button>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 18px; border-radius: 16px; background: #EEF5EF; color: #1F4D2B">
+            <b style="font: 700 20px/1.2 'Baloo Chettan 2', sans-serif">Approved. Invite sent to fatima.n@example.com</b>
+            <span style="line-height: 1.6">Her account now shows as <b>Invited</b>. The link works once and expires in 72 hours. When she sets her password she becomes <b>Active</b> and sees her 3 courses and teachers. Teachers are notified of their new student.</span>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap"><a class="btn" href="Activate-Account.dc.html">See what she receives</a><button class="btn" type="button" onClick="{{ undo }}">Undo (demo)</button></div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sent: false }; }
+  renderVals() {
+    const sent = this.state.sent;
+    return {
+      sent,
+      notSent: !sent,
+      fatimaTag: sent ? 'Invited' : 'Paid',
+      fatimaTagCls: sent ? 'mid' : 'ok',
+      approve: () => this.setState({ sent: true }),
+      undo: () => this.setState({ sent: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Attendance</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFF7EF;font-family:Poppins,system-ui,sans-serif;color:#2B2B2B}
+a{color:#6E583C}a:hover{color:#2B2B2B}
+.side{flex:1 1 240px;max-width:270px;background:#2B2B2B;color:#FFF7EF;padding:24px 16px;display:flex;flex-direction:column;gap:4px;box-sizing:border-box}
+.nav{display:flex;align-items:center;gap:12px;padding:9px 14px;border-radius:12px;font:700 15px/1.2 Nunito,sans-serif;color:#F2E6D3;text-decoration:none;min-height:44px;box-sizing:border-box}
+.nav:hover{background:#3A3734;color:#fff}
+.nav.on{background:#8A6F4D;color:#fff}
+.main{flex:999 1 560px;min-width:0;padding:28px 36px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px}
+.card{background:#fff;border:1px solid #E4CFAE;border-radius:20px;padding:20px;box-sizing:border-box}
+.h2{font:700 20px/1.2 'Baloo Chettan 2',sans-serif;margin:0}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;min-height:36px;box-sizing:border-box;border-radius:999px;background:#F7E7CE;font:700 13px/1.2 Nunito,sans-serif;color:#6E583C;border:0}
+.chip.on{background:#2B2B2B;color:#FFF7EF}
+.tag{display:inline-flex;padding:3px 9px;border-radius:999px;font:700 12px/1.2 Nunito,sans-serif;white-space:nowrap}
+.ok{background:#EEF5EF;color:#2F6B3D}.warn{background:#FBEAE6;color:#8E2F1F}.mid{background:#F7E7CE;color:#6E583C}
+.stat{flex:1 1 160px;display:flex;flex-direction:column;gap:6px}
+.big{font:800 30px/1 'Baloo Chettan 2',sans-serif}
+.small{font-size:13px;color:#5C554D}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:11px 12px;border-bottom:1px solid #EFE1CA;text-align:left;vertical-align:middle}
+th{font:800 12px/1.2 Nunito,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#6E583C;background:#FBF1E2}
+.bar{height:8px;width:90px;border-radius:999px;background:#F0E2CC;overflow:hidden;display:inline-block;vertical-align:middle;margin-right:8px}
+.bar i{display:block;height:100%;background:#8A6F4D;border-radius:999px}
+.view{display:inline-flex;align-items:center;min-height:38px;padding:0 12px;border-radius:999px;border:2px solid #2B2B2B;font:800 13px/1 Nunito,sans-serif;color:#2B2B2B;text-decoration:none}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+  <aside class="side">
+    <span style="background: #FFF7EF; border-radius: 14px; padding: 8px 12px; line-height: 0; align-self: flex-start; margin-bottom: 6px"><img src="/assets/logo.png" alt="SOU" style="height: 34px; width: auto"></span>
+    <span style="font: 800 11px/1.2 Nunito, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #D6B98C; margin: 6px 8px 10px">Staff portal · Light admin</span>
+    <nav aria-label="Light admin portal" style="display: flex; flex-direction: column; gap: 2px">
+      <a class="nav" href="Support-Dashboard.dc.html">Overview</a>
+      <a class="nav" href="Support-View-As.dc.html">Students</a>
+      <a class="nav" href="Support-View-As.dc.html">Teachers</a>
+      <a class="nav" href="Support-View-As.dc.html">Chats</a>
+      <a class="nav" href="Support-Calendar.dc.html">Calendar</a>
+      <a class="nav on" href="Support-Attendance.dc.html">Attendance</a>
+      <a class="nav" href="Support-Course-Approvals.dc.html">Courses &amp; library</a>
+      <a class="nav" href="Support-Reports.dc.html">Reports &amp; messages</a>
+      <a class="nav" href="Support-Create-Login.dc.html">Create login</a>
+      <a class="nav" href="Notifications.dc.html">Notifications</a>
+    </nav>
+    <a class="nav" href="Login-Staff.dc.html" style="margin-top: auto">Log out</a>
+  </aside>
+
+  <main class="main">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h1 style="margin: 0; font: 800 32px/1.15 'Baloo Chettan 2', sans-serif">Attendance</h1>
+        <span style="color: #5C554D">Students are marked by their teacher in each class. Teachers are marked when they start their Google Meet class.</span>
+      </div>
+      <div role="group" aria-label="Period" style="display: flex; gap: 8px"><button class="chip" type="button">This week</button><button class="chip on" type="button">November</button><button class="chip" type="button">Export CSV</button></div>
+    </div>
+
+    <div class="card" style="display: flex; flex-wrap: wrap; gap: 20px">
+      <div class="stat"><span class="small">Student attendance</span><span class="big">92%</span><span class="small">1,204 of 1,309 places</span></div>
+      <div class="stat"><span class="small">Absent 3+ times</span><span class="big">4</span><span class="small">Follow up this week</span></div>
+      <div class="stat"><span class="small">Teacher classes taught</span><span class="big">98%</span><span class="small">2 classes missed</span></div>
+      <div class="stat"><span class="small">Late starts</span><span class="big">5</span><span class="small">Over 5 minutes late</span></div>
+    </div>
+
+    <div class="card" style="display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><h2 class="h2">Students</h2><span class="small">Lowest first</span></div>
+      <div style="overflow-x: auto">
+        <table style="min-width: 760px">
+          <thead><tr><th>Student</th><th>Teacher · class</th><th>Attended</th><th>Missed</th><th>Last absence</th><th><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Open</span></th></tr></thead>
+          <tbody>
+            <tr><td><b>Zainab Khan</b></td><td>Hanan · Arabic group</td><td><span class="bar"><i style="width: 50%"></i></span>4 / 8</td><td><span class="tag warn">4</span></td><td>Yesterday</td><td><a class="view" href="Support-Reports.dc.html">Message</a></td></tr>
+            <tr><td><b>Ali Hassan</b></td><td>Safia · Qaidah</td><td><span class="bar"><i style="width: 62%"></i></span>5 / 8</td><td><span class="tag warn">3</span></td><td>20 Nov</td><td><a class="view" href="Support-Reports.dc.html">Message</a></td></tr>
+            <tr><td><b>Omar Bello</b></td><td>Hanan · Arabic group</td><td><span class="bar"><i style="width: 75%"></i></span>6 / 8</td><td><span class="tag mid">2 · 1 late</span></td><td>Today</td><td><a class="view" href="Support-View-As.dc.html">View</a></td></tr>
+            <tr><td><b>Aisha Rahman</b></td><td>Hanan · Arabic 1-to-1</td><td><span class="bar"><i style="width: 88%"></i></span>7 / 8</td><td><span class="tag ok">1</span></td><td>17 Nov</td><td><a class="view" href="Support-View-As.dc.html">View</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="display: flex; flex-direction: column; gap: 12px">
+      <h2 class="h2">Teachers</h2>
+      <div style="overflow-x: auto">
+        <table style="min-width: 760px">
+          <thead><tr><th>Teacher</th><th>Classes scheduled</th><th>Taught</th><th>Late starts</th><th>Attendance taken</th></tr></thead>
+          <tbody>
+            <tr><td><b>Ustadha Hanan</b></td><td>32</td><td>32</td><td><span class="tag ok">0</span></td><td><span class="tag mid">31 / 32 · 1 missing</span></td></tr>
+            <tr><td><b>Ustadha Hadjer</b></td><td>36</td><td>35</td><td><span class="tag mid">2</span></td><td><span class="tag ok">All</span></td></tr>
+            <tr><td><b>Ustadha Hafssa B</b></td><td>28</td><td>28</td><td><span class="tag ok">0</span></td><td><span class="tag ok">All</span></td></tr>
+            <tr><td><b>Ustadha Safia</b></td><td>20</td><td>19</td><td><span class="tag warn">3</span></td><td><span class="tag ok">All</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <span class="small">Sample numbers for illustration.</span>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Create a staff login</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFF7EF;font-family:Poppins,system-ui,sans-serif;color:#2B2B2B}
+a{color:#6E583C}a:hover{color:#2B2B2B}
+.side{flex:1 1 240px;max-width:270px;background:#2B2B2B;color:#FFF7EF;padding:24px 16px;display:flex;flex-direction:column;gap:6px;box-sizing:border-box}
+.nav{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;font:700 15px/1.2 Nunito,sans-serif;color:#F2E6D3;text-decoration:none;min-height:44px;box-sizing:border-box}
+.nav:hover{background:#3A3734;color:#fff}
+.nav.on{background:#8A6F4D;color:#fff}
+.badge{margin-left:auto;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:#D6B98C;color:#2B2B2B;font:800 12px/22px Nunito,sans-serif;text-align:center;box-sizing:border-box}
+.main{flex:999 1 560px;min-width:0;padding:28px 36px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px}
+.card{background:#fff;border:1px solid #E4CFAE;border-radius:20px;padding:24px;box-sizing:border-box}
+.h2{font:700 20px/1.2 'Baloo Chettan 2',sans-serif;margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 22px;border-radius:999px;font:800 15px/1 Nunito,sans-serif;border:2px solid #2B2B2B;color:#2B2B2B;text-decoration:none;box-sizing:border-box;background:transparent;cursor:pointer}
+.btn.p{background:#8A6F4D;border-color:#8A6F4D;color:#fff}
+.small{font-size:13px;color:#5C554D}
+.field{display:flex;flex-direction:column;gap:6px;font:700 14px/1.3 Nunito,sans-serif}
+.field input,.field select{font:400 15px/1.4 Poppins,sans-serif;border:1px solid #CDB48D;border-radius:12px;padding:11px 14px;min-height:46px;box-sizing:border-box;background:#fff;color:#2B2B2B}
+.role{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:16px;border-radius:16px;border:2px solid #E4CFAE;background:#fff;text-align:left;cursor:pointer;font:400 14px/1.5 Poppins,sans-serif;color:#2B2B2B;min-height:44px}
+.perm{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F0E4D0;font-size:14px}
+.perm:last-child{border-bottom:0}
+.av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 12px/1 Nunito,sans-serif;flex:none;background:#F7E7CE}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+  <aside class="side">
+    <span style="background: #FFF7EF; border-radius: 14px; padding: 8px 12px; line-height: 0; align-self: flex-start; margin-bottom: 6px"><img src="/assets/logo.png" alt="SOU" style="height: 34px; width: auto"></span>
+    <span style="font: 800 11px/1.2 Nunito, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #D6B98C; margin: 6px 8px 12px">Staff portal · Super admin</span>
+    <nav aria-label="Super admin portal" style="display: flex; flex-direction: column; gap: 4px">
+      <a class="nav" href="Admin-Dashboard.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Dashboard</a>
+      <a class="nav" href="Admin-Approvals.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/></svg>Approvals<span class="badge">7</span></a>
+      <a class="nav" href="Admin-Users.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M9 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM22 19v-1a4 4 0 0 0-3-3.9M16 4.1a4 4 0 0 1 0 7.8"/></svg>All users</a>
+      <a class="nav on" href="Admin-Create-Staff.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>Staff &amp; roles</a>
+      <a class="nav" href="Support-View-As.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>View any portal</a>
+      <a class="nav" href="Admin-Users.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Activity log</a>
+      <a class="nav" href="Support-Calendar.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v15H4zM4 10h16M9 3v4M15 3v4"/></svg>Calendar</a>
+      <a class="nav" href="Notifications.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg>Notifications</a>
+    </nav>
+    <a class="nav" href="Login-Staff.dc.html" style="margin-top: auto"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg>Log out</a>
+  </aside>
+
+  <main class="main">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <h1 style="margin: 0; font: 800 32px/1.15 'Baloo Chettan 2', sans-serif">Create a staff login</h1>
+      <span style="color: #5C554D">Only the Super admin can do this. The person receives an email link to set their own password.</span>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+      <form class="card" style="flex: 2 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
+          <label class="field" for="sn">Full name<input id="sn" value="Maryam Yusuf"></label>
+          <label class="field" for="sm">Work email<input id="sm" value="maryam@studentsoftheummah.com"></label>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <b style="font-family: Nunito, sans-serif">Role</b>
+          <div role="radiogroup" aria-label="Role" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+            <sc-for list="{{ roles }}" as="r" hint-placeholder-count="3">
+              <button class="role" type="button" role="radio" aria-checked="{{ r.checked }}" onClick="{{ r.pick }}" style="border-color: {{ r.border }}; background: {{ r.bg }}">
+                <b style="font: 700 17px/1.2 'Baloo Chettan 2', sans-serif">{{ r.name }}</b>
+                <span class="small">{{ r.desc }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+        <sc-if value="{{ isTeacher }}" hint-placeholder-val="{{ false }}">
+          <label class="field" for="sj">Subjects they teach<select id="sj"><option>Qur'an &amp; Tajweed</option><option>Arabic</option><option>Islamic Studies</option><option>Qaidah</option></select></label>
+        </sc-if>
+        <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 14px; background: #F7E7CE; font-size: 14px; line-height: 1.5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6E583C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>
+          <span>{{ twofa }}</span>
+        </div>
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap"><button class="btn p" type="button" onClick="{{ send }}">Create &amp; send invite</button><a class="btn" href="Admin-Users.dc.html">Cancel</a></div>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 16px 18px; border-radius: 16px; background: #EEF5EF; color: #1F4D2B; display: flex; flex-direction: column; gap: 8px">
+            <b>Invite sent to maryam@studentsoftheummah.com as {{ roleName }}.</b>
+            <span style="font-size: 14px; line-height: 1.5">She sets her password from the link (valid 72 hours), then logs in at staff.studentsoftheummah.com. Recorded in the activity log.</span>
+            <button class="btn" type="button" onClick="{{ reset }}" style="align-self: flex-start">Create another (demo)</button>
+          </div>
+        </sc-if>
+      </form>
+
+      <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+        <div class="card" style="display: flex; flex-direction: column; gap: 6px">
+          <h2 class="h2" style="margin-bottom: 4px">{{ roleName }} can…</h2>
+          <sc-for list="{{ perms }}" as="p" hint-placeholder-count="6">
+            <div class="perm"><span style="width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex: none; background: {{ p.bg }}; color: #fff; font: 800 12px/1 Nunito, sans-serif">{{ p.mark }}</span><span>{{ p.label }}</span></div>
+          </sc-for>
+        </div>
+        <div class="card" style="display: flex; flex-direction: column; gap: 10px">
+          <h2 class="h2">Current staff</h2>
+          <span style="display: flex; align-items: center; gap: 10px; font-size: 14px"><span class="av">Y</span><b>Yasmine</b><span class="small" style="margin-left: auto">Super admin</span></span>
+          <span style="display: flex; align-items: center; gap: 10px; font-size: 14px"><span class="av">MS</span><b>Maryam (Support)</b><span class="small" style="margin-left: auto">Light admin</span></span>
+          <span style="display: flex; align-items: center; gap: 10px; font-size: 14px"><span class="av">H</span><b>Ustadha Hanan</b><span class="small" style="margin-left: auto">Teacher</span></span>
+          <span style="display: flex; align-items: center; gap: 10px; font-size: 14px"><span class="av">HB</span><b>Ustadha Hafssa B</b><span class="small" style="margin-left: auto">Teacher</span></span>
+          <a href="Admin-Users.dc.html" style="font-size: 14px; font-weight: 700">See all staff</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { role: 'support', sent: false }; }
+  renderVals() {
+    const defs = [
+      { id: 'teacher', name: 'Teacher', desc: 'Own courses, own students, homework, diary reading, chat.' },
+      { id: 'support', name: 'Light admin', desc: 'Runs the day-to-day: classes, approvals, attendance, reports, new logins. Cannot delete accounts.' },
+      { id: 'super', name: 'Super admin', desc: 'Full control, including other admins. Give with care.' }
+    ];
+    const all = [
+      ['Open their own dashboard and calendar', ['teacher', 'support', 'super']],
+      ['Build courses, upload videos and books, set homework', ['teacher']],
+      ['Take attendance and see their own students', ['teacher']],
+      ['See every portal, all chats and all attendance', ['support', 'super']],
+      ['Assign classes in the calendar', ['support', 'super']],
+      ['Approve teachers\' courses and library items', ['support', 'super']],
+      ['Send reports and messages to students', ['support', 'super']],
+      ['Create student and teacher logins', ['support', 'super']],
+      ['Approve enrolments after checking payment', ['super']],
+      ['Suspend or delete accounts', ['super']],
+      ['Create admin logins and change roles', ['super']]
+    ];
+    const role = this.state.role;
+    const cur = defs.find(d => d.id === role);
+    return {
+      roles: defs.map(d => ({ ...d, checked: d.id === role ? 'true' : 'false', border: d.id === role ? '#8A6F4D' : '#E4CFAE', bg: d.id === role ? '#FBF1E2' : '#FFFFFF', pick: () => this.setState({ role: d.id, sent: false }) })),
+      perms: all.map(([label, who]) => { const yes = who.includes(role); return { label, mark: yes ? '✓' : '–', bg: yes ? '#3F7D4E' : '#B9AFA3' }; }),
+      roleName: cur.name,
+      isTeacher: role === 'teacher',
+      twofa: role === 'teacher' ? 'Two-step verification is recommended for teachers.' : 'Two-step verification is required for admins. They set it up when they activate their account.',
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      send: () => this.setState({ sent: true }),
+      reset: () => this.setState({ sent: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Activate your account</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFF7EF;font-family:Poppins,system-ui,sans-serif;color:#2B2B2B}
+a{color:#6E583C}a:hover{color:#2B2B2B}
+.field{display:flex;flex-direction:column;gap:8px;font:700 14px/1.3 Nunito,sans-serif}
+.field input{font:400 16px/1.4 Poppins,sans-serif;border:1px solid #CDB48D;border-radius:12px;padding:13px 16px;min-height:48px;box-sizing:border-box;background:#fff;color:#2B2B2B}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 22px;border-radius:999px;font:800 16px/1 Nunito,sans-serif;border:2px solid #2B2B2B;color:#2B2B2B;text-decoration:none;box-sizing:border-box;background:transparent}
+.btn.p{background:#8A6F4D;border-color:#8A6F4D;color:#fff}
+.lbl{font:800 12px/1.2 Nunito,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#6E583C}
+.rule{display:flex;align-items:center;gap:10px;font-size:14px}
+.ok{color:#2F6B3D}.todo{color:#5C554D}
+</style>
+</helmet>
+<div style="max-width: 1280px; margin: 0 auto; padding: 48px 40px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+  <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+    <span class="lbl">Step 1 · The invite email</span>
+    <div style="background: #fff; border: 1px solid #E4CFAE; border-radius: 24px; overflow: hidden">
+      <div style="padding: 16px 22px; border-bottom: 1px solid #EFE1CA; font-size: 14px; color: #5C554D; display: flex; flex-direction: column; gap: 4px">
+        <span><b style="color: #2B2B2B">From:</b> SOU – Students of the Ummah</span>
+        <span><b style="color: #2B2B2B">Subject:</b> Welcome to SOU – set your password</span>
+      </div>
+      <div style="padding: 28px 26px; display: flex; flex-direction: column; gap: 16px; line-height: 1.6">
+        <img src="/assets/logo.png" alt="SOU" style="height: 44px; width: auto; align-self: flex-start">
+        <p style="margin: 0">Assalamu alaykum Aisha,</p>
+        <p style="margin: 0; color: #5C554D">Your place at SOU is confirmed. Your teacher is <b style="color: #2B2B2B">Ustadha Hanan</b> for <b style="color: #2B2B2B">Arabic · Beginners</b>.</p>
+        <p style="margin: 0; color: #5C554D">Click below to set your password and open your student portal.</p>
+        <a class="btn p" href="Activate-Account.dc.html" style="align-self: flex-start">Set my password</a>
+        <p style="margin: 0; font-size: 13px; color: #5C554D">This link works once and expires in 72 hours. If it has expired, reply to this email and we will send a new one.</p>
+      </div>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; border-radius: 16px; background: #FBEAE6; color: #8E2F1F; font-size: 14px; line-height: 1.5">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2"/></svg>
+      <span><b>If the link has expired:</b> "This link is no longer valid. Ask SOU to send you a new invite." The admin presses <b>Resend invite</b>.</span>
+    </div>
+  </div>
+
+  <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+    <span class="lbl">Step 2 · Set your password</span>
+    <form style="background: #fff; border: 1px solid #E4CFAE; border-radius: 28px; padding: 34px; display: flex; flex-direction: column; gap: 18px; box-sizing: border-box">
+      <h1 style="margin: 0; font: 800 34px/1.1 'Baloo Chettan 2', sans-serif">Activate your account</h1>
+      <p style="margin: 0; color: #5C554D">Signing in as <b style="color: #2B2B2B">aisha.r@example.com</b></p>
+      <label class="field" for="p1">New password<input id="p1" type="password" value="Sabr2026!" autocomplete="new-password"></label>
+      <label class="field" for="p2">Confirm password<input id="p2" type="password" value="Sabr2026!" autocomplete="new-password"></label>
+      <div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 14px; background: #FFF7EF">
+        <span class="rule ok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>At least 8 characters</span>
+        <span class="rule ok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>A number and a symbol</span>
+        <span class="rule ok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Both passwords match</span>
+      </div>
+      <label for="tc" style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: #5C554D; line-height: 1.5"><input id="tc" type="checkbox" checked style="width: 20px; height: 20px; flex: none; accent-color: #8A6F4D"> I agree to the SOU terms, privacy policy and safeguarding policy (including that admins may view chats to keep learners safe).</label>
+      <a class="btn p" href="Student-Dashboard.dc.html" data-activate>Activate &amp; go to my portal</a>
+      <p style="margin: 0; font-size: 13px; color: #5C554D">Staff (teachers and admins) see the same screen, then go to the staff portal. Admins also set up two-step verification here.</p>
+    </form>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

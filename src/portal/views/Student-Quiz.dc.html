@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Homework quiz</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;family=Amiri&amp;display=swap">
+<style>
+body{margin:0;background:#FFF7EF;font-family:Poppins,system-ui,sans-serif;color:#2B2B2B}
+a{color:#6E583C}a:hover{color:#2B2B2B}
+.side{flex:1 1 240px;max-width:270px;background:#F7E7CE;border-right:1px solid #E4CFAE;padding:24px 16px;display:flex;flex-direction:column;gap:6px;box-sizing:border-box}
+.nav{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;font:700 15px/1.2 Nunito,sans-serif;color:#2B2B2B;text-decoration:none;min-height:44px;box-sizing:border-box}
+.nav:hover{background:#EFDCBE;color:#2B2B2B}
+.nav.on{background:#8A6F4D;color:#fff}
+.main{flex:999 1 560px;min-width:0;padding:28px 36px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px}
+.card{background:#fff;border:1px solid #E4CFAE;border-radius:20px;padding:22px;box-sizing:border-box}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:#F7E7CE;font:700 12px/1.2 Nunito,sans-serif;color:#6E583C}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 22px;border-radius:999px;font:800 16px/1 Nunito,sans-serif;border:2px solid #2B2B2B;color:#2B2B2B;text-decoration:none;box-sizing:border-box;background:transparent;cursor:pointer}
+.btn.p{background:#8A6F4D;border-color:#8A6F4D;color:#fff}
+.small{font-size:13px;color:#5C554D}
+.opt{display:flex;align-items:center;gap:12px;min-height:52px;padding:12px 16px;border-radius:14px;border:2px solid #E4CFAE;background:#fff;font:600 16px/1.3 Poppins,sans-serif;color:#2B2B2B;cursor:pointer;text-align:left;box-sizing:border-box}
+.ar{font-family:Amiri,serif;font-size:26px}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+  <aside class="side">
+    <img src="/assets/logo.png" alt="SOU" style="height: 46px; width: auto; align-self: flex-start; margin: 0 6px 18px">
+    <nav aria-label="Student portal" style="display: flex; flex-direction: column; gap: 4px">
+      <a class="nav" href="Student-Dashboard.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Dashboard</a>
+      <a class="nav" href="Student-Lesson.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM8 7h7"/></svg>My courses</a>
+      <a class="nav on" href="Student-Quiz.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14v16H5zM9 12l2 2 4-4"/></svg>Homework</a>
+      <a class="nav" href="Student-Diary.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5"/></svg>Diary</a>
+      <a class="nav" href="Student-Chat.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Chat</a>
+      <a class="nav" href="Student-Calendar.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v15H4zM4 10h16M9 3v4M15 3v4"/></svg>Calendar</a>
+      <a class="nav" href="Student-Library.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4v16H5zM11 4h4v16h-4zM17 5l3 .8-3.5 14.2-3-.8z"/></svg>Library</a>
+      <a class="nav" href="Student-Reports.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h3"/></svg>Reports</a>
+      <a class="nav" href="Notifications.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg>Notifications</a>
+    </nav>
+    <a class="nav" href="Login-Student.dc.html" style="margin-top: auto"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg>Log out</a>
+  </aside>
+
+  <main class="main">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span class="chip" style="align-self: flex-start">Arabic · Homework</span>
+        <h1 style="margin: 0; font: 800 32px/1.15 'Baloo Chettan 2', sans-serif">Quiz: Letters that join</h1>
+        <span class="small">Set by Ustadha Hanan · Due Saturday 23 November · Multiple-choice is marked instantly, written answers by your teacher</span>
+      </div>
+      <a class="btn" href="Student-Dashboard.dc.html">Save &amp; finish later</a>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+      <div style="flex: 2 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <sc-for list="{{ questions }}" as="q" hint-placeholder-count="3">
+          <div class="card" style="display: flex; flex-direction: column; gap: 14px">
+            <span class="small" style="font-weight: 700">Question {{ q.num }}</span>
+            <b style="font-size: 18px; line-height: 1.4">{{ q.text }}</b>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+              <sc-for list="{{ q.opts }}" as="o" hint-placeholder-count="4">
+                <button class="opt" type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.pressed }}" style="border-color: {{ o.border }}; background: {{ o.bg }}"><span class="{{ o.cls }}">{{ o.label }}</span></button>
+              </sc-for>
+            </div>
+            <sc-if value="{{ q.showFb }}" hint-placeholder-val="{{ false }}">
+              <span style="font: 700 14px/1.4 Nunito, sans-serif; color: {{ q.fbColor }}">{{ q.fb }}</span>
+            </sc-if>
+          </div>
+        </sc-for>
+        <div class="card" style="display: flex; flex-direction: column; gap: 12px">
+          <span class="small" style="font-weight: 700">Question 4 · written answer</span>
+          <label for="wa" style="font-weight: 600; font-size: 18px; line-height: 1.4">Write the word for "book" with all its letters joined.</label>
+          <input id="wa" lang="ar" dir="rtl" value="كتاب" style="font: 400 28px/1.4 Amiri, serif; border: 1px solid #CDB48D; border-radius: 12px; padding: 10px 16px; min-height: 52px; box-sizing: border-box">
+          <span class="small">Ustadha Hanan marks this one and can leave a comment.</span>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center">
+          <button class="btn p" type="button" onClick="{{ submit }}">Submit answers</button>
+          <button class="btn" type="button" onClick="{{ reset }}">Start again</button>
+          <span class="small">{{ answeredText }}</span>
+        </div>
+      </div>
+
+      <aside style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+          <div class="card" style="display: flex; flex-direction: column; gap: 10px; background: #2B2B2B; border-color: #2B2B2B; color: #FFF7EF">
+            <span class="chip" style="align-self: flex-start">Your result</span>
+            <span style="font: 800 52px/1 'Baloo Chettan 2', sans-serif">{{ scoreText }}</span>
+            <span style="color: #E9D9BF">{{ percentText }} on the multiple-choice questions</span>
+            <span style="color: #E9D9BF; font-size: 14px; line-height: 1.5">Saved to your progress tracker. Your written answer is waiting for Ustadha Hanan to mark.</span>
+          </div>
+        </sc-if>
+        <div class="card" style="display: flex; flex-direction: column; gap: 10px">
+          <b>How homework works</b>
+          <span class="small" style="line-height: 1.6">1. Your teacher sets a quiz with a due date.<br>2. Questions come one at a time and can't be skipped: answer each one to move on.<br>3. Once started, the quiz must be finished before you can leave it.<br>4. Multiple-choice answers are marked the moment you submit; written answers by your teacher.<br>5. Your score goes into your progress tracker.</span>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { answers: {}, submitted: false };
+  }
+  renderVals() {
+    const data = [
+      { text: 'Which letter never joins to the letter after it?', opts: ['ب', 'د', 'ت', 'ن'], correct: 1, ar: true },
+      { text: 'How many dots does the letter ث have?', opts: ['One', 'Two', 'Three', 'None'], correct: 2, ar: false },
+      { text: 'Ba (ب) and Ta (ت) are different because of…', opts: ['Their dots', 'Their shape', 'Their length', 'Their colour'], correct: 0, ar: false }
+    ];
+    const { answers, submitted } = this.state;
+    let score = 0;
+    const questions = data.map((q, qi) => {
+      const picked = answers[qi];
+      const right = picked === q.correct;
+      if (right) score++;
+      return {
+        num: qi + 1,
+        text: q.text,
+        showFb: submitted,
+        fb: right ? 'Correct, well done!' : 'Not quite. The correct answer is: ' + q.opts[q.correct],
+        fbColor: right ? '#2F6B3D' : '#8E2F1F',
+        opts: q.opts.map((label, oi) => {
+          const isPicked = picked === oi;
+          let border = isPicked ? '#8A6F4D' : '#E4CFAE';
+          let bg = isPicked ? '#FBF1E2' : '#FFFFFF';
+          if (submitted && oi === q.correct) { border = '#3F7D4E'; bg = '#EEF5EF'; }
+          if (submitted && isPicked && oi !== q.correct) { border = '#B3412F'; bg = '#FBEAE6'; }
+          return { label, cls: q.ar ? 'ar' : '', border, bg, pressed: isPicked ? 'true' : 'false',
+            pick: () => { if (!this.state.submitted) this.setState({ answers: { ...this.state.answers, [qi]: oi } }); } };
+        })
+      };
+    });
+    const answered = Object.keys(answers).length;
+    return {
+      questions,
+      submitted,
+      scoreText: score + ' / ' + data.length,
+      percentText: Math.round(score / data.length * 100) + '%',
+      answeredText: submitted ? 'Submitted' : answered + ' of ' + data.length + ' multiple-choice answered',
+      submit: () => this.setState({ submitted: true }),
+      reset: () => this.setState({ answers: {}, submitted: false })
+    };
+  }
+}
+</script>
+</body>
+</html>
