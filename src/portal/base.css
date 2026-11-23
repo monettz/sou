@@ -264,3 +264,6 @@ html { -webkit-text-size-adjust: 100%; }
   #app .main .card:has(> .stat:nth-child(5)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   #app .main .card:has(> .stat) > .stat { min-width: 0; }
 }
+/* side menu section labels and counts (staff) */
+#app .side .nav-sec { display: block; font: 800 10px/1.2 Nunito, system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #8C8378; padding: 14px 14px 4px; }
+#app .side .nav .badge { margin-left: auto; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: #D6B98C; color: #2B2B2B; font: 800 12px/22px Nunito, system-ui, sans-serif; text-align: center; box-sizing: border-box; }

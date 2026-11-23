@@ -28,6 +28,8 @@ const ROUTES = {
   'super/create-staff': 'Admin-Create-Staff',
   'super/activity': 'Admin-Activity',
   'super/view': 'Admin-View-Portal',
+  'super/payments': 'Admin-Payments',
+  'super/settings': 'Admin-Settings',
   notifications: 'Notifications',
   // staff can preview what students see (read-only screens)
   'preview/dashboard': 'Student-Dashboard',
@@ -72,8 +74,17 @@ startPortal({
     return { view: ROUTES[path] };
   },
   after(view, root, { session, go, who }) {
-    // the Super admin's own "Calendar" item opens the class calendar but keeps the Super admin menu
-    if (view === 'Support-Calendar' && who()?.role === 'super') {
+    // the Super admin opens the shared school pages (calendar, attendance, chats, courses, reports)
+    // from their own menu and keeps that menu, unless they chose "View any portal" to see the Light admin's
+    if (view.startsWith('Admin-')) { try { sessionStorage.removeItem('sou-viewing-as'); } catch (e) { /* ignore */ } }
+    let viewingAs = null; try { viewingAs = sessionStorage.getItem('sou-viewing-as'); } catch (e) { /* ignore */ }
+    if (view.startsWith('Support-') && who()?.role === 'super' && viewingAs) {
+      const bar = document.createElement('div');
+      bar.style.cssText = 'display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:14px;background:#2B2B2B;color:#FFF7EF;font:700 14px/1.3 Nunito,system-ui,sans-serif';
+      bar.innerHTML = '<span>You are viewing the Light admin portal · read-only, logged</span><a href="#/super" data-wired="1" style="color:#D6B98C;font-weight:800">Back to Super admin</a>';
+      root.querySelector('.main')?.prepend(bar);
+    }
+    if (view.startsWith('Support-') && who()?.role === 'super' && !viewingAs) {
       const src = SUPER_VIEWS['./views/Admin-Dashboard.dc.html'] || '';
       const m = src.match(/<aside class="side">([\s\S]*?)<\/aside>/);
       const side = root.querySelector('.side');
@@ -83,7 +94,7 @@ startPortal({
         side.querySelectorAll('a[href]').forEach(a => {
           const v = (a.getAttribute('href').match(/^([A-Za-z-]+)\.dc\.html$/) || [])[1];
           if (v) a.setAttribute('href', v === 'Login-Staff' ? '#/logout' : '#/' + (BY_VIEW[v] || ''));
-          a.classList.toggle('on', a.getAttribute('href') === '#/support/calendar');
+          a.classList.toggle('on', a.getAttribute('href') === location.hash);
         });
         if (toggle) side.appendChild(toggle);
       }

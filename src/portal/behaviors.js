@@ -455,6 +455,7 @@ const screens = {
   'Admin-Activity'(root) {
     const body = $('#log-rows', root);
     db.get().users.slice().reverse().forEach(u => body?.insertAdjacentHTML('afterbegin', `<tr><td>Recently</td><td>${u.role === 'teacher' || u.role === 'support' ? 'Yasmine (Super admin)' : 'SOU Support'}</td><td>Created login for ${esc(u.name)} (${esc(u.role)})</td><td><span class="tag ok">Accounts</span></td></tr>`));
+    (db.get().log || []).forEach(l => body?.insertAdjacentHTML('afterbegin', `<tr><td>${esc(l.at)}</td><td>Yasmine (Super admin)</td><td>${esc(l.text)}</td><td><span class="tag ok">${esc(l.type)}</span></td></tr>`));
     on($('#log-csv', root), () => {
       const rows = $$('tr', root).filter(r => r.style.display !== 'none').map(r => $$('th,td', r).map(c => `"${txt(c).replace(/"/g, '""')}"`).join(','));
       download('sou-activity-log.csv', rows.join('\n'), 'text/csv'); toast('Activity log exported');
@@ -463,8 +464,40 @@ const screens = {
 
   'Admin-View-Portal'(root) {
     $$('a.btn', root).forEach(a => a.addEventListener('click', () => {
+      // seeing the Light admin's portal shows their own menu, not the Super admin's
+      if (/Light admin/i.test(txt(a))) { try { sessionStorage.setItem('sou-viewing-as', 'support'); } catch (e) { /* ignore */ } }
       const sel = $('select', a.closest('.card')); toast(`Viewing ${sel ? sel.value + "'s" : 'the Light admin'} portal · read-only · logged`);
     }));
+  },
+
+  'Admin-Payments'(root) {
+    $$('[data-pay="remind"]', root).forEach(b => on(b, () => {
+      const who = txt($('b', b.closest('.lrow'))).split('·')[0].trim();
+      b.textContent = 'Reminder sent'; b.disabled = true;
+      db.update(x => { (x.log = x.log || []).push({ text: `Payment reminder sent to ${who}`, type: "Payments", at: nowLabel() }); });
+      toast(`Payment reminder emailed to ${who}`);
+    }));
+    on($('#pay-csv', root), () => {
+      const rows = $$('tr', root).filter(r => r.style.display !== 'none').map(r => $$('th,td', r).map(c => `"${txt(c).replace(/"/g, '""')}"`).join(','));
+      download('sou-payments-november.csv', rows.join('\n'), 'text/csv'); toast('Payments exported');
+    });
+  },
+
+  'Admin-Settings'(root) {
+    const saved = db.get().settings || {};
+    $$('[data-sw]', root).forEach(sw => {
+      const key = sw.dataset.sw;
+      const set = (v) => { sw.classList.toggle('on', v); sw.setAttribute('aria-checked', v); };
+      if (key in saved) set(!!saved[key]);
+      on(sw, () => set(!sw.classList.contains('on')));
+    });
+    $$('.pk input', root).forEach((inp, i) => { const v = (saved.prices || {})[i]; if (v !== undefined) inp.value = v; });
+    on($('#set-save', root), () => {
+      const s = {}; $$('[data-sw]', root).forEach(sw => { s[sw.dataset.sw] = sw.classList.contains('on'); });
+      s.prices = $$('.pk input', root).map(i => i.value);
+      db.update(x => { x.settings = s; (x.log = x.log || []).push({ text: "School settings updated", type: "Accounts", at: nowLabel() }); });
+      toast('Settings saved · the change is in the activity log');
+    });
   },
 
   /* ---------- light admin ---------- */
