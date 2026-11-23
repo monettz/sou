@@ -55,12 +55,11 @@ th{font:800 12px/1.2 Nunito,sans-serif;letter-spacing:.06em;text-transform:upper
   </aside>
 
   <main class="main">
-    <div style="display: flex; gap: 12px; align-items: center; padding: 12px 16px; border-radius: 14px; background: #F7E7CE; font-size: 14px">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6E583C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
-      <span><b>Light admin access:</b> open any portal and chat, assign classes, approve courses, track attendance, send reports and create student or teacher logins. Deleting or suspending accounts is for the Super admin.</span>
-    </div>
-    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px">
-      <h1 style="margin: 0; font: 800 32px/1.15 'Baloo Chettan 2', sans-serif">Support overview</h1>
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h1 style="margin: 0; font: 800 32px/1.15 'Baloo Chettan 2', sans-serif">Support overview</h1>
+        <span style="color: #5C554D">Thursday 21 November · what needs attention today</span>
+      </div>
       <label for="fa" style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 16px; border: 1px solid #CDB48D; border-radius: 999px; background: #fff; min-width: 320px; box-sizing: border-box">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5C554D" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM21 21l-4.3-4.3"/></svg>
         <input id="fa" placeholder="Find any student or teacher" style="border: 0; outline: 0; font: 400 15px/1.4 Poppins, sans-serif; flex: 1; min-width: 0; background: transparent">
@@ -71,7 +70,7 @@ th{font:800 12px/1.2 Nunito,sans-serif;letter-spacing:.06em;text-transform:upper
       <div class="stat"><span class="small">Active students</span><span class="big">142</span><span class="small">+11 this month</span></div>
       <div class="stat"><span class="small">Courses to approve</span><span class="big">2</span><span class="small">+ 3 library items</span></div>
       <div class="stat"><span class="small">Attendance today</span><span class="big">94%</span><span class="small">3 students absent</span></div>
-      <div class="stat"><span class="small">Open help requests</span><span class="big">4</span><span class="small">Oldest 1 day</span></div>
+      <div class="stat"><span class="small">Open help requests</span><span class="big">3</span><span class="small">Oldest 1 day</span></div>
       <div class="stat"><span class="small">Chats waiting &gt; 24h</span><span class="big">6</span><span class="small">Teacher hasn't replied</span></div>
     </div>
 
@@ -95,10 +94,10 @@ th{font:800 12px/1.2 Nunito,sans-serif;letter-spacing:.06em;text-transform:upper
           <table>
             <thead><tr><th>Teacher</th><th>Students</th><th>Avg progress</th><th>To mark</th><th><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Open</span></th></tr></thead>
             <tbody>
-              <tr><td><b>Ustadha Hanan</b><br><span class="small">Arabic</span></td><td>18</td><td>64%</td><td><span class="tag mid">5</span></td><td><a class="btn" href="Teacher-Dashboard.dc.html">View</a></td></tr>
-              <tr><td><b>Ustadha Hadjer</b><br><span class="small">Qur'an</span></td><td>24</td><td>71%</td><td><span class="tag warn">12</span></td><td><a class="btn" href="Teacher-Dashboard.dc.html">View</a></td></tr>
-              <tr><td><b>Ustadha Hafssa B</b><br><span class="small">Islamic Studies</span></td><td>21</td><td>68%</td><td><span class="tag ok">0</span></td><td><a class="btn" href="Teacher-Dashboard.dc.html">View</a></td></tr>
-              <tr><td><b>Ustadha Safia</b><br><span class="small">Qaidah</span></td><td>15</td><td>59%</td><td><span class="tag mid">3</span></td><td><a class="btn" href="Teacher-Dashboard.dc.html">View</a></td></tr>
+              <tr><td><b style="white-space: nowrap">Ustadha Hanan</b><br><span class="small">Arabic</span></td><td>18</td><td>64%</td><td><span class="tag mid">5</span></td><td><a class="btn" href="Teacher-Dashboard.dc.html">View</a></td></tr>
+              <tr><td><b style="white-space: nowrap">Ustadha Hadjer</b><br><span class="small">Qur'an</span></td><td>24</td><td>71%</td><td><span class="tag warn">12</span></td><td><a class="btn" href="Teacher-Dashboard.dc.html">View</a></td></tr>
+              <tr><td><b style="white-space: nowrap">Ustadha Hafssa B</b><br><span class="small">Islamic Studies</span></td><td>21</td><td>68%</td><td><span class="tag ok">0</span></td><td><a class="btn" href="Teacher-Dashboard.dc.html">View</a></td></tr>
+              <tr><td><b style="white-space: nowrap">Ustadha Safia</b><br><span class="small">Qaidah</span></td><td>15</td><td>59%</td><td><span class="tag mid">3</span></td><td><a class="btn" href="Teacher-Dashboard.dc.html">View</a></td></tr>
             </tbody>
           </table>
         </div>

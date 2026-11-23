@@ -195,3 +195,47 @@ html { -webkit-text-size-adjust: 100%; }
 #app .sou-topbar { display: flex; justify-content: flex-end; align-items: center; margin: -10px 0 -8px; color: #2B2B2B; }
 #app .sou-topbar .sou-bell { background: #fff; border-color: #E4CFAE; }
 @media (hover: hover) { #app .sou-topbar .sou-bell:hover { background: #FBF1E2; border-color: #CDB48D; } }
+
+/* phones: the number cards at the top of dashboards sit two per row */
+@media (max-width: 760px) {
+  #app .main .card:has(> .stat) { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px !important; }
+  #app .main .card:has(> .stat) > .stat { min-width: 0; }
+  #app .main .card:has(> .stat) .big { font-size: 28px !important; }
+}
+/* phones: list rows with a button put the button under the text */
+@media (max-width: 760px) {
+  #app .main .row:has(> .btn) { flex-wrap: wrap; }
+  #app .main .row:has(> .btn) > span:first-child { flex: 1 1 100%; min-width: 0; }
+}
+
+/* ======================= phones: dashboard polish ======================= */
+@media (max-width: 760px) {
+  #app .main { gap: 16px !important; }
+  #app .main h1, #notif-title { font-size: 24px !important; line-height: 1.2 !important; }
+  #app .main h1 ~ span { font-size: 14px !important; line-height: 1.5 !important; }
+  #app .main h2, #app .main h2[style*="font-size: 24px"], #app .main h2[style*="font-size: 26px"] { font-size: 18px !important; }
+  #app .main .card { padding: 18px !important; border-radius: 18px !important; }
+
+  /* page header buttons share the row evenly */
+  #app .main > div:not(.card):not(.sou-topbar):not(.tbl) > div:has(> .btn) { display: flex !important; flex-wrap: wrap; gap: 10px !important; width: 100%; }
+  #app .main > div:not(.card):not(.sou-topbar):not(.tbl) > div:has(> .btn) > .btn,
+  #app .main > div:not(.card):not(.sou-topbar):not(.tbl) > .btn { flex: 1 1 0; min-width: max-content; padding: 10px 14px !important; font-size: 14px !important; }
+
+  /* number cards: one tile per number, two per row; an odd last tile takes the full row */
+  #app .main .card:has(> .stat) { background: transparent !important; border: 0 !important; padding: 0 !important; box-shadow: none !important; display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px !important; }
+  #app .main .card:has(> .stat) > .stat { min-width: 0; background: #fff; border: 1px solid #E4CFAE; border-radius: 16px; padding: 14px; gap: 4px !important; box-sizing: border-box; }
+  #app .main .card:has(> .stat) > .stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  #app .main .card:has(> .stat) .big { font-size: 26px !important; line-height: 1.1 !important; }
+  #app .main .card:has(> .stat) .small { font-size: 12px !important; line-height: 1.35; }
+
+  /* list rows: text stays readable, small buttons stay compact on the right */
+  #app .main .row { gap: 10px !important; }
+  #app .main .row b { font-size: 15px; }
+  #app .main .row .btn:not(:only-child), #app .main .row > .btn, #app .main .row > span > .btn { min-height: 38px !important; padding: 0 14px !important; font-size: 13px !important; flex: none; }
+  #app .main .row > span:has(> b) { min-width: 0; flex: 1 1 auto; }
+}
+@media (max-width: 760px) {
+  /* rows with a picture: the button lines up with the text, not under the picture */
+  #app .main .row:has(> span > .av) > .btn { margin-left: 52px; }
+  #app .main .row > span:has(> .av) { align-items: flex-start !important; }
+}
