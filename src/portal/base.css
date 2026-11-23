@@ -59,6 +59,17 @@ html { -webkit-text-size-adjust: 100%; }
   #app .week .day:not(:has(.ev)) { display: none; }
   #app .week .dh { flex-direction: row !important; align-items: baseline; gap: 8px !important; }
 
-  /* the open "More" menu shown on the users table is a desktop illustration */
-  #app [role="menu"] { display: none !important; }
 }
+
+/* confirmation messages */
+#sou-toast {
+  position: fixed; left: 50%; bottom: 20px; z-index: 100; transform: translate(-50%, 20px);
+  max-width: min(560px, calc(100vw - 32px)); padding: 12px 18px; border-radius: 14px;
+  background: #2B2B2B; color: #FFF7EF; font: 600 14px/1.45 Poppins, system-ui, sans-serif;
+  box-shadow: 0 10px 30px rgba(43, 43, 43, .3); opacity: 0; pointer-events: none;
+  transition: opacity .25s, transform .25s;
+}
+#sou-toast.show { opacity: 1; transform: translate(-50%, 0); }
+#sou-toast[data-kind="err"] { background: #8E2F1F; }
+.demo-bar button { margin-left: 6px; border: 0; background: none; padding: 0; font: inherit; color: #6E583C; text-decoration: underline; cursor: pointer; }
+#app [contenteditable="true"] { outline: 2px dashed #CDB48D; outline-offset: 2px; border-radius: 4px; }

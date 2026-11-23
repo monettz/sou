@@ -11,6 +11,9 @@
 
 // Each app passes in only the screens it is allowed to show (see student.js / staff.js),
 // so the student bundle never contains the staff screens.
+import { applyBehaviors } from './behaviors.js';
+import { db } from './store.js';
+
 const viewName = (file) => file.split('/').pop().replace('.dc.html', '');
 
 /* ---------- tiny template engine ---------- */
@@ -133,6 +136,7 @@ export function startPortal(app) {
     });
     root.querySelectorAll('form').forEach(f => f.addEventListener('submit', e => e.preventDefault()));
     if (app.after) app.after(name, root, { who, session, go });
+    applyBehaviors(name, root, { who, go, linkTo: app.linkTo });
   }
 
   function go(hash) { if (location.hash === hash) route(); else location.hash = hash; }
@@ -146,6 +150,15 @@ export function startPortal(app) {
   }
 
   // phone layout: the sidebar becomes a scrollable bar on top
+  document.querySelector('[data-reset-demo]')?.addEventListener('click', () => { if (confirm('Clear everything saved in this demo (notes, messages, classes, approvals…)?')) { db.reset(); location.reload(); } });
+  // live updates: when another tab (e.g. the teacher) saves something, redraw this screen,
+  // unless the person is typing here
+  window.addEventListener('storage', (e) => {
+    if (!e.key || !e.key.startsWith('sou-demo-db')) return;
+    const a = document.activeElement;
+    if (a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName) && a.value) return;
+    if (current) draw();
+  });
   window.addEventListener('hashchange', route);
   route();
 }
