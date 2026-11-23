@@ -8,10 +8,15 @@ const ROUTES = {
   'teacher/students': 'Teacher-Students',
   'teacher/student': 'Teacher-Student-Profile',
   'teacher/homework': 'Teacher-Quiz-Builder',
+  'teacher/courses': 'Teacher-Courses',
   'teacher/chat': 'Teacher-Chat',
   'teacher/calendar': 'Teacher-Calendar',
   support: 'Support-Dashboard',
   'support/view': 'Support-View-As',
+  'support/students': 'Support-Students',
+  'support/teachers': 'Support-Teachers',
+  'support/chats': 'Support-Chats',
+  'support/help': 'Support-Help',
   'support/calendar': 'Support-Calendar',
   'support/courses': 'Support-Course-Approvals',
   'support/attendance': 'Support-Attendance',
@@ -21,9 +26,12 @@ const ROUTES = {
   'super/approvals': 'Admin-Approvals',
   'super/users': 'Admin-Users',
   'super/create-staff': 'Admin-Create-Staff',
+  'super/activity': 'Admin-Activity',
+  'super/view': 'Admin-View-Portal',
   notifications: 'Notifications',
   // staff can preview what students see (read-only screens)
   'preview/dashboard': 'Student-Dashboard',
+  'preview/courses': 'Student-Courses',
   'preview/lesson': 'Student-Lesson',
   'preview/lesson-check': 'Student-Lesson-Quiz',
   'preview/homework': 'Student-Quiz',
@@ -44,8 +52,10 @@ const ALLOWED = {
 };
 const area = (path) => path.split('/')[0];
 
+const SUPER_VIEWS = import.meta.glob(['./views/*.dc.html', '!./views/Login-Student.dc.html'], { query: '?raw', import: 'default', eager: true });
+
 startPortal({
-  views: import.meta.glob(['./views/*.dc.html', '!./views/Login-Student.dc.html'], { query: '?raw', import: 'default', eager: true }),
+  views: SUPER_VIEWS,
   sessionKey: 'sou-staff-session',
   linkTo(view) {
     if (view === 'Login-Staff' || view === 'Login-Student') return '#/logout';
@@ -61,6 +71,22 @@ startPortal({
     return { view: ROUTES[path] };
   },
   after(view, root, { session, go, who }) {
+    // the Super admin's own "Calendar" item opens the class calendar but keeps the Super admin menu
+    if (view === 'Support-Calendar' && who()?.role === 'super') {
+      const src = SUPER_VIEWS['./views/Admin-Dashboard.dc.html'] || '';
+      const m = src.match(/<aside class="side">([\s\S]*?)<\/aside>/);
+      const side = root.querySelector('.side');
+      if (m && side) {
+        const toggle = side.querySelector('.menu-toggle');
+        side.innerHTML = m[1];
+        side.querySelectorAll('a[href]').forEach(a => {
+          const v = (a.getAttribute('href').match(/^([A-Za-z-]+)\.dc\.html$/) || [])[1];
+          if (v) a.setAttribute('href', v === 'Login-Staff' ? '#/logout' : '#/' + (BY_VIEW[v] || ''));
+          a.classList.toggle('on', a.getAttribute('href') === '#/support/calendar');
+        });
+        if (toggle) side.appendChild(toggle);
+      }
+    }
     if (view === 'Login-Staff') {
       const step1 = root.querySelector('#staff-step1');
       const step2 = root.querySelector('#staff-step2');

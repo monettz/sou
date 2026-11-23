@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>View any portal</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFF7EF;font-family:Poppins,system-ui,sans-serif;color:#2B2B2B}
+a{color:#6E583C}a:hover{color:#2B2B2B}
+.side{flex:1 1 240px;max-width:270px;background:#2B2B2B;color:#FFF7EF;padding:24px 16px;display:flex;flex-direction:column;gap:6px;box-sizing:border-box}
+.nav{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;font:700 15px/1.2 Nunito,sans-serif;color:#F2E6D3;text-decoration:none;min-height:44px;box-sizing:border-box}
+.nav:hover{background:#3A3734;color:#fff}
+.nav.on{background:#8A6F4D;color:#fff}
+.badge{margin-left:auto;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:#D6B98C;color:#2B2B2B;font:800 12px/22px Nunito,sans-serif;text-align:center;box-sizing:border-box}
+.main{flex:999 1 560px;min-width:0;padding:28px 36px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:22px}
+.card{background:#fff;border:1px solid #E4CFAE;border-radius:20px;padding:22px;box-sizing:border-box}
+.h2{font:700 20px/1.2 'Baloo Chettan 2',sans-serif;margin:0}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:#F7E7CE;font:700 12px/1.2 Nunito,sans-serif;color:#6E583C}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 18px;border-radius:999px;font:800 15px/1 Nunito,sans-serif;border:2px solid #2B2B2B;color:#2B2B2B;text-decoration:none;box-sizing:border-box;background:transparent}
+.btn.p{background:#8A6F4D;border-color:#8A6F4D;color:#fff}
+.btn.s{min-height:40px;padding:8px 14px;font-size:14px}
+.stat{flex:1 1 160px;display:flex;flex-direction:column;gap:6px}
+.big{font:800 30px/1 'Baloo Chettan 2',sans-serif}
+.small{font-size:13px;color:#5C554D}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #F0E4D0}
+.row:last-child{border-bottom:0}
+.av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 13px/1 Nunito,sans-serif;flex:none;background:#F7E7CE}
+.log{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #F0E4D0;font-size:14px}
+.log:last-child{border-bottom:0}
+
+.tbl{background:#fff;border:1px solid #E4CFAE;border-radius:20px;overflow-x:auto}
+.tbl table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+.tbl th,.tbl td{padding:13px 14px;border-bottom:1px solid #EFE1CA;text-align:left;vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl th{font:800 12px/1.2 Nunito,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#6E583C;background:#FBF1E2}
+.tag{display:inline-flex;padding:3px 9px;border-radius:999px;font:700 12px/1.2 Nunito,sans-serif;white-space:nowrap}
+.ok{background:#EEF5EF;color:#2F6B3D}.bad{background:#FBEAE6;color:#8E2F1F}.mid{background:#F7E7CE;color:#6E583C}.info{background:#E8EEF7;color:#2D4A73}
+.pbar{height:8px;border-radius:999px;background:#F0E2CC;overflow:hidden}
+.pbar i{display:block;height:100%;background:#8A6F4D;border-radius:999px}
+.pick{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;min-height:38px;box-sizing:border-box;border-radius:999px;background:#F7E7CE;font:700 13px/1.2 Nunito,sans-serif;color:#6E583C;border:0;cursor:pointer}
+.pick.on{background:#2B2B2B;color:#FFF7EF}
+.find{display:flex;align-items:center;gap:10px;min-height:46px;padding:0 16px;border:1px solid #CDB48D;border-radius:999px;background:#fff;min-width:240px;box-sizing:border-box}
+.find input{border:0;outline:0;font:400 15px/1.4 Poppins,sans-serif;flex:1;min-width:0;background:transparent}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.who{width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font:800 13px/1 Nunito,sans-serif;background:#F7E7CE;color:#2B2B2B;flex:none}
+.lrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #F0E4D0;font-size:14px;flex-wrap:wrap}
+.lrow:last-child{border-bottom:0}
+.bubble{max-width:80%;padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.5}
+.bubble.l{background:#FFF7EF;border:1px solid #E4CFAE;align-self:flex-start}
+.bubble.r{background:#2B2B2B;color:#FFF7EF;align-self:flex-end}
+.convb{display:flex;gap:12px;align-items:center;width:100%;text-align:left;padding:12px;border-radius:14px;border:1px solid transparent;background:transparent;cursor:pointer;font:inherit;color:inherit}
+.convb:hover{background:#FFFBF5}
+.convb.on{background:#FBF1E2;border-color:#CDB48D}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+  <aside class="side">
+    <span style="background: #FFF7EF; border-radius: 14px; padding: 8px 12px; line-height: 0; align-self: flex-start; margin-bottom: 6px"><img src="/assets/logo.png" alt="SOU" style="height: 34px; width: auto"></span>
+    <span style="font: 800 11px/1.2 Nunito, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #D6B98C; margin: 6px 8px 12px">Staff portal · Super admin</span>
+    <nav aria-label="Super admin portal" style="display: flex; flex-direction: column; gap: 4px">
+      <a class="nav" href="Admin-Dashboard.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Dashboard</a>
+      <a class="nav" href="Admin-Approvals.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/></svg>Approvals<span class="badge">7</span></a>
+      <a class="nav" href="Admin-Users.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M9 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM22 19v-1a4 4 0 0 0-3-3.9M16 4.1a4 4 0 0 1 0 7.8"/></svg>All users</a>
+      <a class="nav" href="Admin-Create-Staff.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>Staff &amp; roles</a>
+      <a class="nav on" href="Admin-View-Portal.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>View any portal</a>
+      <a class="nav" href="Admin-Activity.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Activity log</a>
+      <a class="nav" href="Support-Calendar.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v15H4zM4 10h16M9 3v4M15 3v4"/></svg>Calendar</a>
+      <a class="nav" href="Notifications.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg>Notifications</a>
+    </nav>
+    <a class="nav" href="Login-Staff.dc.html" style="margin-top: auto"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg>Log out</a>
+  </aside>
+
+  <main class="main">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h1 style="margin: 0; font: 800 32px/1.15 'Baloo Chettan 2', sans-serif">View any portal</h1>
+        <span style="color: #5C554D">See exactly what a student, teacher or Light admin sees. Viewing is read-only and is written to the activity log.</span>
+      </div>
+    </div>
+    <div class="cgrid">
+      <div class="card" style="display: flex; flex-direction: column; gap: 12px">
+        <span class="tag mid" style="align-self: flex-start">Student portal</span>
+        <h2 class="h2">See a student's portal</h2>
+        <label class="small" for="vp-s" style="display: flex; flex-direction: column; gap: 6px; font-weight: 700">Student<select id="vp-s" style="min-height: 46px; padding: 0 12px; border: 1px solid #CDB48D; border-radius: 12px; font: 400 15px/1.4 Poppins, sans-serif; background: #fff"><option>Aisha Rahman</option><option>Yusuf Ali</option><option>Maryam Kareem</option><option>Fatima Noor</option></select></label>
+        <a class="btn p" href="Student-Dashboard.dc.html" style="align-self: flex-start">Open student portal</a>
+      </div>
+      <div class="card" style="display: flex; flex-direction: column; gap: 12px">
+        <span class="tag mid" style="align-self: flex-start">Teacher portal</span>
+        <h2 class="h2">See a teacher's portal</h2>
+        <label class="small" for="vp-t" style="display: flex; flex-direction: column; gap: 6px; font-weight: 700">Teacher<select id="vp-t" style="min-height: 46px; padding: 0 12px; border: 1px solid #CDB48D; border-radius: 12px; font: 400 15px/1.4 Poppins, sans-serif; background: #fff"><option>Ustadha Hanan</option><option>Ustadha Hadjer</option><option>Ustadha Hafssa B</option><option>Ustadha Safia</option></select></label>
+        <a class="btn p" href="Teacher-Dashboard.dc.html" style="align-self: flex-start">Open teacher portal</a>
+      </div>
+      <div class="card" style="display: flex; flex-direction: column; gap: 12px">
+        <span class="tag mid" style="align-self: flex-start">Light admin portal</span>
+        <h2 class="h2">See SOU Support's portal</h2>
+        <span class="small" style="line-height: 1.6">Calendar, attendance, course approvals, reports and logins, as the Light admins see them.</span>
+        <a class="btn p" href="Support-Dashboard.dc.html" style="align-self: flex-start">Open Light admin portal</a>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

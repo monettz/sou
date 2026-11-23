@@ -152,6 +152,9 @@ export function startPortal(app) {
       });
       side.appendChild(btn);
     }
+    // the demo notice sits at the end of the content column, so the side menu reaches the bottom
+    const demo = document.querySelector('.demo-bar');
+    if (demo) (root.querySelector('.main') || document.body).appendChild(demo);
     if (app.after) app.after(name, root, { who, session, go });
     applyBehaviors(name, root, { who, go, linkTo: app.linkTo });
   }

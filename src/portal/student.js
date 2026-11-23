@@ -4,6 +4,7 @@ import { startPortal } from './runtime.js';
 
 const ROUTES = {
   dashboard: 'Student-Dashboard',
+  courses: 'Student-Courses',
   lesson: 'Student-Lesson',
   'lesson-check': 'Student-Lesson-Quiz',
   homework: 'Student-Quiz',

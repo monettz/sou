@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Teachers & courses</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FFF7EF;font-family:Poppins,system-ui,sans-serif;color:#2B2B2B}
+a{color:#6E583C}a:hover{color:#2B2B2B}
+.side{flex:1 1 240px;max-width:270px;background:#2B2B2B;color:#FFF7EF;padding:24px 16px;display:flex;flex-direction:column;gap:6px;box-sizing:border-box}
+.nav{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;font:700 15px/1.2 Nunito,sans-serif;color:#F2E6D3;text-decoration:none;min-height:44px;box-sizing:border-box}
+.nav:hover{background:#3A3734;color:#fff}
+.nav.on{background:#8A6F4D;color:#fff}
+.main{flex:999 1 560px;min-width:0;padding:28px 36px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px}
+.card{background:#fff;border:1px solid #E4CFAE;border-radius:20px;padding:22px;box-sizing:border-box}
+.h2{font:700 20px/1.2 'Baloo Chettan 2',sans-serif;margin:0}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:#F7E7CE;font:700 12px/1.2 Nunito,sans-serif;color:#6E583C}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 18px;border-radius:999px;font:800 15px/1 Nunito,sans-serif;border:2px solid #2B2B2B;color:#2B2B2B;text-decoration:none;box-sizing:border-box;background:transparent;cursor:pointer}
+.btn.p{background:#8A6F4D;border-color:#8A6F4D;color:#fff}
+.btn[disabled]{border-color:#CDB48D;color:#8C8378;cursor:not-allowed}
+.small{font-size:13px;color:#5C554D}
+.bar{height:8px;border-radius:999px;background:#F0E2CC;overflow:hidden}
+.bar i{display:block;height:100%;background:#8A6F4D;border-radius:999px}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #F0E4D0;font-size:14px}
+.kv:last-child{border-bottom:0}
+.msg{max-width:80%;padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.5}
+.them{background:#FFF7EF;border:1px solid #E4CFAE;align-self:flex-start}
+.me{background:#2B2B2B;color:#FFF7EF;align-self:flex-end}
+.time{display:inline-flex;align-self:flex-start;padding:3px 9px;border-radius:999px;background:#2B2B2B;color:#FFF7EF;font:800 12px/1.2 Nunito,sans-serif;text-decoration:none}
+
+.tbl{background:#fff;border:1px solid #E4CFAE;border-radius:20px;overflow-x:auto}
+.tbl table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+.tbl th,.tbl td{padding:13px 14px;border-bottom:1px solid #EFE1CA;text-align:left;vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl th{font:800 12px/1.2 Nunito,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#6E583C;background:#FBF1E2}
+.tag{display:inline-flex;padding:3px 9px;border-radius:999px;font:700 12px/1.2 Nunito,sans-serif;white-space:nowrap}
+.ok{background:#EEF5EF;color:#2F6B3D}.bad{background:#FBEAE6;color:#8E2F1F}.mid{background:#F7E7CE;color:#6E583C}.info{background:#E8EEF7;color:#2D4A73}
+.pbar{height:8px;border-radius:999px;background:#F0E2CC;overflow:hidden}
+.pbar i{display:block;height:100%;background:#8A6F4D;border-radius:999px}
+.pick{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;min-height:38px;box-sizing:border-box;border-radius:999px;background:#F7E7CE;font:700 13px/1.2 Nunito,sans-serif;color:#6E583C;border:0;cursor:pointer}
+.pick.on{background:#2B2B2B;color:#FFF7EF}
+.find{display:flex;align-items:center;gap:10px;min-height:46px;padding:0 16px;border:1px solid #CDB48D;border-radius:999px;background:#fff;min-width:240px;box-sizing:border-box}
+.find input{border:0;outline:0;font:400 15px/1.4 Poppins,sans-serif;flex:1;min-width:0;background:transparent}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.who{width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font:800 13px/1 Nunito,sans-serif;background:#F7E7CE;color:#2B2B2B;flex:none}
+.lrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #F0E4D0;font-size:14px;flex-wrap:wrap}
+.lrow:last-child{border-bottom:0}
+.bubble{max-width:80%;padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.5}
+.bubble.l{background:#FFF7EF;border:1px solid #E4CFAE;align-self:flex-start}
+.bubble.r{background:#2B2B2B;color:#FFF7EF;align-self:flex-end}
+.convb{display:flex;gap:12px;align-items:center;width:100%;text-align:left;padding:12px;border-radius:14px;border:1px solid transparent;background:transparent;cursor:pointer;font:inherit;color:inherit}
+.convb:hover{background:#FFFBF5}
+.convb.on{background:#FBF1E2;border-color:#CDB48D}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+  <aside class="side">
+    <span style="background: #FFF7EF; border-radius: 14px; padding: 8px 12px; line-height: 0; align-self: flex-start; margin-bottom: 6px"><img src="/assets/logo.png" alt="SOU" style="height: 34px; width: auto"></span>
+    <span style="font: 800 11px/1.2 Nunito, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #D6B98C; margin: 6px 8px 12px">Staff portal · Light admin</span>
+    <nav aria-label="Light admin portal" style="display: flex; flex-direction: column; gap: 4px">
+      <a class="nav" href="Support-Dashboard.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Overview</a>
+      <a class="nav" href="Support-Students.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M9 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>Students</a>
+      <a class="nav on" href="Support-Teachers.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM8 7h7"/></svg>Teachers &amp; courses</a>
+      <a class="nav" href="Support-Chats.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Chats</a>
+      <a class="nav" href="Support-Help.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9a2.5 2.5 0 1 1 3 2.5c-.5.2-.5.7-.5 1.5M12 17h.01"/></svg>Help requests</a>
+      <a class="nav" href="Support-Calendar.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v15H4zM4 10h16M9 3v4M15 3v4"/></svg>Calendar</a>
+      <a class="nav" href="Support-Attendance.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v3H8zM6 5H4v16h16V5h-2M9 14l2 2 4-4"/></svg>Attendance</a>
+      <a class="nav" href="Support-Course-Approvals.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4v16H5zM11 4h4v16h-4zM17 5l3 .8-3.5 14.2-3-.8z"/></svg>Courses &amp; library</a>
+      <a class="nav" href="Support-Reports.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h3"/></svg>Reports &amp; messages</a>
+      <a class="nav" href="Support-Create-Login.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M8.5 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19 8v6M16 11h6"/></svg>Create login</a>
+      <a class="nav" href="Notifications.dc.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg>Notifications</a>
+    </nav>
+    <a class="nav" href="Login-Staff.dc.html" style="margin-top: auto"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg>Log out</a>
+  </aside>
+
+  <main class="main">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h1 style="margin: 0; font: 800 32px/1.15 'Baloo Chettan 2', sans-serif">Teachers &amp; courses</h1>
+        <span style="color: #5C554D">Who teaches what, their classes this week and their attendance.</span>
+      </div>
+      <a class="btn p" href="Support-Course-Approvals.dc.html">Courses to approve</a>
+    </div>
+    <div class="cgrid">
+      <div class="card member" style="display: flex; flex-direction: column; gap: 12px">
+        <span style="display: flex; align-items: center; gap: 12px"><span class="who">H</span><span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 16px">Ustadha Hanan</b><span class="small">Head of Arabic</span></span></span>
+        <div><div class="lrow"><span>Arabic Beginners · 12 students</span></div><div class="lrow"><span>Arabic Intermediate · 6 students</span></div><div class="lrow"><span>Arabic for travellers · waiting for approval</span></div></div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap"><span class="tag mid">9 classes this week</span><span class="tag ok">Attendance 100%</span></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px"><a class="btn" href="Support-Calendar.dc.html">Calendar</a><a class="btn" href="Support-Chats.dc.html">Read chats</a></div>
+      </div>
+      <div class="card member" style="display: flex; flex-direction: column; gap: 12px">
+        <span style="display: flex; align-items: center; gap: 12px"><span class="who">H</span><span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 16px">Ustadha Hadjer</b><span class="small">Qur'an & Tajweed</span></span></span>
+        <div><div class="lrow"><span>Qur'an group · 8 students</span></div><div class="lrow"><span>Tajweed foundations · 10 students</span></div></div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap"><span class="tag mid">7 classes this week</span><span class="tag ok">Attendance 96%</span></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px"><a class="btn" href="Support-Calendar.dc.html">Calendar</a><a class="btn" href="Support-Chats.dc.html">Read chats</a></div>
+      </div>
+      <div class="card member" style="display: flex; flex-direction: column; gap: 12px">
+        <span style="display: flex; align-items: center; gap: 12px"><span class="who">H</span><span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 16px">Ustadha Hafssa B</b><span class="small">Islamic studies</span></span></span>
+        <div><div class="lrow"><span>Aqeedah 1-to-1 · 3 students</span></div><div class="lrow"><span>Fiqh crash course · 8 students</span></div></div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap"><span class="tag mid">5 classes this week</span><span class="tag ok">Attendance 100%</span></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px"><a class="btn" href="Support-Calendar.dc.html">Calendar</a><a class="btn" href="Support-Chats.dc.html">Read chats</a></div>
+      </div>
+      <div class="card member" style="display: flex; flex-direction: column; gap: 12px">
+        <span style="display: flex; align-items: center; gap: 12px"><span class="who">S</span><span style="display: flex; flex-direction: column; gap: 2px"><b style="font-size: 16px">Ustadha Safia</b><span class="small">Qaidah</span></span></span>
+        <div><div class="lrow"><span>Qaidah for children · 9 students</span></div></div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap"><span class="tag mid">6 classes this week</span><span class="tag ok">Attendance 92%</span></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px"><a class="btn" href="Support-Calendar.dc.html">Calendar</a><a class="btn" href="Support-Chats.dc.html">Read chats</a></div>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

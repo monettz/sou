@@ -361,6 +361,31 @@ const screens = {
     });
   },
 
+  'Student-Courses'(root) {
+    const tpl = $('#crash-tpl', root); if (!tpl) return;
+    db.get().purchases.forEach(name => { const el = tpl.content.firstElementChild.cloneNode(true); $('[data-name]', el).textContent = name; $('a', el).setAttribute('href', '#/lesson'); tpl.before(el); });
+  },
+
+  'Support-Students'(root) {
+    const body = $('#stu-rows', root); if (!body) return;
+    db.get().users.filter(u => /student/i.test(u.role)).forEach(u => body.insertAdjacentHTML('afterbegin', `<tr><td><b>${esc(u.name)}</b><br><span class="small">${esc(u.email || '')}</span></td><td>Just added</td><td>To be assigned</td><td><span class="tag mid">Waiting</span></td><td><span class="tag info">New</span></td><td><a class="btn" href="#/support/view">Open</a></td></tr>`));
+  },
+
+  'Admin-Activity'(root) {
+    const body = $('#log-rows', root);
+    db.get().users.slice().reverse().forEach(u => body?.insertAdjacentHTML('afterbegin', `<tr><td>Recently</td><td>${u.role === 'teacher' || u.role === 'support' ? 'Yasmine (Super admin)' : 'SOU Support'}</td><td>Created login for ${esc(u.name)} (${esc(u.role)})</td><td><span class="tag ok">Accounts</span></td></tr>`));
+    on($('#log-csv', root), () => {
+      const rows = $$('tr', root).filter(r => r.style.display !== 'none').map(r => $$('th,td', r).map(c => `"${txt(c).replace(/"/g, '""')}"`).join(','));
+      download('sou-activity-log.csv', rows.join('\n'), 'text/csv'); toast('Activity log exported');
+    });
+  },
+
+  'Admin-View-Portal'(root) {
+    $$('a.btn', root).forEach(a => a.addEventListener('click', () => {
+      const sel = $('select', a.closest('.card')); toast(`Viewing ${sel ? sel.value + "'s" : 'the Light admin'} portal · read-only · logged`);
+    }));
+  },
+
   /* ---------- light admin ---------- */
   'Support-Dashboard'(root) {
     const d = db.get();
@@ -574,7 +599,7 @@ function calendarClasses(root, who) {
     const ev = document.createElement(who === 'student' ? 'a' : 'div');
     ev.className = 'ev'; if (who === 'student') ev.href = '#';
     ev.style.border = '2px solid #8A6F4D';
-    ev.innerHTML = who === 'student' ? `<b>${esc(c.when.slice(4))} · ${esc(c.subject)}</b>${esc(c.teacher)} · ${esc(c.len)}<span class="meet">● Google Meet</span>` : `<b>${esc(c.when.slice(4))} · ${esc(c.student.split(' (')[0])}</b>${esc(c.subject)} · new`;
+    ev.innerHTML = who === 'student' ? `<span class="et">${esc(c.when.slice(4))}</span><b>${esc(c.subject)}</b>${esc(c.teacher)} · ${esc(c.len)}<span class="meet">● Google Meet</span>` : `<span class="et">${esc(c.when.slice(4))}</span><b>${esc(c.student.split(" (")[0])}</b>${esc(c.subject)} · new`;
     days[i].appendChild(ev);
   });
 }
