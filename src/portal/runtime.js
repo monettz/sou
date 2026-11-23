@@ -135,6 +135,20 @@ export function startPortal(app) {
       else if (href === '#') a.addEventListener('click', e => e.preventDefault());
     });
     root.querySelectorAll('form').forEach(f => f.addEventListener('submit', e => e.preventDefault()));
+    // phones: the side menu folds behind a hamburger button
+    const side = root.querySelector('.side');
+    if (side) {
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'menu-toggle';
+      btn.setAttribute('aria-label', 'Open menu'); btn.setAttribute('aria-expanded', 'false');
+      btn.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="m-open" d="M4 7h16M4 12h16M4 17h16"/><path class="m-close" d="M6 6l12 12M18 6L6 18"/></svg>';
+      btn.dataset.wired = '1';
+      btn.addEventListener('click', () => {
+        const open = side.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open); btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+      side.appendChild(btn);
+    }
     if (app.after) app.after(name, root, { who, session, go });
     applyBehaviors(name, root, { who, go, linkTo: app.linkTo });
   }

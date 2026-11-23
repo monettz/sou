@@ -62,7 +62,7 @@ function searchBoxes(root) {
 // anything still not wired gives honest feedback instead of doing nothing
 function fallback(root) {
   $$('button, a[href="#"]', root).forEach(el => {
-    if (el.dataset.wired || el.dataset.dcEv !== undefined || el.type === 'submit' || el.closest('form#login-form, form#staff-step1, form#staff-step2')) return;
+    if (el.dataset.wired || el.dataset.dcEv !== undefined || el.dataset.demoRole || el.hasAttribute('data-activate') || el.classList.contains('menu-toggle') || el.type === 'submit' || el.closest('form#login-form, form#staff-step1, form#staff-step2')) return;
     if (el.closest('[role="group"], [role="radiogroup"], .seg')) return;
     const label = txt(el) || el.getAttribute('aria-label') || 'Done';
     on(el, () => toast(`${label}: done`));

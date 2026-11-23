@@ -29,13 +29,25 @@ html { -webkit-text-size-adjust: 100%; }
 
 /* ---------- phones and small tablets ---------- */
 @media (max-width: 760px) {
-  /* side menu becomes a bar across the top */
-  #app .side { max-width: none !important; min-width: 0 !important; flex: 1 1 100% !important; padding: 12px 12px 8px !important; gap: 6px !important; }
-  #app .side > nav { flex-direction: row !important; flex-wrap: nowrap !important; overflow-x: auto; min-width: 0; max-width: 100%; gap: 6px !important; padding-bottom: 4px; scrollbar-width: none; }
-  #app .side > nav::-webkit-scrollbar { display: none; }
-  #app .side .nav { white-space: nowrap; flex: none; }
-  #app .side > div { display: none !important; }
-  #app .side > a.nav { margin-top: 0 !important; align-self: flex-start; }
+  /* side menu becomes a top bar with a hamburger button */
+  #app .side {
+    position: sticky; top: 0; z-index: 40; max-width: none !important; min-width: 0 !important;
+    flex: 1 1 100% !important; flex-direction: row !important; flex-wrap: wrap !important;
+    align-items: center !important; padding: 10px 16px !important; gap: 0 !important;
+    box-shadow: 0 4px 14px rgba(43, 43, 43, .08);
+  }
+  #app .side > img, #app .side > span:first-child { order: 0; margin: 0 !important; height: auto; }
+  #app .side > img { height: 40px !important; }
+  #app .side > span:first-child img { height: 30px !important; }
+  #app .side > .menu-toggle { order: 1; margin-left: auto; display: inline-flex; }
+  #app .side > :not(img):not(:first-child):not(.menu-toggle) { order: 2; flex-basis: 100%; }
+  #app .side:not(.open) > :not(img):not(:first-child):not(.menu-toggle) { display: none !important; }
+  #app .side.open > nav { display: flex !important; flex-direction: column !important; gap: 4px !important; padding: 12px 0 6px; max-height: calc(100vh - 140px); overflow-y: auto; }
+  #app .side.open > a.nav, #app .side.open > span:not(:first-child) { display: flex !important; margin: 0 !important; }
+  #app .side.open > span:not(:first-child) { padding: 10px 2px 0; }
+  #app .side.open > div { display: flex !important; margin: 0 !important; padding: 0 !important; }
+  #app .side.open > div > div { display: none !important; }
+  #app .side .nav { white-space: nowrap; min-height: 48px; }
   #app .main { padding: 20px 16px 32px !important; }
 
   /* side-by-side panels stack, full width */
@@ -73,3 +85,12 @@ html { -webkit-text-size-adjust: 100%; }
 #sou-toast[data-kind="err"] { background: #8E2F1F; }
 .demo-bar button { margin-left: 6px; border: 0; background: none; padding: 0; font: inherit; color: #6E583C; text-decoration: underline; cursor: pointer; }
 #app [contenteditable="true"] { outline: 2px dashed #CDB48D; outline-offset: 2px; border-radius: 4px; }
+
+/* hamburger button (only shown on phones) */
+.menu-toggle {
+  display: none; align-items: center; justify-content: center; width: 46px; height: 46px; padding: 0;
+  border-radius: 50%; border: 2px solid currentColor; background: transparent; color: inherit; cursor: pointer;
+}
+.menu-toggle .m-close { display: none; }
+.side.open .menu-toggle .m-open { display: none; }
+.side.open .menu-toggle .m-close { display: inline; }
