@@ -66,7 +66,6 @@ startPortal({
       const step2 = root.querySelector('#staff-step2');
       const err = root.querySelector('#staff-error');
       let pending = null;
-      step2.style.opacity = '.45';
       step2.addEventListener('submit', () => {
         if (!pending) { step1.querySelector('input')?.focus(); return; }
         const code = [...step2.querySelectorAll('.code')].map(i => i.value).join('');
@@ -85,7 +84,8 @@ startPortal({
         const role = /^(admin|founder|yasmine)@/i.test(email) ? 'super' : /^support@/i.test(email) ? 'support' : 'teacher';
         pending = { role, email };
         if (role === 'teacher') { session.set(pending); go(HOME.teacher); return; }
-        step2.style.opacity = '1';
+        step1.hidden = true; // one step at a time
+        step2.hidden = false;
         step2.querySelector('.code')?.focus();
       });
       // move between the 6 code boxes as people type

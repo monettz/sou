@@ -1,24 +1,54 @@
-/* Shared portal basics. Each screen brings its own styles (see views/). */
+/* Shared portal basics. Each screen brings its own styles (see views/).
+   The rules below adapt every screen for tablets and phones. */
 html { -webkit-text-size-adjust: 100%; }
 [hidden] { display: none !important; }
+
 /* keep visually-hidden header labels inside their scrolling table box */
 #app th { position: relative; }
 
+/* form fields always fill their space and never push the layout wider */
+#app .field input, #app .field select, #app .field textarea { width: 100%; min-width: 0; box-sizing: border-box; }
+
+/* demo notice: sits at the end of the page, never on top of content */
 .demo-bar {
-  position: fixed; right: 12px; bottom: 12px; z-index: 50;
-  padding: 8px 14px; border-radius: 999px;
-  background: #2B2B2B; color: #FFF7EF;
-  font: 700 12px/1.3 Nunito, system-ui, sans-serif;
-  box-shadow: 0 6px 18px rgba(43, 43, 43, .25);
-  max-width: calc(100vw - 24px);
+  display: block; width: fit-content; max-width: calc(100% - 32px);
+  margin: 16px auto 20px; padding: 8px 14px; box-sizing: border-box; border-radius: 999px;
+  background: #F7E7CE; color: #5C554D; text-align: center;
+  font: 700 12px/1.4 Nunito, system-ui, sans-serif;
 }
 
-/* Phones: the side menu becomes a bar across the top */
+/* ---------- phones and small tablets ---------- */
 @media (max-width: 760px) {
+  /* side menu becomes a bar across the top */
   #app .side { max-width: none !important; min-width: 0 !important; flex: 1 1 100% !important; padding: 12px 12px 8px !important; gap: 6px !important; }
-  #app .side > nav { flex-direction: row !important; flex-wrap: nowrap !important; overflow-x: auto; min-width: 0; max-width: 100%; gap: 6px !important; padding-bottom: 4px; }
+  #app .side > nav { flex-direction: row !important; flex-wrap: nowrap !important; overflow-x: auto; min-width: 0; max-width: 100%; gap: 6px !important; padding-bottom: 4px; scrollbar-width: none; }
+  #app .side > nav::-webkit-scrollbar { display: none; }
   #app .side .nav { white-space: nowrap; flex: none; }
   #app .side > div { display: none !important; }
   #app .side > a.nav { margin-top: 0 !important; align-self: flex-start; }
-  #app .main { padding: 20px 16px 64px !important; }
+  #app .main { padding: 20px 16px 32px !important; }
+
+  /* side-by-side panels stack, full width */
+  #app [style*="flex: 1 1 2"], #app [style*="flex: 1 1 3"], #app [style*="flex: 1 1 4"],
+  #app [style*="flex: 2 1"], #app [style*="flex: 3 1"] {
+    flex-basis: 100% !important; min-width: 0 !important; max-width: 100% !important;
+  }
+
+  /* 2-, 3- and 4-column form/detail grids become one column */
+  #app [style*="grid-template-columns: repeat(2"],
+  #app [style*="grid-template-columns: repeat(3"],
+  #app [style*="grid-template-columns: repeat(4"] { grid-template-columns: minmax(0, 1fr) !important; }
+
+  /* library shelves and report numbers: two per row */
+  #app .grid:not([style*="min-width"]) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  #app .auto { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+
+  /* week calendars become a simple list of the days that have something on */
+  #app .week { min-width: 0 !important; grid-template-columns: minmax(0, 1fr) !important; }
+  #app .week .day { min-height: 0 !important; }
+  #app .week .day:not(:has(.ev)) { display: none; }
+  #app .week .dh { flex-direction: row !important; align-items: baseline; gap: 8px !important; }
+
+  /* the open "More" menu shown on the users table is a desktop illustration */
+  #app [role="menu"] { display: none !important; }
 }
