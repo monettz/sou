@@ -167,7 +167,8 @@ export function startPortal(app) {
   curtain.className = 'sou-curtain'; curtain.setAttribute('aria-hidden', 'true');
   curtain.innerHTML = '<img src="/assets/logo-light.png" alt="" width="549" height="167">';
   document.body.appendChild(curtain);
-  const calm = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // animations are always on for every visitor, same as the website
+  const calm = () => false;
   let turn = 0;
   function lift() {
     curtain.classList.add('leave'); curtain.classList.remove('cover');
