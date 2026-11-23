@@ -39,9 +39,11 @@ html { -webkit-text-size-adjust: 100%; }
   #app .side > img, #app .side > span:first-child { order: 0; margin: 0 !important; height: auto; }
   #app .side > img { height: 40px !important; }
   #app .side > span:first-child img { height: 30px !important; }
-  #app .side > .menu-toggle { order: 1; margin-left: auto; display: inline-flex; }
-  #app .side > :not(img):not(:first-child):not(.menu-toggle) { order: 2; flex-basis: 100%; }
-  #app .side:not(.open) > :not(img):not(:first-child):not(.menu-toggle) { display: none !important; }
+  #app .side > .menu-toggle { order: 1; margin-left: 10px; display: inline-flex; }
+  #app .side > .sou-bell.phone { order: 1; margin-left: auto; display: inline-flex !important; }
+  #app .sou-topbar { display: none !important; }
+  #app .side > :not(img):not(:first-child):not(.menu-toggle):not(.sou-bell) { order: 2; flex-basis: 100%; }
+  #app .side:not(.open) > :not(img):not(:first-child):not(.menu-toggle):not(.sou-bell) { display: none !important; }
   #app .side.open > nav { display: flex !important; flex-direction: column !important; gap: 4px !important; padding: 12px 0 6px; max-height: calc(100vh - 140px); overflow-y: auto; }
   #app .side.open > a.nav, #app .side.open > span:not(:first-child) { display: flex !important; margin: 0 !important; }
   #app .side.open > span:not(:first-child) { padding: 10px 2px 0; }
@@ -184,3 +186,12 @@ html { -webkit-text-size-adjust: 100%; }
 .sou-curtain.cover img { opacity: 1; transform: none; }
 .sou-curtain.instant, .sou-curtain.instant img { transition: none !important; }
 .sou-curtain.leave { transform: translateY(-100%); transition: transform .6s cubic-bezier(.76,0,.24,1); }
+
+/* ======================= notification bell (top of every page) ======================= */
+.sou-bell { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; flex: none; box-sizing: border-box; border-radius: 50%; border: 2px solid currentColor; color: inherit; text-decoration: none; transition: background-color .2s, transform .15s; }
+.sou-bell:active { transform: scale(.95); }
+.sou-bell-n { position: absolute; top: -5px; right: -5px; min-width: 21px; height: 21px; padding: 0 5px; box-sizing: border-box; border-radius: 999px; background: #B3412F; color: #fff; border: 2px solid #FFF7EF; display: inline-flex; align-items: center; justify-content: center; font: 800 11px/1 Nunito, system-ui, sans-serif; }
+.sou-bell.phone { display: none; }
+#app .sou-topbar { display: flex; justify-content: flex-end; align-items: center; margin: -10px 0 -8px; color: #2B2B2B; }
+#app .sou-topbar .sou-bell { background: #fff; border-color: #E4CFAE; }
+@media (hover: hover) { #app .sou-topbar .sou-bell:hover { background: #FBF1E2; border-color: #CDB48D; } }

@@ -156,7 +156,52 @@ export function startPortal(app) {
     const demo = document.querySelector('.demo-bar');
     if (demo) (root.querySelector('.main') || document.body).appendChild(demo);
     if (app.after) app.after(name, root, { who, session, go });
+    addBell(root);
     applyBehaviors(name, root, { who, go, linkTo: app.linkTo });
+  }
+
+  /* notifications live behind a bell at the top of every page, not in the side menu */
+  const BELL_SVG = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg>';
+  let seedNotes = null;
+  function unread() {
+    const role = who()?.role || 'student';
+    if (!seedNotes) {
+      seedNotes = {};
+      const src = VIEWS.Notifications;
+      if (src) {
+        const t = document.createElement('template');
+        t.innerHTML = (src.match(/<x-dc>([\s\S]*?)<\/x-dc>/) || [, ''])[1];
+        t.content.querySelectorAll('[data-role]').forEach(col => {
+          seedNotes[col.dataset.role] = [...col.querySelectorAll('.n.new b')].map(b => b.textContent.trim());
+        });
+      }
+    }
+    const d = db.get();
+    const titles = new Set([...(seedNotes[role] || []), ...d.notifications.filter(n => n.role === 'all' || n.role === role).map(n => n.title)]);
+    return [...titles].filter(t => !d.readNotes.includes(t)).length;
+  }
+  function addBell(root) {
+    const side = root.querySelector('.side');
+    const main = root.querySelector('.main');
+    if (!side || !main) return;
+    const href = app.linkTo('Notifications');
+    side.querySelectorAll('a').forEach(a => { if (a.getAttribute('href') === href) a.remove(); });
+    const n = unread();
+    const make = (cls) => {
+      const a = document.createElement('a');
+      a.className = 'sou-bell ' + cls; a.href = href; a.dataset.wired = '1';
+      a.setAttribute('aria-label', n ? `Notifications, ${n} new` : 'Notifications');
+      a.innerHTML = BELL_SVG + (n ? `<span class="sou-bell-n">${n > 9 ? '9+' : n}</span>` : '');
+      return a;
+    };
+    // desktop & tablet: a slim bar at the top of the content
+    const bar = document.createElement('div');
+    bar.className = 'sou-topbar';
+    bar.appendChild(make('top'));
+    main.prepend(bar);
+    // phones: next to the menu button in the sticky top bar
+    const toggle = side.querySelector('.menu-toggle');
+    if (toggle) toggle.before(make('phone'));
   }
 
   function go(hash) { if (location.hash === hash) route(); else location.hash = hash; }
