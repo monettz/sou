@@ -57,6 +57,7 @@ const SUPER_VIEWS = import.meta.glob(['./views/*.dc.html', '!./views/Login-Stude
 startPortal({
   views: SUPER_VIEWS,
   sessionKey: 'sou-staff-session',
+  homeView: (who) => ({ teacher: 'Teacher-Dashboard', support: 'Support-Dashboard', super: 'Admin-Dashboard' })[who?.role],
   linkTo(view) {
     if (view === 'Login-Staff' || view === 'Login-Student') return '#/logout';
     if (view === 'Activate-Account') return '#/activate';
@@ -125,7 +126,7 @@ startPortal({
     if (view === 'Notifications') {
       const role = who()?.role;
       root.querySelectorAll('[data-role]').forEach(el => { el.hidden = el.dataset.role !== role; });
-      const t = root.querySelector('#notif-title'); if (t) t.textContent = 'My notifications';
+      const t = root.querySelector('#notif-title'); if (t) t.textContent = 'Notifications';
     }
   },
 });

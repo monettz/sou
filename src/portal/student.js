@@ -21,6 +21,7 @@ const STAFF_HINT = /@studentsoftheummah\.com$/i;
 startPortal({
   views: import.meta.glob(['./views/Student-*.dc.html', './views/Login-Student.dc.html', './views/Activate-Account.dc.html', './views/Notifications.dc.html'], { query: '?raw', import: 'default', eager: true }),
   sessionKey: 'sou-student-session',
+  homeView: () => 'Student-Dashboard',
   linkTo(view) {
     if (view === 'Login-Student') return '#/logout';
     if (view === 'Activate-Account') return '#/activate';
@@ -54,7 +55,7 @@ startPortal({
     }
     if (view === 'Notifications') {
       root.querySelectorAll('[data-role]').forEach(el => { el.hidden = el.dataset.role !== 'student'; });
-      const t = root.querySelector('#notif-title'); if (t) t.textContent = 'My notifications';
+      const t = root.querySelector('#notif-title'); if (t) t.textContent = 'Notifications';
     }
   },
 });

@@ -114,7 +114,11 @@ export function startPortal(app) {
       current = { name, inst, view };
       inst._rerender = () => draw();
     }
-    styleEl.textContent = view.styles;
+    // a shared page (notifications) borrows the side menu and its styles from the person's own dashboard
+    const home = view.markup.includes('data-borrow-side') && app.homeView ? app.homeView(who()) : null;
+    const homeSrc = home && VIEWS[home];
+    current.side = homeSrc ? ((homeSrc.match(/<aside class="side">([\s\S]*?)<\/aside>/) || [])[1] || null) : null;
+    styleEl.textContent = (homeSrc ? (cache[home] || (cache[home] = parseView(homeSrc))).styles + '\n' : '') + view.styles;
     // play the enter animation once per page (not on every redraw)
     root.classList.remove('entering'); void root.offsetWidth; root.classList.add('entering');
     clearTimeout(render.t); render.t = setTimeout(() => root.classList.remove('entering'), 1300);
@@ -130,6 +134,8 @@ export function startPortal(app) {
     const handlers = [];
     proc(tpl.content, inst.renderVals(), handlers);
     root.replaceChildren(tpl.content);
+    const borrow = root.querySelector('aside[data-borrow-side]');
+    if (borrow && current.side) { borrow.innerHTML = current.side; borrow.querySelectorAll('.nav.on').forEach(a => a.classList.remove('on')); }
     root.querySelectorAll('[data-dc-ev]').forEach(el => { const h = handlers[+el.dataset.dcEv]; el.addEventListener(h.type, (e) => { if (el.tagName === 'A') e.preventDefault(); h.fn(e); }); });
     root.querySelectorAll('a[href]').forEach(a => {
       const href = a.getAttribute('href');

@@ -72,32 +72,33 @@ function fallback(root) {
 /* ======================= notifications ======================= */
 function renderNotifications(root, role) {
   const d = db.get();
-  $$('[data-role]', root).forEach(col => {
-    const r = col.dataset.role;
-    const mine = d.notifications.filter(n => n.role === 'all' || n.role === r);
-    const tpl = $('.n.new', col) || $('.n', col);
-    const head = $('.head', col);
-    mine.slice().reverse().forEach(n => {
-      const el = tpl.cloneNode(true);
-      el.classList.add('new');
-      el.classList.toggle('crash', /crash course/i.test(n.title));
-      $('b', el).textContent = n.title; $('small', el).textContent = n.sub || '';
-      head.after(el);
-    });
-    $$('.n', col).forEach(el => {
-      if (d.readNotes.includes(txt($('b', el)))) el.classList.remove('new');
-      el.style.cursor = 'pointer';
-      el.tabIndex = 0;
-      el.addEventListener('click', () => { el.classList.remove('new'); db.update(x => { const t = txt($('b', el)); if (!x.readNotes.includes(t)) x.readNotes.push(t); }); count(); });
-    });
-    const count = () => { const c = $('.count', col); if (c) c.textContent = $$('.n.new', col).length; };
-    count();
+  const typeOf = (t) => /crash course/i.test(t) ? 'crash' : /message|chat/i.test(t) ? 'chat' : /class/i.test(t) ? 'class' : /pay/i.test(t) ? 'payment' : /approv|enrol/i.test(t) ? 'approval' : /login|account|student/i.test(t) ? 'account' : /report/i.test(t) ? 'report' : /homework|quiz|answer|mark/i.test(t) ? 'homework' : 'lesson';
+  const col = $(`[data-role="${role}"]`, root); if (!col) return;
+  const today = $('.grp', col);
+  d.notifications.filter(n => n.role === 'all' || n.role === role).slice().reverse().forEach(n => {
+    const ty = typeOf(n.title);
+    const tpl = $(`.n[data-type="${ty}"]`, col) || $('.n', col);
+    const el = tpl.cloneNode(true);
+    el.classList.add('new'); el.dataset.type = ty;
+    $('b', el).textContent = n.title; $('small', el).textContent = n.sub || '';
+    $('.tm', el).firstChild.textContent = 'Just now';
+    today.prepend(el);
   });
-  const markAll = document.createElement('button');
-  markAll.type = 'button'; markAll.textContent = 'Mark all as read';
-  markAll.style.cssText = 'align-self:flex-start;min-height:44px;padding:0 18px;border-radius:999px;border:2px solid #2B2B2B;background:transparent;font:800 14px/1 Nunito,sans-serif;cursor:pointer';
-  $('#notif-title', root)?.parentElement.appendChild(markAll);
-  on(markAll, () => { $$('[data-role]:not([hidden]) .n', root).forEach(n => n.click()); toast('All notifications marked as read'); });
+  const count = () => {
+    const c = $$('.n.new', col).length; const s = $('#nt-sub', root);
+    if (s) s.textContent = c ? `${c} new since your last visit` : 'You are all caught up';
+    // keep the bell's number in step
+    $$('.sou-bell', root).forEach(bell => { const n = $('.sou-bell-n', bell); bell.setAttribute('aria-label', c ? `Notifications, ${c} new` : 'Notifications'); if (!c) n?.remove(); else if (n) n.textContent = c > 9 ? '9+' : c; });
+  };
+  $$('.n', col).forEach(el => {
+    if (d.readNotes.includes(txt($('b', el)))) el.classList.remove('new');
+    el.tabIndex = 0; el.setAttribute('role', 'button');
+    const read = () => { el.classList.remove('new'); db.update(x => { const t = txt($('b', el)); if (!x.readNotes.includes(t)) x.readNotes.push(t); }); count(); };
+    el.addEventListener('click', read);
+    el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); read(); } });
+  });
+  count();
+  on($('#nt-markall', root), () => { $$('.n.new', col).forEach(n => n.click()); toast('All notifications marked as read'); });
 }
 
 /* ======================= per-screen behaviours ======================= */
@@ -275,13 +276,7 @@ const screens = {
   },
 
   'Notifications'(root, ctx) {
-    const role = ctx.who()?.role;
-    renderNotifications(root, role);
-    const home = { student: '#/dashboard', teacher: '#/teacher', support: '#/support', super: '#/super' }[role] || '#/';
-    const back = document.createElement('a');
-    back.href = home; back.className = 'back-link'; back.dataset.wired = '1';
-    back.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Back to dashboard';
-    root.firstElementChild?.firstElementChild?.before(back);
+    renderNotifications(root, ctx.who()?.role || 'student');
   },
 
   /* ---------- teacher ---------- */

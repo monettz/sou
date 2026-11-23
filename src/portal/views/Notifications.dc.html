@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Notifications for every role</title>
+<title>Notifications</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -11,73 +11,112 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;display=swap">
 <style>
 body{margin:0;background:#FFF7EF;font-family:Poppins,system-ui,sans-serif;color:#2B2B2B}
-a{color:#6E583C}a:hover{color:#2B2B2B}
-.col{flex:1 1 280px;min-width:0;background:#fff;border:1px solid #E4CFAE;border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
-.head{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #EFE1CA}
-.head b{font:700 19px/1.2 'Baloo Chettan 2',sans-serif}
-.count{min-width:24px;height:24px;padding:0 7px;border-radius:999px;background:#8A6F4D;color:#fff;font:800 12px/24px Nunito,sans-serif;text-align:center;box-sizing:border-box}
-.n{display:flex;gap:12px;padding:14px 18px;border-bottom:1px solid #F3E8D6;font-size:14px;line-height:1.45}
-.n:last-child{border-bottom:0}
-.n.new{background:#FFFBF5}
-.ic{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none;background:#F7E7CE;color:#6E583C}
-.n small{display:block;color:#5C554D;font-size:12px;margin-top:3px}
-.crash{background:#2B2B2B;color:#FFF7EF}
-.crash .ic{background:#8A6F4D;color:#fff}
-.crash small{color:#E9D9BF}
+.main{flex:999 1 560px;min-width:0;padding:28px 40px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px}
+.nt-head{max-width:780px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
+.nt-head h1{margin:0;font:800 28px/1.2 'Baloo Chettan 2',sans-serif}
+.nt-sub{font-size:13px;color:#5C554D}
+.nt-all{min-height:44px;padding:0 18px;border-radius:999px;border:2px solid #2B2B2B;background:transparent;font:800 14px/1 Nunito,sans-serif;color:#2B2B2B;cursor:pointer}
+.list{max-width:780px;width:100%;display:flex;flex-direction:column;gap:6px}
+.day{font:800 12px/1.2 Nunito,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#6E583C;margin:10px 0 4px}
+.day:first-child{margin-top:0}
+.grp{display:flex;flex-direction:column;gap:8px}
+.n{display:flex;gap:16px;align-items:flex-start;padding:14px 16px;border-radius:16px;border:1px solid transparent;cursor:pointer}
+.n.new{background:#fff;border-color:#E4CFAE}
+.ic{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.tx b{font-size:15px;line-height:1.35}
+.n:not(.new) .tx b{color:#5C554D}
+.tx small{font-size:13px;color:#5C554D;line-height:1.45}
+.tm{display:flex;align-items:center;gap:8px;font-size:12px;color:#5C554D;white-space:nowrap;padding-top:2px}
+.dot{width:9px;height:9px;border-radius:50%;background:#B3412F;display:none}
+.n.new .dot{display:inline-block}
+@media (max-width:760px){
+  .n{gap:12px;padding:12px}
+  .ic{width:36px;height:36px;border-radius:10px}
+  .tx b{font-size:14px}
+  .tx small{font-size:12px}
+  .nt-all{min-height:40px;padding:0 14px;font-size:13px}
+}
 </style>
 </helmet>
-<div style="max-width: 1360px; margin: 0 auto; padding: clamp(24px, 5vw, 40px) clamp(16px, 4vw, 36px) 40px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
-  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
-    <div style="display: flex; flex-direction: column; gap: 8px; max-width: 760px">
-      <span style="font: 800 13px/1.2 Nunito, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #6E583C">Notifications</span>
-      <h1 id="notif-title" style="margin: 0; font: 800 38px/1.1 'Baloo Chettan 2', sans-serif">Everyone hears about what matters to their role</h1>
-      <p style="margin: 0; color: #5C554D; font-size: 16px; line-height: 1.6">Shown under the bell in every portal and sent by email. People choose in their settings which ones also come by email. A new crash course is announced to <b style="color: #2B2B2B">everyone</b>.</p>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+  <aside class="side" data-borrow-side></aside>
+  <main class="main">
+    <div class="nt-head">
+      <div style="display: flex; flex-direction: column; gap: 2px"><h1 id="notif-title">Notifications</h1><span class="nt-sub" id="nt-sub">Everything new for you, newest first</span></div>
+      <button class="nt-all" type="button" id="nt-markall">Mark all as read</button>
     </div>
-    <img src="/assets/logo.png" alt="SOU" style="height: 52px; width: auto">
-  </div>
-
-  <div style="display: flex; flex-wrap: wrap; gap: 18px; align-items: stretch">
-    <div class="col" data-role="student">
-      <div class="head"><b>Student</b><span class="count">4</span></div>
-      <div class="n crash"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4v16H5zM11 4h4v16h-4zM17 5l3 .8-3.5 14.2-3-.8z"/></svg></span><span><b>New crash course: Fiqh of prayer</b><small>15 lessons · £300 · see it in your Library · 10 min ago</small></span></div>
-      <div class="n new"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v15H4zM4 10h16M9 3v4M15 3v4"/></svg></span><span><b>Arabic class in 1 hour</b><small>Today 6:00 PM · Ustadha Hanan · Google Meet link ready</small></span></div>
-      <div class="n new"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></span><span><b>New lesson added</b><small>Arabic · Module 2 · Lesson 4: Letters that never join · yesterday</small></span></div>
-      <div class="n new"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14v16H5zM9 12l2 2 4-4"/></svg></span><span><b>Homework due Saturday</b><small>Quiz: Letters that join · 2 days left</small></span></div>
-      <div class="n"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h3"/></svg></span><span><b>Your November report is ready</b><small>Sent by SOU Support · 1 Dec</small></span></div>
-      <div class="n"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v12H3zM3 11h18"/></svg></span><span><b>Payment of £60 taken</b><small>Single lesson · renews 14 Jan</small></span></div>
+    <div class="list" data-role="student">
+      <span class="day">Today</span>
+      <div class="grp">
+        <div class="n new" data-type="class"><span class="ic" style="background: #2B2B2B; color: #D6B98C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10l5-3v10l-5-3zM3 7h12v10H3z"/></svg></span><span class="tx"><b>Arabic class starts in 1 hour</b><small>Ustadha Hanan · 6:00 PM on Google Meet</small></span><span class="tm">5:00 PM<i class="dot" aria-hidden="true"></i></span></div>
+        <div class="n new" data-type="crash"><span class="ic" style="background: #EDE6F5; color: #5B3E86"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l15-6v14L3 13zM7 12v6"/></svg></span><span class="tx"><b>New crash course: Fiqh of prayer</b><small>15 lessons with Ustadha Hafssa B · now in the Library</small></span><span class="tm">9:00 AM<i class="dot" aria-hidden="true"></i></span></div>
+        <div class="n new" data-type="homework"><span class="ic" style="background: #F7E7CE; color: #6E583C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14v16H5zM9 12l2 2 4-4"/></svg></span><span class="tx"><b>Homework due Saturday</b><small>Quiz: Letters that join · 2 days left</small></span><span class="tm">8:00 AM<i class="dot" aria-hidden="true"></i></span></div>
+      </div>
+      <span class="day">Yesterday</span>
+      <div class="grp">
+        <div class="n" data-type="lesson"><span class="ic" style="background: #F7E7CE; color: #6E583C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM8 7h7"/></svg></span><span class="tx"><b>New lesson added</b><small>Arabic · Module 2 · Lesson 4: Letters that never join</small></span><span class="tm">6:30 PM<i class="dot" aria-hidden="true"></i></span></div>
+        <div class="n" data-type="payment"><span class="ic" style="background: #EEF5EF; color: #2F6B3D"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v10H3zM3 11h18"/></svg></span><span class="tx"><b>Monthly payment received · £60</b><small>Auto-pay · next payment 14 January</small></span><span class="tm">8:30 AM<i class="dot" aria-hidden="true"></i></span></div>
+      </div>
+      <span class="day">Earlier</span>
+      <div class="grp">
+        <div class="n" data-type="report"><span class="ic" style="background: #F7E7CE; color: #6E583C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h3"/></svg></span><span class="tx"><b>Your November report is ready</b><small>Sent by SOU Support · open it in Reports</small></span><span class="tm">1 Dec<i class="dot" aria-hidden="true"></i></span></div>
+      </div>
     </div>
-
-    <div class="col" data-role="teacher">
-      <div class="head"><b>Teacher</b><span class="count">4</span></div>
-      <div class="n crash"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4v16H5zM11 4h4v16h-4zM17 5l3 .8-3.5 14.2-3-.8z"/></svg></span><span><b>New crash course: Fiqh of prayer</b><small>Taught by Ustadha Hafssa B · 10 min ago</small></span></div>
-      <div class="n new"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v15H4zM4 10h16M9 3v4M15 3v4"/></svg></span><span><b>New class assigned to you</b><small>Fatima Noor · Tuesdays 7:00 PM · from 26 Nov</small></span></div>
-      <div class="n new"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/></svg></span><span><b>Your course was approved</b><small>"Arabic for travellers" is now live for students</small></span></div>
-      <div class="n new"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14v16H5zM9 12l2 2 4-4"/></svg></span><span><b>3 answers to mark</b><small>Letters that join · Arabic Beginners</small></span></div>
-      <div class="n"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v3H8zM6 5H4v16h16V5h-2M9 14l2 2 4-4"/></svg></span><span><b>Attendance not taken</b><small>Yesterday's 4:00 PM group class</small></span></div>
+    <div class="list" data-role="teacher">
+      <span class="day">Today</span>
+      <div class="grp">
+        <div class="n new" data-type="homework"><span class="ic" style="background: #F7E7CE; color: #6E583C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14v16H5zM9 12l2 2 4-4"/></svg></span><span class="tx"><b>3 answers to mark</b><small>Letters that join · Arabic Beginners</small></span><span class="tm">4:10 PM<i class="dot" aria-hidden="true"></i></span></div>
+        <div class="n new" data-type="class"><span class="ic" style="background: #2B2B2B; color: #D6B98C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10l5-3v10l-5-3zM3 7h12v10H3z"/></svg></span><span class="tx"><b>New class assigned to you</b><small>Fatima Noor · Tuesdays 7:00 PM · from 26 Nov</small></span><span class="tm">11:20 AM<i class="dot" aria-hidden="true"></i></span></div>
+        <div class="n new" data-type="crash"><span class="ic" style="background: #EDE6F5; color: #5B3E86"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l15-6v14L3 13zM7 12v6"/></svg></span><span class="tx"><b>New crash course: Fiqh of prayer</b><small>Taught by Ustadha Hafssa B · announced to everyone</small></span><span class="tm">9:00 AM<i class="dot" aria-hidden="true"></i></span></div>
+      </div>
+      <span class="day">Yesterday</span>
+      <div class="grp">
+        <div class="n" data-type="approval"><span class="ic" style="background: #EEF5EF; color: #2F6B3D"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7zM9 12l2 2 4-4"/></svg></span><span class="tx"><b>Your course was approved</b><small>"Arabic for travellers" is now live for students</small></span><span class="tm">5:45 PM<i class="dot" aria-hidden="true"></i></span></div>
+        <div class="n" data-type="alert"><span class="ic" style="background: #FBEAE6; color: #8E2F1F"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l9 16H3zM12 10v4M12 17v.5"/></svg></span><span class="tx"><b>Attendance not taken</b><small>The 4:00 PM group class</small></span><span class="tm">4:50 PM<i class="dot" aria-hidden="true"></i></span></div>
+      </div>
+      <span class="day">Earlier</span>
+      <div class="grp">
+        <div class="n" data-type="chat"><span class="ic" style="background: #F7E7CE; color: #6E583C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><span class="tx"><b>Yusuf Ali sent a message</b><small>"Can we move Monday's class?"</small></span><span class="tm">Mon<i class="dot" aria-hidden="true"></i></span></div>
+      </div>
     </div>
-
-    <div class="col" data-role="support">
-      <div class="head"><b>Light admin</b><span class="count">4</span></div>
-      <div class="n crash"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4v16H5zM11 4h4v16h-4zM17 5l3 .8-3.5 14.2-3-.8z"/></svg></span><span><b>Crash course published</b><small>Fiqh of prayer · announced to everyone</small></span></div>
-      <div class="n new"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM8 7h7"/></svg></span><span><b>Course waiting for approval</b><small>"Tajweed Level 2" by Ustadha Hadjer</small></span></div>
-      <div class="n new"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v3H8zM6 5H4v16h16V5h-2M9 14l2 2 4-4"/></svg></span><span><b>Zainab Khan missed 3 classes</b><small>Attendance alert · Arabic Beginners</small></span></div>
-      <div class="n new"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><span><b>Chat unanswered for 24 h</b><small>Yusuf Ali → Ustadha Hanan</small></span></div>
-      <div class="n"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h3"/></svg></span><span><b>Monthly reports are due</b><small>142 students · send by 1 Dec</small></span></div>
+    <div class="list" data-role="support">
+      <span class="day">Today</span>
+      <div class="grp">
+        <div class="n new" data-type="approval"><span class="ic" style="background: #EEF5EF; color: #2F6B3D"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7zM9 12l2 2 4-4"/></svg></span><span class="tx"><b>Course waiting for approval</b><small>"Tajweed Level 2" by Ustadha Hadjer</small></span><span class="tm">3:30 PM<i class="dot" aria-hidden="true"></i></span></div>
+        <div class="n new" data-type="alert"><span class="ic" style="background: #FBEAE6; color: #8E2F1F"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l9 16H3zM12 10v4M12 17v.5"/></svg></span><span class="tx"><b>Zainab Khan missed 3 classes</b><small>Attendance alert · Arabic Beginners</small></span><span class="tm">1:15 PM<i class="dot" aria-hidden="true"></i></span></div>
+        <div class="n new" data-type="chat"><span class="ic" style="background: #F7E7CE; color: #6E583C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><span class="tx"><b>Chat unanswered for 24 h</b><small>Yusuf Ali → Ustadha Hanan</small></span><span class="tm">10:00 AM<i class="dot" aria-hidden="true"></i></span></div>
+      </div>
+      <span class="day">Yesterday</span>
+      <div class="grp">
+        <div class="n" data-type="crash"><span class="ic" style="background: #EDE6F5; color: #5B3E86"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l15-6v14L3 13zM7 12v6"/></svg></span><span class="tx"><b>Crash course published</b><small>Fiqh of prayer · announced to everyone</small></span><span class="tm">6:00 PM<i class="dot" aria-hidden="true"></i></span></div>
+        <div class="n" data-type="account"><span class="ic" style="background: #F7E7CE; color: #6E583C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19 8v6M22 11h-6"/></svg></span><span class="tx"><b>New student needs a class time</b><small>Fatima Noor · Monthly bundle</small></span><span class="tm">2:20 PM<i class="dot" aria-hidden="true"></i></span></div>
+      </div>
+      <span class="day">Earlier</span>
+      <div class="grp">
+        <div class="n" data-type="report"><span class="ic" style="background: #F7E7CE; color: #6E583C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h3"/></svg></span><span class="tx"><b>Monthly reports are due</b><small>142 students · send by 1 Dec</small></span><span class="tm">Mon<i class="dot" aria-hidden="true"></i></span></div>
+      </div>
     </div>
-
-    <div class="col" data-role="super">
-      <div class="head"><b>Super admin</b><span class="count">4</span></div>
-      <div class="n crash"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4v16H5zM11 4h4v16h-4zM17 5l3 .8-3.5 14.2-3-.8z"/></svg></span><span><b>Crash course published</b><small>Fiqh of prayer · by Maryam (Support)</small></span></div>
-      <div class="n new"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/></svg></span><span><b>New enrolment to approve</b><small>Fatima Noor · Monthly bundle · payment received</small></span></div>
-      <div class="n new"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v12H3zM3 11h18"/></svg></span><span><b>Payment failed</b><small>Ali Hassan · card declined · retry in 3 days</small></span></div>
-      <div class="n new"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M8.5 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19 8v6M16 11h6"/></svg></span><span><b>New teacher login created</b><small>Ustadha Ruqayyah · by Maryam (Support)</small></span></div>
-      <div class="n"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2"/></svg></span><span><b>Invite expired</b><small>Bilal Ahmed · resend?</small></span></div>
+    <div class="list" data-role="super">
+      <span class="day">Today</span>
+      <div class="grp">
+        <div class="n new" data-type="approval"><span class="ic" style="background: #EEF5EF; color: #2F6B3D"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7zM9 12l2 2 4-4"/></svg></span><span class="tx"><b>New enrolment to approve</b><small>Fatima Noor · Monthly bundle · payment received</small></span><span class="tm">5:31 PM<i class="dot" aria-hidden="true"></i></span></div>
+        <div class="n new" data-type="payment"><span class="ic" style="background: #EEF5EF; color: #2F6B3D"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v10H3zM3 11h18"/></svg></span><span class="tx"><b>Payment failed</b><small>Ali Hassan · card declined · retry in 3 days</small></span><span class="tm">2:05 PM<i class="dot" aria-hidden="true"></i></span></div>
+        <div class="n new" data-type="account"><span class="ic" style="background: #F7E7CE; color: #6E583C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19 8v6M22 11h-6"/></svg></span><span class="tx"><b>New teacher login created</b><small>Ustadha Ruqayyah · by SOU Support</small></span><span class="tm">11:40 AM<i class="dot" aria-hidden="true"></i></span></div>
+      </div>
+      <span class="day">Yesterday</span>
+      <div class="grp">
+        <div class="n" data-type="crash"><span class="ic" style="background: #EDE6F5; color: #5B3E86"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l15-6v14L3 13zM7 12v6"/></svg></span><span class="tx"><b>Crash course published</b><small>Fiqh of prayer · by SOU Support</small></span><span class="tm">6:00 PM<i class="dot" aria-hidden="true"></i></span></div>
+      </div>
+      <span class="day">Earlier</span>
+      <div class="grp">
+        <div class="n" data-type="alert"><span class="ic" style="background: #FBEAE6; color: #8E2F1F"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l9 16H3zM12 10v4M12 17v.5"/></svg></span><span class="tx"><b>Invite expired</b><small>Bilal Ahmed · resend the invite?</small></span><span class="tm">Mon<i class="dot" aria-hidden="true"></i></span></div>
+      </div>
     </div>
-  </div>
-  <p style="margin: 0; font-size: 13px; color: #5C554D">Sample notifications. Dark rows show the crash-course announcement, which every role receives.</p>
+  </main>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
 class Component extends DCLogic {
   renderVals() { return {}; }
 }

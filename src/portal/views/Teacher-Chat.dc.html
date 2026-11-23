@@ -8,7 +8,7 @@
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;family=Poppins:wght@400;500;600&amp;family=Amiri&amp;display=swap">
 <style>
 body{margin:0;background:#FFF7EF;font-family:Poppins,system-ui,sans-serif;color:#2B2B2B}
 a{color:#6E583C}a:hover{color:#2B2B2B}
@@ -16,17 +16,59 @@ a{color:#6E583C}a:hover{color:#2B2B2B}
 .nav{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;font:700 15px/1.2 Nunito,sans-serif;color:#F2E6D3;text-decoration:none;min-height:44px;box-sizing:border-box}
 .nav:hover{background:#3A3734;color:#fff}
 .nav.on{background:#8A6F4D;color:#fff}
-.main{flex:999 1 560px;min-width:0;padding:28px 36px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px}
+.main{flex:999 1 560px;min-width:0;padding:24px 32px 32px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px}
 .small{font-size:13px;color:#5C554D}
-.conv{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;text-decoration:none;color:#2B2B2B;min-height:56px;box-sizing:border-box}
-.conv:hover{background:#FBF1E2;color:#2B2B2B}
-.conv.on{background:#F7E7CE}
-.av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 14px/1 Nunito,sans-serif;flex:none;background:#F7E7CE}
-.msg{max-width:70%;padding:12px 16px;border-radius:18px;font-size:15px;line-height:1.5}
-.them{background:#fff;border:1px solid #E4CFAE;border-bottom-left-radius:6px;align-self:flex-start}
-.me{background:#2B2B2B;color:#FFF7EF;border-bottom-right-radius:6px;align-self:flex-end}
-.meta{font-size:12px;color:#5C554D}
-.badge{min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:#8A6F4D;color:#fff;font:800 12px/22px Nunito,sans-serif;text-align:center;box-sizing:border-box}
+.ch-head{display:flex;flex-direction:column;gap:2px}
+.ch-head h1{margin:0;font:800 28px/1.2 'Baloo Chettan 2',sans-serif}
+.ch-wrap{display:flex;gap:16px;align-items:stretch;min-height:620px}
+.ch-list{width:320px;flex:none;background:#fff;border:1px solid #E4CFAE;border-radius:20px;padding:14px;box-sizing:border-box;display:flex;flex-direction:column;gap:6px}
+.ch-find{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:#FBF1E2;margin-bottom:6px}
+.ch-find input{border:0;outline:0;background:transparent;font:400 14px/1.4 Poppins,sans-serif;flex:1;min-width:0}
+.ch-label{font:800 11px/1.2 Nunito,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#6E583C;padding:8px 8px 2px}
+.conv{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;border:1px solid transparent;text-decoration:none;color:#2B2B2B;min-height:56px;box-sizing:border-box}
+.conv:hover{background:#FFFBF5;color:#2B2B2B}
+.conv.on{background:#FBF1E2;border-color:#CDB48D}
+.av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 13px/1 Nunito,sans-serif;flex:none;background:#F7E7CE;color:#2B2B2B}
+.cv-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.cv-tx b{font-size:14px}
+.cv-tx span{font-size:12px;color:#5C554D;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cv-time{font-size:11px;color:#5C554D;flex:none}
+.badge{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#8A6F4D;color:#fff;font:800 11px/20px Nunito,sans-serif;text-align:center;box-sizing:border-box;flex:none}
+.ch-thread{flex:1;min-width:0;background:#fff;border:1px solid #E4CFAE;border-radius:20px;display:flex;flex-direction:column;overflow:hidden}
+.ch-top{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid #F0E4D0}
+.ch-top .who{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.ch-top .who b{font-size:15px}
+.ch-top .who .small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch-msgs{flex:1;padding:20px;display:flex;flex-direction:column;gap:8px;background:#FFFBF5}
+.dayc{align-self:center;font:700 12px/1.2 Nunito,sans-serif;color:#6E583C;background:#F7E7CE;padding:5px 12px;border-radius:999px;margin:6px 0}
+.msg{max-width:62%;padding:10px 14px;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+.them{align-self:flex-start;background:#fff;border:1px solid #E4CFAE;border-radius:16px 16px 16px 4px}
+.me{align-self:flex-end;background:#2B2B2B;color:#FFF7EF;border-radius:16px 16px 4px 16px}
+.meta{font-size:11px;color:#5C554D;margin-top:-2px}
+.ar{font-family:Amiri,serif;font-size:18px;direction:rtl;unicode-bidi:isolate}
+.file{display:flex;align-items:center;gap:10px}
+.ch-form{display:flex;gap:10px;align-items:center;padding:12px 16px;border-top:1px solid #F0E4D0}
+.ch-attach{width:44px;height:44px;border-radius:50%;border:1px solid #E4CFAE;background:#fff;color:#5C554D;display:flex;align-items:center;justify-content:center;flex:none;cursor:pointer}
+.ch-input{flex:1;min-width:0;min-height:44px;padding:0 16px;border:1px solid #CDB48D;border-radius:999px;font:400 14px/1.4 Poppins,sans-serif;box-sizing:border-box}
+.ch-send{min-height:44px;padding:0 22px;border-radius:999px;border:0;background:#8A6F4D;color:#fff;font:800 14px/1 Nunito,sans-serif;cursor:pointer;flex:none}
+@media (max-width:980px){ .ch-list{width:260px} .msg{max-width:78%} }
+@media (max-width:760px){
+  .main{padding:16px 12px 24px !important}
+  .ch-head h1{font-size:18px !important}
+  .ch-wrap{flex-direction:column;gap:12px;min-height:0}
+  .ch-list{width:auto;flex-direction:row;overflow-x:auto;padding:8px;gap:6px;border-radius:16px;scrollbar-width:none}
+  .ch-list::-webkit-scrollbar{display:none}
+  .ch-find,.ch-label,.cv-time,.cv-tx span{display:none}
+  .conv{flex:none;padding:8px 12px 8px 8px;min-height:48px;gap:8px}
+  .av{width:34px;height:34px;font-size:12px}
+  .cv-tx b{white-space:nowrap;font-size:13px}
+  .ch-thread{border-radius:16px;min-height:calc(100vh - 230px)}
+  .ch-top{padding:12px 14px}
+  .ch-msgs{padding:14px 12px}
+  .msg{max-width:85%;font-size:14px}
+  .ch-form{position:sticky;bottom:0;background:#fff;padding:10px;gap:8px}
+  .ch-send{padding:0 16px}
+}
 </style>
 </helmet>
 <div style="display: flex; flex-wrap: wrap; min-height: 100vh">
@@ -46,44 +88,37 @@ a{color:#6E583C}a:hover{color:#2B2B2B}
   </aside>
 
   <main class="main">
-    <h1 style="margin: 0; font: 800 32px/1.15 'Baloo Chettan 2', sans-serif">Chat with my students</h1>
-    <div style="display: flex; flex-wrap: wrap; background: #fff; border: 1px solid #E4CFAE; border-radius: 22px; overflow: hidden; min-height: 620px">
-      <div style="flex: 1 1 260px; max-width: 320px; border-right: 1px solid #EFE1CA; padding: 14px; display: flex; flex-direction: column; gap: 4px; box-sizing: border-box">
-        <label for="cs" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 1px solid #CDB48D; border-radius: 999px; margin-bottom: 8px; box-sizing: border-box">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C554D" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM21 21l-4.3-4.3"/></svg>
-          <input id="cs" placeholder="Search students" style="border: 0; outline: 0; font: 400 14px/1.4 Poppins, sans-serif; flex: 1; min-width: 0; background: transparent">
-        </label>
-        <a class="conv" href="Teacher-Chat.dc.html"><span class="av" style="background: #2B2B2B; color: #FFF7EF">AB</span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1"><b style="font-size: 15px">Arabic Beginners · group</b><span class="small">Announcement to 12 students</span></span></a>
-        <a class="conv on" href="Teacher-Chat.dc.html"><span class="av">AR</span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1"><b style="font-size: 15px">Aisha Rahman</b><span class="small">Thank you Ustadha!</span></span><span class="badge">1</span></a>
-        <a class="conv" href="Teacher-Chat.dc.html"><span class="av">YA</span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1"><b style="font-size: 15px">Yusuf Ali</b><span class="small">Can we move Monday's class?</span></span><span class="badge">2</span></a>
-        <a class="conv" href="Teacher-Chat.dc.html"><span class="av">MK</span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1"><b style="font-size: 15px">Maryam Kareem</b><span class="small">You: Don't forget the homework</span></span></a>
-        <a class="conv" href="Teacher-Chat.dc.html"><span class="av">SH</span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1"><b style="font-size: 15px">Sumayyah Hussain</b><span class="small">Jazakallah khair</span></span></a>
-      </div>
-      <div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column">
-        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; border-bottom: 1px solid #EFE1CA">
-          <span style="display: flex; align-items: center; gap: 12px"><span class="av">AR</span><span style="display: flex; flex-direction: column; gap: 2px"><b>Aisha Rahman</b><span class="small">Arabic Beginners · 62% progress</span></span></span>
-          <a href="Teacher-Student-Profile.dc.html" style="font-size: 14px; font-weight: 700">Open student profile</a>
-        </div>
-        <div style="flex: 1; padding: 22px 20px; display: flex; flex-direction: column; gap: 10px; background: #FFFBF5">
-          <span class="meta" style="align-self: center">Wednesday 20 November</span>
+    <div class="ch-head"><h1>Chat</h1><span class="small">Messages with your students · images and files allowed · admins can read all chats</span></div>
+    <div class="ch-wrap">
+      <nav class="ch-list" aria-label="Conversations">
+        <label class="ch-find" for="cs"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C554D" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM21 21l-4.3-4.3"/></svg><input id="cs" placeholder="Search students"></label>
+        <a class="conv" href="Teacher-Chat.dc.html"><span class="av" style="background: #2B2B2B; color: #FFF7EF">AB</span><span class="cv-tx"><b>Arabic Beginners · group</b><span>You: Class starts at 4 today</span></span><span class="cv-time">8:30</span></a>
+        <a class="conv on" href="Teacher-Chat.dc.html"><span class="av">AR</span><span class="cv-tx"><b>Aisha Rahman</b><span>Thank you Ustadha!</span></span><span class="cv-time">9:10</span></a>
+        <a class="conv" href="Teacher-Chat.dc.html"><span class="av">YA</span><span class="cv-tx"><b>Yusuf Ali</b><span>Can we move Monday's class?</span></span><span class="badge">2</span></a>
+        <a class="conv" href="Teacher-Chat.dc.html"><span class="av">MK</span><span class="cv-tx"><b>Maryam Kareem</b><span>Sent a photo of her worksheet</span></span><span class="cv-time">Mon</span></a>
+        <a class="conv" href="Teacher-Chat.dc.html"><span class="av">SH</span><span class="cv-tx"><b>Sumayyah Hussain</b><span>Jazakallah khair</span></span><span class="cv-time">Sun</span></a>
+      </nav>
+      <section class="ch-thread" aria-label="Chat with Aisha Rahman">
+        <div class="ch-top"><span class="av" style="background: #D6B98C">AR</span><span class="who"><b>Aisha Rahman</b><span class="small">Arabic Beginners · 1-to-1 · 62% progress</span></span><a href="Teacher-Student-Profile.dc.html" style="font: 800 13px/1.2 Nunito, sans-serif; white-space: nowrap">Open profile</a></div>
+        <div class="ch-msgs">
+          <span class="dayc">Wednesday 20 November</span>
           <div class="msg them">Assalamu alaykum Ustadha, I'm stuck on which letters don't join forward. Is it only alif and dal?</div>
           <span class="meta">7:52 PM</span>
-          <div class="msg me">Wa alaykum assalam Aisha! Good question. There are six: ا د ذ ر ز و. Watch lesson 4, I explain them at 03:20.</div>
+          <div class="msg me">Wa alaykum assalam Aisha! There are six: <span class="ar" lang="ar">ا د ذ ر ز و</span>. Watch lesson 4, I explain them at 03:20.</div>
           <span class="meta" style="align-self: flex-end">8:15 PM · Seen</span>
-          <span class="meta" style="align-self: center">Today</span>
-          <div class="msg me">Well done on the quiz! Please practise lesson 3 before Monday.</div>
-          <span class="meta" style="align-self: flex-end">9:02 AM · Seen</span>
+          <div class="msg me file"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D6B98C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5"/></svg>joining-letters-worksheet.pdf · 240 KB</div>
+          <span class="meta" style="align-self: flex-end">8:16 PM · Seen</span>
+          <span class="dayc">Today</span>
           <div class="msg them">Thank you Ustadha!</div>
           <span class="meta">9:10 AM</span>
         </div>
-        <form style="display: flex; gap: 10px; align-items: center; padding: 14px 16px; border-top: 1px solid #EFE1CA">
-          <button type="button" aria-label="Attach a file" style="width: 48px; height: 48px; border-radius: 50%; border: 1px solid #CDB48D; background: #fff; color: #6E583C; display: flex; align-items: center; justify-content: center; flex: none; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11l-8.5 8.5a5 5 0 0 1-7-7L14 4a3.5 3.5 0 0 1 5 5l-8.5 8.5a2 2 0 0 1-3-3L15 7"/></svg></button>
+        <form class="ch-form">
+          <button class="ch-attach" type="button" aria-label="Attach an image or file"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11l-9 9a5 5 0 0 1-7-7l9-9a3.5 3.5 0 0 1 5 5l-9 9a2 2 0 0 1-3-3l8-8"/></svg></button>
           <label for="tm" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Message</label>
-          <input id="tm" placeholder="Write a message…" style="flex: 1; min-width: 0; min-height: 48px; border: 1px solid #CDB48D; border-radius: 999px; padding: 0 18px; font: 400 15px/1.4 Poppins, sans-serif; box-sizing: border-box">
-          <button type="button" style="min-height: 48px; padding: 0 22px; border-radius: 999px; border: 0; background: #8A6F4D; color: #fff; font: 800 15px/1 Nunito, sans-serif; cursor: pointer">Send</button>
+          <input class="ch-input" id="tm" placeholder="Write a message…">
+          <button class="ch-send" type="button">Send</button>
         </form>
-        <p class="small" style="margin: 0; padding: 0 16px 14px; line-height: 1.5">You can only chat with students enrolled in your courses. Images and files can be shared. To protect students, SOU admins can read all chats.</p>
-      </div>
+      </section>
     </div>
   </main>
 </div>
