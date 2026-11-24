@@ -523,14 +523,39 @@ const screens = {
     const ghost = $('.ev.new', root);
     const fill = (c) => { if (!ghost) return; ghost.classList.remove('new'); ghost.classList.add('h'); ghost.innerHTML = `<b>${esc(c.subject)} · ${esc(c.student.split(' (')[0])}</b><br>${esc(c.teacher.replace('Ustadha ', ''))} · ${esc(c.when)}`; };
     if (d.classes.length) fill(d.classes[d.classes.length - 1]);
+    // date + time: the first class, how it repeats and (optionally) the last one
+    const dateIn = $('#c4', root), timeIn = $('#c4t', root), rep = $('#c6', root), until = $('#c7', root), untilWrap = $('#c7wrap', root), sum = $('#c-sum', root);
+    const parse = (v) => { const [y, m, dd] = (v || '').split('-').map(Number); return y ? new Date(y, m - 1, dd) : null; };
+    const fmtDate = (dt) => dt.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    const shortDate = (dt) => dt.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    const fmtTime = (v) => { const [h, mi] = (v || '19:00').split(':').map(Number); return `${((h + 11) % 12) + 1}:${String(mi).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; };
+    const read = () => {
+      const first = parse(dateIn.value), last = parse(until.value), once = /once/i.test(selText(rep));
+      return { first, last: once ? null : last, once, time: fmtTime(timeIn.value) };
+    };
+    const check = () => {
+      const r = read(); untilWrap.style.display = r.once ? 'none' : '';
+      if (!r.first) { sum.textContent = 'Choose the date of the first class.'; return null; }
+      if (r.first < new Date(2026, 10, 24)) { sum.textContent = 'That date has already passed. Choose today or a later date.'; return null; }
+      if (r.last && r.last < r.first) { sum.textContent = 'The last class must be after the first one.'; return null; }
+      const repeatTxt = r.once ? 'One class only.' : `Then ${selText(rep).toLowerCase()}${r.last ? ` until ${fmtDate(r.last)}` : ', with no end date'}.`;
+      sum.textContent = `First class: ${fmtDate(r.first)} at ${r.time}. ${repeatTxt} No clash for ${selText($('#c2', root))} or ${selText($('#c1', root)).split(' (')[0]}; a Google Meet link is made automatically.`;
+      return r;
+    };
+    [dateIn, timeIn, rep, until, $('#c1', root), $('#c2', root)].forEach(el => el?.addEventListener('input', check));
+    [dateIn, timeIn, rep, until, $('#c1', root), $('#c2', root)].forEach(el => el?.addEventListener('change', check));
+    check();
     const go = byText(root, 'Add to calendar')[0];
     on(go, () => {
-      const c = { student: selText($('#c1', root)), teacher: selText($('#c2', root)), subject: selText($('#c3', root)), when: $('#c4', root).value.trim() || 'Tue 7:00 PM', len: selText($('#c5', root)), repeat: selText($('#c6', root)) };
+      const r = check(); if (!r) { toast(sum.textContent, 'err'); dateIn.focus(); return; }
+      const day = r.first.toLocaleDateString('en-GB', { weekday: 'short' });
+      const c = { student: selText($('#c1', root)), teacher: selText($('#c2', root)), subject: selText($('#c3', root)), when: `${day} ${r.time}`, date: dateIn.value, until: r.last ? until.value : '', len: selText($('#c5', root)), repeat: selText(rep) };
+      const dates = `from ${shortDate(r.first)}${r.last ? ` to ${shortDate(r.last)}` : ''}`;
       db.update(x => x.classes.push(c));
-      db.notify('student', 'New class added to your calendar', `${c.subject} with ${c.teacher} · ${c.when} · Google Meet`);
-      db.notify('teacher', 'New class assigned to you', `${c.student} · ${c.when} · ${c.repeat.toLowerCase()}`);
+      db.notify('student', 'New class added to your calendar', `${c.subject} with ${c.teacher} · ${c.when} · ${r.once ? shortDate(r.first) : c.repeat.toLowerCase() + ' ' + dates} · Google Meet`);
+      db.notify('teacher', 'New class assigned to you', `${c.student.split(' (')[0]} · ${c.when} · ${r.once ? shortDate(r.first) : c.repeat.toLowerCase() + ' ' + dates}`);
       fill(c);
-      toast(`Class added · ${c.teacher} and ${c.student.split(' (')[0]} have been notified`);
+      toast(`Class added for ${fmtDate(r.first)} · ${c.teacher} and ${c.student.split(' (')[0]} have been notified`);
     });
   },
 

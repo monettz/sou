@@ -80,11 +80,15 @@ a{color:#6E583C}a:hover{color:#2B2B2B}
         <label class="field" for="c2">Teacher<select id="c2"><option>Ustadha Hanan</option></select></label>
         <label class="field" for="c3">Subject<select id="c3"><option>Arabic</option></select></label>
         <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
-          <label class="field" for="c4">Day &amp; time<input id="c4" value="Tue 7:00 PM"></label>
-          <label class="field" for="c5">Length<select id="c5"><option>45 min</option><option>1 hour</option></select></label>
+          <label class="field" for="c4">First class date<input id="c4" type="date" value="2026-11-25" min="2026-11-24"></label>
+          <label class="field" for="c4t">Time<input id="c4t" type="time" value="19:00" step="900"></label>
         </div>
-        <label class="field" for="c6">Repeats<select id="c6"><option>Every week</option><option>Once</option></select></label>
-        <div style="display: flex; gap: 10px; align-items: flex-start; padding: 12px; border-radius: 12px; background: #EEF5EF; color: #1F4D2B; font-size: 13px; line-height: 1.5"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><path d="M5 12l5 5 9-10"/></svg><span>No clash: Ustadha Hanan and Fatima are both free. A Google Meet link will be created automatically.</span></div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <label class="field" for="c5">Length<select id="c5"><option>30 min</option><option selected>45 min</option><option>1 hour</option><option>1 hour 30 min</option></select></label>
+          <label class="field" for="c6">Repeats<select id="c6"><option>Every week</option><option>Every 2 weeks</option><option>Once</option></select></label>
+        </div>
+        <label class="field" for="c7" id="c7wrap">Last class (optional)<input id="c7" type="date" min="2026-11-24"></label>
+        <div style="display: flex; gap: 10px; align-items: flex-start; padding: 12px; border-radius: 12px; background: #EEF5EF; color: #1F4D2B; font-size: 13px; line-height: 1.5"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><path d="M5 12l5 5 9-10"/></svg><span id="c-sum">No clash: Ustadha Hanan and Fatima are both free. A Google Meet link will be created automatically.</span></div>
         <button class="btn p" type="button">Add to calendar &amp; notify</button>
         <span class="small" style="line-height: 1.5">The teacher and student are notified, and the class appears in their portal and Google Calendar. Moving a class later updates everyone.</span>
       </form>
